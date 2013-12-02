@@ -5631,8 +5631,8 @@ rewrite the lower bound $\LL_Q(\TT)$ as
     \LL_Q(\TT) =& \sum_{i=1}^p b_i x_i + \sum_{j=1}^q c_j
     \mu_j + \sum_{i=1}^p x_i \mu_j w_{ij} + 
     \nonumber \\ 
-    & \sum_{i=1}^p \sum_{j=i}^p x_i x_j u_{ij} +
-    \sum_{i=1}^q \sum_{j=i}^p \mu_i \mu_j v_{ij} -\log
+    & \sum_{i=1}^p \sum_{j=i+1}^p x_i x_j u_{ij} +
+    \sum_{i=1}^q \sum_{j=i+1}^q \mu_i \mu_j v_{ij} -\log
     Z(\TT) 
     \nonumber \\
     & - \sum_{j=1}^p \left( \mu_j \log \mu_j + (1
@@ -5672,15 +5672,16 @@ of the fully factorized form of the approximate posterior
 distribution $Q$.
 
 Because all hidden units were assumed to be independent from
-each other, $Q$ can only have a single mode. If the
-distribution approximated by $Q$ has more than one mode,
-due to the property of the KL-divergence and the
-order\footnote{Note that the order of $Q$ and $P$ matters
-when their KL-divergence is computed, as the KL-divergence
-is \textit{not} a symmetric measure.} of $Q$ and the true
-distribution $P$, the approximate distribution $Q$ will tend
-to approximate one of those multiple modes in the true
-distribution $P$ \citep[see][Section 21.2.2 for more details]{Murphy2012}.
+each other, $Q$ can only have a single mode, unless
+$\mu_j=0.5$ for some $j$. If the distribution approximated
+by $Q$ has more than one mode, due to the property of the
+KL-divergence and the order\footnote{Note that the order of
+$Q$ and $P$ matters when their KL-divergence is computed, as
+the KL-divergence is \textit{not} a symmetric measure.} of
+$Q$ and the true distribution $P$, the approximate
+distribution $Q$ will tend to approximate one of those
+multiple modes in the true distribution $P$
+\citep[see][Section 21.2.2 for more details]{Murphy2012}.
 
 This especially limits using the variational approximation
 for estimating the joint distribution ${p(\vx, \vh \mid
@@ -5758,11 +5759,11 @@ hidden units conditioned on $\vx^{(n)}$. Then,
 
 However, the problem is with the second term $H_\infty$
 which
-requires running a Gibbs sampling chain until the
+requires running a Gibbs sampling chain until 
 convergence. For instance, let us assume that we collected a
 finite number $N_0$ of samples $\left\{ (\vx^{(1)},
 \vh^{(1)}), \dots, (\vx^{(N_0)}, \vh^{(N_0)}) \right\}$ from
-the model distribution using the Gibbs sampling. Then, 
+the model distribution using Gibbs sampling. Then, 
 \begin{align*}
     H_\infty \approx \frac{1}{N_0} \sum_{n=1}^{N_0}
     h\left(\left.\vx^{(n)}, \vh^{(n)} \right| \TT^{\qt{t}}\right).
@@ -5838,7 +5839,7 @@ distributions modeled by a fully-connected Boltzmann machine
 exactly, the approximate methods introduced before, such as
 MCMC methods and variational approximations, are still
 computationally very expensive. Especially when it comes to
-using MCMC methods, especially the Gibbs sampling, the full
+using MCMC methods such as Gibbs sampling, the full
 connectivity of Boltzmann machines prevents an efficient,
 parallel sampling procedure.
 
@@ -5889,7 +5890,7 @@ a state $\mV$ is defined by
     p(\mV) = \frac{1}{Z} \prod_{c \in C} \varphi_c
     \left(\mV_c\right),
 \end{align*}
-where $Z$ is a normalization constant and $C$ is a set of all
+where $Z$ is a normalization constant and $C$ is the set of all
 possible cliques\footnote{A \textit{clique} is a complete
 subgraph, where all vertices in the subgraph are fully
 connected to each other \citep[see, e.g.,][]{Bondy2008}.}.
@@ -5940,18 +5941,18 @@ if there is no path between $A$ and $B$ without any observed
 variable. $\mX_{\text{obs}}$ is the state of all observed
 variables.
 
-In this sense, we define a \textit{Markov blanket} of a
-random variable as a set of all immediate neighboring
+In this sense, we define the \textit{Markov blanket} of a
+random variable as the set of all immediate neighboring
 variables. If all the variables in the Markov blanket of another
-variable were observed, the variable is independent from all
+variable were observed, the variable would be independent from all
 other variables conditioned on the variables in the Markov
 blanket.
 
 In the example MRF in Fig.~\ref{fig:mrf}, there are five
 random variables; $A$, $B$, $C$, $D$ and $E$. Let us
-consider the variable $A$, first. When $D$ is observed, $A$
-is conditionally independent from $E$ since $D$ the observed in the only
-path $A$--$B$--$D$--$E$ between them. However,
+consider the variable $A$. When $D$ is observed, $A$ is
+conditionally independent from $E$ since $D$ is the observed
+in the only path $A$--$B$--$D$--$E$ between them. However,
 $A$ and $C$ are mutually dependent, as the path
 $A$--$B$--$C$ has no observed variable.
 
@@ -5973,9 +5974,9 @@ Gibbs sampler repeatedly:
 \begin{enumerate}
     \itemsep 0em
     \item Sample from $p(A\mid B)$, $p(C \mid B)$ and $p(D
-        \mid B, E)$ in parallel
+        \mid B, E)$ in parallel.
     \item Sample from $p(B \mid A, C, D)$ and $p(E \mid D)$
-        in parallel
+        in parallel.
 \end{enumerate}
 This will greatly speed up the sampling process, assuming
 that parallel computation is easily accessible and
@@ -6052,14 +6053,14 @@ machine \eqref{eq:bm_energy} so that $\mU = \mzero$ and $\mV =
 Contrary to the fully-connected Boltzmann machine, the
 Markov blanket of each unit consists only of the units of an
 opposite type.  For instance, the Markov blanket of a
-visible unit $x_i$ is a set of all hidden units, and that of
-a hidden unit $h_j$ is a set of all visible units. Simply
+visible unit $x_i$ is the set of all hidden units, and that of
+a hidden unit $h_j$ is the set of all visible units. Simply
 put, the hidden units are conditionally independent given a
 state of the visible units, and vice versa.
 
 This conditional independence has two positive consequences
 in computing the statistics required for learning the
-parameters of an RBM.  Firstly, the Gibbs sampling can be
+parameters of an RBM.  Firstly, Gibbs sampling can be
 implemented efficiently by parallelizing the sampling
 procedure. The states of the units in each type of layer,
 either a visible or hidden layer, can be sampled in parallel
@@ -6083,7 +6084,7 @@ where
 \end{align*}
 Effectively, in just two parallelized steps, the state of
 each unit is replaced by a new sample.  See
-Fig.~\ref{fig:rbm_gibbs} for illustration of the Gibbs
+Fig.~\ref{fig:rbm_gibbs} for an illustration of Gibbs
 sampling in the case of RBMs.
 
 \begin{figure}[t]
@@ -6226,9 +6227,10 @@ This model corresponds in fact exactly to the RBM
 \citep{Freund1994}, under
 certain constraints, such as (1) one of the experts is
 always on to act as a visible bias in an RBM and (2) $\vx
-\in \left\{ 0, 1 \right\}^p$. Compare
+\in \left\{ 0, 1 \right\}^p$. Comparing
 Eqs.~\eqref{eq:poe_cond_h} and \eqref{eq:poe_cond_x} against
-Eqs.~\eqref{eq:rbm_cond_h} and \eqref{eq:rbm_cond_x}. An RBM
+Eqs.~\eqref{eq:rbm_cond_h} and \eqref{eq:rbm_cond_x}, we see
+that an RBM
 is a special case of the PoE, and a learning algorithm for
 PoEs can be immediately applied to an RBM.
 
@@ -6239,7 +6241,7 @@ harmonium assumes that the prior distributions of visible
 variables
 $\vx$ and hidden variables $\vh$ belong to the exponential
 family. This implies that both conditional and posterior
-distributions as well as marginal distributions are in
+distributions are in
 the form of the exponential family distributions.
 
 \subsubsection{Interpolation between Data and Model
@@ -6247,7 +6249,7 @@ Distributions and Contrastive Divergence}
 \label{sec:contrastive_divergence}
 
 Consider now a series of distributions that are
-defined by running a Gibbs sampler for a finite $k$ steps
+defined by running a Gibbs sampler for $k$ steps
 under a PoE with a factorized conditional distribution for
 visible variables. 
 
@@ -6293,7 +6295,7 @@ learning in RBMs, and respectively PoEs with a factorized
 conditional distribution of visible variables, by $\KL(P_0
 \| P_\infty)$. There $P_\infty$ is the model distribution
 that can be described by the samples collected by running a
-Gibbs sampler long time starting from the set of training
+Gibbs sampler for a long time starting from the set of training
 samples.
 
 With these interpolated distributions, \citet{Hinton2002}
@@ -6302,14 +6304,14 @@ divergence, instead of maximizing the log-likelihood. The
 $k$-step contrastive divergence
 (CD\nomenclature{CD}{Contrastive divergence}) is defined as a
 difference between $\KL(P_0 \| P_{\infty})$ and $\KL(P_k \|
-P_\infty)$, and minimizing it is equivalent to maximizing
+P_\infty)$. Minimizing it is equivalent to maximizing
 the log-likelihood in the infinite limit of $k$, since
 $\KL(P_\infty \| P_\infty) = 0$.
 
 The gradient of the $k$-step CD is, then,
 \begin{align}
     \label{eq:rbm_cd_grad}
-    \frac{\partial \CD_k}{\partial \theta} \propto
+    \frac{\partial \CD_k}{\partial \theta} \approx
     \left< \frac{\partial
     \left(-E(\vx^{(n)}, \vh\mid\TT)\right)}{\partial \theta}
     \right>_{P_0} 
@@ -6356,7 +6358,7 @@ interested reader to \citep{Bengio2009}.
 \subsection{Deep Boltzmann Machines}
 \label{sec:dbm}
 
-Deep Boltzmann machine (DBM\nomenclature{DBM}{Deep Boltzmann
+The deep Boltzmann machine (DBM\nomenclature{DBM}{Deep Boltzmann
 machine}) was proposed by
 \citet{Salakhutdinov2009a} as a relaxed version of an RBM.  A
 DBM simply stacks multiple additional layers of hidden units
@@ -6413,7 +6415,8 @@ We can collect samples by repeating the following
 steps:
 \begin{enumerate}
     \itemsep 0em
-    \item Sample $\vh_+$ in parallel, conditioned on $\vx$ and $\vh_-$
+    \item Sample $\vh_+$ in parallel, conditioned on $\vx$
+        and $\vh_-$.
     \item Sample $\left\{ \vx, \vh_- \right\}$
         in parallel, conditioned on $\vh_+$.
 \end{enumerate}
@@ -6447,7 +6450,7 @@ In order to alleviate this difficulty,
 \citet{Salakhutdinov2009a,Salakhutdinov2012} proposed an
 algorithm that initializes the parameters of a DBM by
 pretraining each layer separately starting from the bottom
-layer. In \citepub{Cho2013icann} yet another pretraining
+layer. In \citepub{Cho2013icann}, yet another pretraining
 algorithm was proposed that utilizes a deep autoencoder to
 obtain a set of variational parameters for the hidden units
 in the even-numbered hidden layers.  We will discuss those
@@ -6703,17 +6706,17 @@ Then, the score function of the GRBM is
     \frac{w_{ij}}{\sigma_i^2}.
 \end{align}
 Furthermore, we will need
-\begin{align}
-    \label{eq:grbm_score_grad}
+\begin{align*}
+    %\label{eq:grbm_score_grad}
     \frac{\partial \psi_i(\vx \mid \TT)}{\partial x_i} =
     -\frac{1}{\sigma_i^2} + \sum_{j=1}^q \hat{h}_j (1 -
-    \hat{h}_j) \frac{w_{ij}^2}{\sigma_i^2},
-\end{align}
+    \hat{h}_j) \frac{w_{ij}^2}{\sigma_i^4},
+\end{align*}
 where $\hat{h}_j = \phi\left( \sum_{i=1}^p
 \frac{x_i}{\sigma_i^2} w_{ij} + c_j \right)$ is the
 activation probability of the $j$-th hidden units.
 
-Given a set $D$ of $N$ training samples, the score matching
+Given a set $D$ of $N$ training samples, score matching
 then tries to minimize the following cost function
 instead of maximizing the marginal log-likelihood:
 \begin{align}
@@ -6728,13 +6731,13 @@ If we assume that the bias $b_i$ and the conditional
 variance $\sigma_i$ to each visible unit are respectively
 fixed to $0$ and $1$\footnote{ Fixing $b_i$ to $0$ can be
 indirectly achieved by normalizing each component of
-training samples to have a zero-mean, and it has been an
+training samples to have a zero-mean, and it has been a
 usual practice to ignore $\sigma_i$ by forcing it to $1$
 \citep[see, e.g.,][]{Hinton2012rbm}.  }, the cost function in
 Eq.~\eqref{eq:grbm_sm_cost_orig} can be rewritten as
 \begin{align*}
     J(\TT) = \frac{1}{N} \sum_{n=1}^N \left[ \frac{1}{2}
-    \left( \sum_{i=1}^p \sum_{j=1}^q \hat{h}_j w_{ij} - x_i
+    \sum_{i=1}^p \left( \sum_{j=1}^q \hat{h}_j w_{ij} - x_i
     \right)^2 + \sum_{i=1}^p \sum_{j=1}^q h_j(1 - h_j)
     w_{ij}^2 \right] + C,
 \end{align*}
@@ -6744,7 +6747,7 @@ It is easy to see that the first term inside the summation
 is the reconstruction error of a single-layer autoencoder
 with a tied set of weights $\mW$ (see
 Eq.~\eqref{eq:autoencoder_cost}). The other term can be
-considered a regularization term.
+considered as a regularization term.
 
 Hence, this leads us to understand that learning the
 parameters of a GRBM by score matching is equivalent to
@@ -6781,12 +6784,12 @@ via score matching.
 %\end{figure}
 
 In Section~\ref{sec:sbn_dbn}, we presented the sigmoid
-belief network in a relation with a deep autoencoder and
+belief network in relation with a deep autoencoder and
 subsequently briefly described the deep belief network.
-Here, we present another aspect of the DBN as a combination of
+Here, we present another view of the DBN as a combination of
 a sigmoid belief network and an RBM.
 
-A deep belief network (DBN), proposed by
+The deep belief network (DBN), proposed by
 \citet{Hinton2006nc}, is a hybrid model that has both
 directed and undirected edges.  The top two hidden layers
 $\vh^{(L-1)}$ and $\vh^{(L)}$ are connected to each other 
@@ -6833,10 +6836,9 @@ layers.
 A DBN maintains two sets of parameters as well as the
 parameters for the top two layers.  The first two sets
 $\TT_-$ and $\TT_+$ correspond to the recognition and
-generation parameters of a sigmoid belief network, and the
-last one 
-%$\TT_\tau$ 
-does to the parameters of an RBM.
+generation parameters of a sigmoid belief network.
+Additionally, there is a separate set of parameters for the
+parameters of a top-level RBM.
 
 Using this hybrid architecture \citet{Hinton2006nc} proposed
 an efficient learning algorithm that consists of two stages.
@@ -6870,20 +6872,20 @@ $\vh^{\qlay{L}}$. Let us use $\TT_0^{\qlay{l}}$ to indicate the
 parameters of an RBM consisting of the $l$-th and $(l+1)$-th
 layers, learned during the first stage.
 
-The first stage corresponds to a layer-wise
-pretraining. Instead of jointly optimizing all the layers at
-once, during the first stage each pair of two consecutive
-layers is optimized one by one starting from the bottom pair
+The first stage corresponds to a layer-wise pretraining.
+Instead of jointly optimizing all the layers at once, during
+the first stage each pair of two consecutive layers is
+optimized one by one starting from the bottom pair
 consisting of the visible and first hidden layers. This
 approach of adding more hidden layers in a DBN has been
-shown to guarantee to improve the model
-\citep{Hinton2006nc}, and will be discussed more in
-Section~\ref{sec:dbn_rbm}.
+shown to guarantee to improve the variational lower-bound of
+the model \citep{Hinton2006nc}, and will be discussed more
+in Section~\ref{sec:dbn_rbm}.
 
 The second stage highly resembles the wake-sleep algorithm
 used to estimate the parameters of a sigmoid belief network
 from Section~\ref{sec:sbn_dbn}. The learning algorithm,
-called an up-down algorithm, starts by initializing the
+called the up-down algorithm, starts by initializing the
 weights to those estimated during the first stage. The
 recognition and generation parameters will be identical,
 since the RBMs trained in the first stage use a tied set of
@@ -6927,13 +6929,14 @@ the top-level RBM.
 \subsubsection{Deep Energy Model}
 
 Before ending this section, we will briefly introduce a deep
-energy model (DEM\nomenclature{DEM}{Deep energy model}) proposed by \citet{Ngiam2011} as an
-alternative formulation of combining a deep autoencoder with
-an RBM. A DEM extends an RBM by introducing a nonlinear
-encoder with multiple layers of \textit{deterministic}
-hidden units. According to \citet{Ngiam2011}, this potentially
-avoids the difficulty introduced by having stochastic hidden
-units in a deep belief network.
+energy model (DEM\nomenclature{DEM}{Deep energy model})
+proposed by \citet{Ngiam2011} as an alternative formulation
+of combining a deep autoencoder with an RBM. A DEM extends
+an RBM by introducing a nonlinear encoder with multiple
+layers of \textit{deterministic} hidden units. According to
+\citet{Ngiam2011}, this potentially avoids the difficulty
+introduced by having stochastic hidden units in a deep
+belief network.
 
 Let us consider a GRBM from Section~\ref{sec:grbm}, however,
 assuming that $\sigma_i=1$ for all $i=1,\dots,p$. The energy
@@ -6961,18 +6964,18 @@ distribution.
 \chapter{Unsupervised Neural Networks as the First Step}
 \label{chap:pretraining}
 
-So far in this thesis, we have considered the unsupervised
+So far in this thesis, we have considered unsupervised
 and supervised neural networks separately.  In fact, our
 main focus was on the unsupervised neural networks rather
-than the supervised ones. We spent most of time discussing
-autoencoders and Boltzmann machines both of which aim to
+than the supervised ones. We mostly discussed
+autoencoders and Boltzmann machines, both of which aim to
 learn the distribution of training samples and are not
 specifically engineered for other tasks.
 
-In Section~\ref{sec:bp_imp}, we briefly discussed so
-called layer-wise pretraining where shallow
+In Section~\ref{sec:bp_imp}, we briefly discussed the so
+called layer-wise pretraining, where shallow
 unsupervised neural networks were used to initialize the
-parameters of a deep multi-layer perceptron (MLP). Notably
+parameters of a deep multi-layer perceptron (MLP). Notably,
 a stack of, for instance, restricted Boltzmann machines used
 for initializing an MLP was trained without any prior
 knowledge that it will be used for classification.
@@ -6987,8 +6990,8 @@ coordinate system of input samples into one that is more
 useful for supervised learning tasks. A restricted Boltzmann machine
 may be trained to facilitate training more sophisticated
 deep Boltzmann machines, or it can learn the joint
-distribution of input and output and use it to compute the
-conditional distribution of output given a new input.
+distribution of inputs and outputs and use it to compute the
+conditional distribution of an output given a new input.
 
 In this chapter, we discuss some of the approaches proposed
 recently to incorporate the power of generative modeling
@@ -7004,7 +7007,7 @@ discussed earlier in Sections~\ref{sec:perceptron} and
 \ref{sec:log_reg} that a simple perceptron without any
 intermediate nonlinear hidden layer can perform this task
 perfectly only if training samples are \textit{linearly
-separable}. Otherwise, this simple neural network fails to
+separable}. Otherwise, this simple neural network will fail to
 do so.  However, even
 if the training set has a nonlinear separating hyperplane,
 an MLP which is essentially a perceptron with one or more
@@ -7062,11 +7065,11 @@ the \textit{representation is better} when better
 \textit{generalization} performance on another machine
 learning task, for instance classification, can be achieved
 using the representation compared to using the raw
-representation \citep{Bengio2007nips}.}. This is contrary to
+representation \citep{Bengio2007nips}.}. This is different
+from
 how the parameters of an MLP were estimated. For an MLP, we
 first fix the structure of the model and jointly optimize
-all layers, while what is being suggested here is the
-other way around. We start with one visible and one hidden
+all layers, while what is being suggested here is different. We start with one visible and one hidden
 layer to learn a \textit{transformation} that extracts a
 somewhat better representation. Repeatedly, using the
 representation from the previous stage, we train another
@@ -7188,7 +7191,7 @@ finetuning the stack with backpropagation.
 In the remainder of this section, we introduce other approaches
 than the previously discussed layer-wise pretraining
 that aim to improve the discriminative performance by
-utilizing unsupervised neural networks. These approaches
+using unsupervised neural networks. These approaches
 may use a separate unsupervised neural network, or combine a
 supervised and an unsupervised neural network.
 
@@ -7229,7 +7232,7 @@ only focus on the MAP solution for the output $y$.
 
 If $y$ can only have a finite number of possible outcomes
 (classification), we can simply evaluate $p(\vx^*, y)$ for
-all possible $y$'s and choose $y$ with the largest value.
+all possible $y$'s and choose the $y$ with the largest value.
 Otherwise, it is possible to optimize $p(\vx^*, y)$ with
 respect to $y$ to compute the best possible $y$, although it
 may only find a local mode if $p(\vx^*, y)$ has more than one
@@ -7244,7 +7247,7 @@ $y^{(n)} \in \left\{ 1, 2, \dots, q \right\}$ into a
 $q$-dimensional vector $\vy^{(n)}$ whose $y^{(n)}$-th
 component is one and all other components are zero. With the
 transformed output vectors, we create a new training set
-$\tilde{D} = \left\{ \left[(\vx^{(n)})^\top (\vy^{(n)})^\top
+$\tilde{D} = \left\{ \left[(\vx^{(n)})^\top,  (\vy^{(n)})^\top
 \right]^\top \right\}_{n=1}^N$ by concatenating $\vx^{(n)}$
 and $\vy^{(n)}$ for each $n$.
 
@@ -7262,7 +7265,7 @@ sample by Eq.~\eqref{eq:gen_class}.
 
 \citet{Larochelle2008} proposed a \textit{discriminative}
 objective function for training this kind of an RBM. The proposed
-objective function maximizes instead of the log-likelihood
+objective function maximizes instead 
 the conditional log-likelihood 
 \[
 \LL_d(\TT) = \sum_{n=1}^N \log p(\vy^{(n)} \mid \vx^{(n)},
@@ -7332,7 +7335,7 @@ sampling steps between the top two layers start from the
 samples from the (approximate) posterior distribution
 attached with the labels of the samples in a minibatch. 
 
-Once the training is over, we can classify a new sample $\vx^*$
+Once training is over, we can classify a new sample $\vx^*$
 easily by first obtaining the approximate (fully factorized)
 posterior means of the penultimate layer $\vmu^*$ and
 computing the unnormalized probabilities of the combination
@@ -7342,7 +7345,7 @@ chosen as a prediction $\hat{\vy}$.
 
 Surprisingly, both of these approaches which perform both
 generative $p(\vx, y)$ and discriminative $p(y \mid \vx)$
-modeling achieve the classification performance comparable
+modeling achieve a classification performance comparable
 to or often better than the models which were trained
 purely to perform discriminative modeling
 \citep{Hinton2006nc,Larochelle2008}.
@@ -7362,7 +7365,7 @@ into account the nature of each layer receiving both
 bottom-up and top-down signals.
 
 A naive way of utilizing a DBM for a discriminative task in
-this case is to forget transforming it into an MLP,
+this case is to forget about transforming it into an MLP,
 and simply use the approximate posterior means of hidden
 units as features (see, e.g., \citet{Montavon2012ai} and
 \citepub{Cho2013icann}). In other words, for
@@ -7379,7 +7382,8 @@ MLP be modified to simulate the top-down signal in a DBM.
 Given a DBM with $L$ hidden layers
 $\left\{\vh^{\qlay{l}}\right\}_{l=1}^L$ and a single visible
 layer $\vx$, let us construct an MLP with $L$ intermediate
-hidden layers $\left\{\tilde{\vh}^{\qlay{l}}\right\}_{l=1}^L$ and
+hidden layers
+$\left\{\tilde{\vh}^{\qlay{l}}\right\}_{l=1}^L$, 
 a single output layer $\tilde{\vy}$ and a single visible
 layer $\tilde{\vx}$.
 The main goal of this construction is to make sure that a
@@ -7405,7 +7409,9 @@ exactly $\vmu^{\qlay{1}}$.
 This applies similarly to all intermediate hidden layers of
 the DBM. For any $l$-th layer of the DBM, where $l < L - 1$,
 we constrain the $l$-th hidden layer of the MLP by appending
-$\vmu^{\qlay{l}}$ with $\vmu^{\qlay{l+2}}$. By connecting them to
+%$\vmu^{\qlay{l}}$ 
+$\tilde{\vh}^{\qlay{l}}$ 
+with $\vmu^{\qlay{l+2}}$. By connecting them to
 $\tilde{\vh}^{\qlay{l+1}}$ with the corresponding weights from
 the DBM, we can ensure that the activation of the $(l+1)$-th
 hidden layer of the MLP will be initially identical to
@@ -7441,7 +7447,7 @@ This way of constructing an MLP (see Fig.~\ref{fig:dbm_mlp})
 guarantees that the activation of the last hidden layer of
 the MLP after a forward pass with the initialized weights
 will coincide with their variational parameters. From there
-on, we can use the backpropagation (see
+on, we can use backpropagation (see
 Section~\ref{sec:backprop}) to further finetune the model.
 
 For instance, in \citep{Salakhutdinov2009a} and
@@ -7458,14 +7464,14 @@ digits as well as 3-D object recognition tasks.
 
 
 So far in this chapter we have described how 
-unsupervised neural networks can be used to improve the
-performance of supervised tasks. In this section we will
+unsupervised neural networks can be used to improve 
+performance in supervised tasks. In this section we will
 discuss how a simpler unsupervised neural network can help
 training more complex, deeper unsupervised neural networks
 with some theoretical guarantees.
 
-Earlier in this chapter we have looked at the incremental
-feature learning from the perspective of \textit{incremental
+Earlier in this chapter we have looked at incremental
+feature learning from the perspective of an \textit{incremental
 transformation} that nonlinearly transforms an input into a
 better representation. Once the features are obtained by
 the incremental transformation, they are fed to another
@@ -7484,12 +7490,12 @@ from a single restricted Boltzmann machine (RBM) trained on
 original training samples, we repeatedly stack an RBM
 trained on the aggregate posterior distribution of the
 previous RBM on top.  However, the ultimate goal of this
-almost the same procedure was very different.
-The goal of this procedure in training a DBN was to build a
-good \textit{generative} model that learns the data
-distribution well, rather than to nonlinearly transform the
-input space so that another machine learning task will
-benefit from the new, better representation.
+almost identical procedure was very different.  The goal of
+this procedure in training a DBN was to build a good
+\textit{generative} model that learns the data distribution
+well, rather than to nonlinearly transform the input space
+so that another machine learning task will benefit from the
+new, better representation.
 
 Ultimately it is a question of what or how much
 stacking another restricted Boltzmann machine on top of the
@@ -7509,7 +7515,7 @@ on to discuss how this scheme can be extended to
 initializing the parameters of a deep Boltzmann machine
 (DBM) based on
 \citep{Salakhutdinov2012nc,Salakhutdinov2012}. At the end of
-the section, another pretraining scheme for DBMs proposed in
+the section, another pretraining scheme for DBMs, proposed in
 \citepub{Cho2013icann}, utilizing such directed deep neural
 networks as deep autoencoders and DBNs is introduced.
 
@@ -7555,16 +7561,16 @@ network is often known as \textit{ancestral sampling}
 \citep[see, e.g.,][]{Bishop2006,Murphy2012}.
 
 Let us construct a sigmoid belief network with infinitely
-many layers, given a set of parameters of an RBM. The bottom
+many layers, given a set of parameters from an RBM. The bottom
 layer corresponds to the visible layer of the RBM, and there
 are directed edges from the layer above which corresponds to
 the hidden layer of the RBM. The weights of the edges are
 set to those of the RBM. Again, on top of the second layer,
 another layer that corresponds to the visible layer of the
-RBM is connected with the downward directed edges with their
-weights fixed to those of the RBM. We repeat this step
+RBM is connected with the downward directed edges whose
+weights are fixed to those of the RBM. We repeat this step
 infinitely, and we get the infinitely deep sigmoid belief
-network with the tied weights\footnote{For simplicity, we
+network with tied weights\footnote{For simplicity, we
 omit biases, but they can be considered a part of the
 weights.}. 
 
@@ -7584,10 +7590,10 @@ It is easy to see that this is exactly what Gibbs sampling
 does to get samples from the model distribution of an RBM.
 If this procedure starts from a layer far enough from the
 visible layer, the Gibbs chain will reach the equilibrium
-distribution by the time samples from the bottom layers were
+distribution by the time samples from the bottom layers are
 collected. 
 
-This means that if we instead of a random state perform
+This means that if, instead of a random state, we perform
 the same sampling procedure while fixing all those layers
 that correspond to the visible layer of the RBM to a given
 sample, the samples of the other layers will represent the
@@ -7603,12 +7609,13 @@ Better Prior}
 \label{sec:dbn_rbm}
 
 Here, we take a more detailed look at the first stage of the
-learning algorithm of a DBN discussed in
-Section~\ref{sec:dbn}. The first stage consists of
+learning algorithm of a DBN.
+%discussed in Section~\ref{sec:dbn}. 
+The first stage consists of
 iteratively training an RBM on the samples collected from
 the posterior distribution of the hidden units of an RBM
 immediately below. Let us first consider a DBN with two
-layers of hidden units of which the second hidden layer has
+layers of hidden units where the second hidden layer has
 as many units as there are visible units.
 
 The first RBM trained on a training set $D$ with $N$ samples
@@ -7626,7 +7633,7 @@ We used the superscript $\qlay{1}$ to indicate that the hidden
 units are in the first hidden layer of a DBN.
 
 An interesting observation can be made here.  The same set
-of the parameters $\TT_1$ is used to model both the
+of parameters $\TT_1$ is used to model both the
 conditional distribution $p(\vx \mid \vh^{\qlay{1}})$ and the
 prior distribution $p(\vh^{\qlay{1}})$. From this observation, it
 is natural to consider \textit{replacing} the prior of
@@ -7691,15 +7698,14 @@ distribution, as $\TT_2$ is now different from $\TT_1$,
 which makes the bound less tight.
 
 Once $\TT_2$ is estimated, we can recursively perform this
-procedure to replace the prior distribution of $\vh^{\qlay{2}}$,
-and so on.  Each replacement will result in an improved
-bound, making the generative model better and better each
-time.  The approximate posterior distribution $Q$,
-however, becomes less and less tight each time, and the
-second stage, called the up-down algorithm
-\citep{Hinton2006nc}, is needed to
-jointly estimate both the recognition and generation
-parameters of all layers.  
+procedure to replace the prior distribution of
+$\vh^{\qlay{2}}$, and so on.  Each replacement will result
+in an improved bound, making the generative model possibly
+better and better each time.  The approximate posterior
+distribution $Q$, however, becomes less and less tight each
+time, and the second stage, called the up-down algorithm
+\citep{Hinton2006nc}, is needed to jointly estimate both the
+recognition and generation parameters of all layers.  
 
 This guarantee of improving the variational lower bound
 \textit{only} holds when
@@ -7722,7 +7728,7 @@ contrastive divergence.
 \subsubsection{Stochastic Units vs. Deterministic Units}
 \label{sec:det_vs_sto}
 
-Let us discuss slightly more about using the probabilities
+Let us discuss slightly more about using probabilities
 instead of actual samples as training samples for training
 an upper RBM. This can be considered as using a different
 approximate posterior distribution $Q$.
@@ -7804,9 +7810,9 @@ Table~\ref{tbl:dbn_ae} summarizes these differences.
         & DBN & DBN-FF & AE \\
         \hline
         \hline
-        Posterior & Layer-wise Factorial & Fully Factorial & Fully Factorial \\
+        Recognition & Layer-wise Factorial & Fully Factorial & Fully Factorial \\
         \hline
-        Conditional & Layer-wise Factorial & Layer-wise Factorial & Fully Factorial \\
+        Generation & Layer-wise Factorial & Layer-wise Factorial & Fully Factorial \\
     \end{tabular}
     \caption{The forms of approximate/exact 
     distributions used by a deep belief network (DBN), a
@@ -7825,14 +7831,14 @@ stochastic mechanism is involved. However, this choice
 nullifies the guarantee discussed earlier in
 Section~\ref{sec:dbn_rbm}.
 
-Based on this and the similarity between the
-fully factorized approximate posterior and the encoder of a
+Based on this and the similarity between the fully
+factorized approximate posterior and the encoder of a
 deterministic autoencoder, we informally conclude that in
-terms of generative modeling of data autoencoders may lag
+terms of generative modeling of data, autoencoders may lag
 behind a deep belief network of the same structure. However,
 in practice where features extracted by these models are
-more interesting, the fully factorized
-approximate posterior is often used to train even a deep belief network.
+more interesting, the fully factorized approximate posterior
+is often used to train even a deep belief network.
 Furthermore, since the network can be further finetuned
 generatively by the up-down algorithm (see
 Section~\ref{sec:dbn}) later on, the importance of using a
@@ -7854,8 +7860,8 @@ pretraining scheme was further improved in
 \citep{Salakhutdinov2012} to better utilize the undirected
 nature of the connectivity in a deep Boltzmann machine.
 
-Firstly, we must realize that that all the edges in a DBM are
-\textit{undirected}. This is a critical difference from a
+Firstly, we must realize that all the edges in a DBM are
+\textit{undirected}. This is a critical difference with a
 DBN, when we consider the conditional distribution of a
 single intermediate hidden layer $\vh^{\qlay{l}}$. In a DBN, this
 is simply conditioned on the layer immediately above
@@ -7872,7 +7878,7 @@ c_j^{\qlay{l}}
 where we follow the notations from Section~\ref{sec:dbm}.
 
 Simply put, DBMs must be pretrained while taking into
-account that each hidden unit receives signal from both
+account that each hidden unit receives a signal from both
 upper and lower layers. On the other hand, no such
 considerations are needed when pretraining a DBN. If the same
 pretraining method for DBNs is used, the conditional
@@ -7887,10 +7893,10 @@ visible units with tied weights such that the
 additional set of visible units supplies signal that
 compensates for the lack of signal from the second hidden
 layer. Similarly, an RBM that consists of the top two layers
-has two copies of hidden units. For any pair of intermediate
+has the two copies of hidden units. For any pair of intermediate
 hidden layers, an RBM is constructed to have two copies of
 both visible and hidden units. See Fig.~\ref{fig:dbm_pre}
-for illustration.
+for an illustration.
 
 \begin{figure}[t]
     \centering
@@ -7901,7 +7907,7 @@ for illustration.
     \includegraphics[width=0.73\columnwidth]{figures/pretrain_dbm.eps}
     \caption{Illustration of the layer-wise pretraining of
     a deep Boltzmann machine. The dashed directed lines
-    indicate \textit{copying} of either pretrained models or
+    indicate \textit{copying} either the pretrained models or
     the activations of the hidden units of the pretrained
     models.}
     \label{fig:dbm_pre}
@@ -7915,7 +7921,9 @@ it is worth discussing it in relation to the pretraining
 scheme for DBNs.
 
 We can rewrite the variational lower bound of a 
-DBN having two hidden layers, given in
+DBN 
+%having two hidden layers
+given in
 Eq.~\eqref{eq:dbn_two_layer} as
 \begin{align}
     \label{eq:dbn_two_layer2}
@@ -7948,8 +7956,8 @@ posterior, since the KL-divergence between two distributions
 is non-negative and becomes zero only when they are
 identical.
 
-If we train the first RBM having two copies of visible
-units, following the pretraining algorithm of a
+If we train the first RBM with two copies of visible
+units ($\vx$ and $\vh^{\qlay{2}}$), following the pretraining algorithm of a
 \textit{DBM}, we can compute the marginal or prior
 distribution over $\vh^{\qlay{1}}$ by using the fact that by
 considering $\vh^{\qlay{1}}$ as a visible layer, the whole model
@@ -7971,12 +7979,13 @@ Eq.~\eqref{eq:dbm_prior1}, we can improve the variational
 lower bound in Eq.~\eqref{eq:dbn_two_layer2} by replacing it
 with an RBM having two copies of hidden units with tied
 parameters $\TT_2$. If we start by fixing $\TT_2=\TT_1$ and
-follow the steepest gradient direction with the stochastic
-gradient method, the KL-divergence between the aggregate
+follow the steepest gradient direction,
+%with the stochastic gradient method, 
+the KL-divergence between the aggregate
 posterior and the new prior distribution will be guaranteed
 to decrease, or stay identical at least, which amounts to
-improving the lower bound. The new prior distribution can be
-similarly written as
+improving the lower bound in Eq.~\eqref{eq:dbn_two_layer2}.
+The new prior distribution can be similarly written as
 \begin{align}
     \label{eq:dbm_prior2}
     p(\vh^{\qlay{1}} \mid \TT_2) = \frac{1}{Z(\TT_2)} \left(
@@ -7996,8 +8005,10 @@ the new distribution in Eq.~\eqref{eq:dbm_prior2} such that
     \sum_{\vh^{\qlay{2}}} p(\vh^{\qlay{1}}, \vh^{\qlay{2}} \mid \TT_2)
     \right),
 \end{align*}
-which is guaranteed to have a smaller KL-divergence than the
-aggregate posterior \citep{Hinton2002}. 
+which is guaranteed to have a smaller KL-divergence from the
+aggregate posterior $Q(\vh^{\qlay{1}}\mid \vx)$ than
+$p(\vh^{\qlay{1}} \mid \TT_1)$ in Eq.~\eqref{eq:dbm_prior2}
+\citep[See Appendix of][]{Salakhutdinov2012nc}. 
 
 Hence, adding one more layer on top of an existing RBM is
 guaranteed to improve the variational lower bound, if the
@@ -8006,7 +8017,7 @@ does not extend trivially to the intermediate hidden layers.
 
 This mathematical justification suggests that the
 pretraining method for a DBM differs from that for a DBN in
-the sense that only a \textit{half} of a prior distribution is
+that only \textit{half} of a prior distribution is
 replaced by the upper layer. Conversely, it states that the
 existing layer is still used to model the remaining half of
 the prior distribution, whereas in a DBN the lower layer
@@ -8014,8 +8025,8 @@ only concentrated on modeling the conditional generative
 distribution given the state of units in the upper layer. 
 
 In fact, this way of justifying the pretraining algorithm
-allows to extend the algorithm so that the amount of
-modeling the prior distribution is distributed
+allows to extend the algorithm so that 
+modeling of the prior distribution is distributed
 \textit{unevenly}. For instance, \citet{Salakhutdinov2012}
 proposed to use \textit{three} copies of visible and hidden
 units, respectively, when training the bottom and top RBMs.
@@ -8149,7 +8160,7 @@ found in the first stage. For instance, consider having a
 deep belief network that has a visible layer corresponding
 to $\vx$, and a number of hidden layers corresponding to the
 even-numbered hidden layers $\vh_-$ of the DBM. Then we can
-perform a layer-wise pretraining described earlier in this
+perform layer-wise pretraining described earlier in this
 chapter, to estimate the \textit{recognition} parameters
 that represent the approximate posterior distribution of the
 DBN. 
@@ -8203,7 +8214,7 @@ This approach was empirically shown to be very effective at
 learning a good generative model using a DBM in
 \citepub{Cho2013icann}. Furthermore, DBMs with Gaussian
 visible units trained using this approach were found to be
-good at denoising images corrupted with high level of noise
+good at denoising images corrupted with a high level of noise
 %in \citep{Cho2013}.
 in \citepub{Cho2013icannA}.
 
@@ -8235,7 +8246,7 @@ were able to outperform the conventional models and
 algorithms significantly.
 
 Based on these advances in academic research, deep neural
-networks have rapidly found their ways into commercial use
+networks have rapidly found their way into commercial use
 through companies such as Google, Microsoft and Apple.  For
 instance, Google Goggles\footnote{
 http://www.google.fi/mobile/goggles/ } uses a deep belief
@@ -8284,11 +8295,11 @@ learning as one of the ten breakthrough technologies in
 \\http://www.technologyreview.com/featuredstory/513696/deep-learning/
 } of deep neural networks, the core principles of building
 deep neural networks have evolved rather gradually over more
-than 50 years since \citet{Rosenblatt1958} proposed a
+than 50 years since \citet{Rosenblatt1958} proposed the
 perceptron. Over those years many seemingly distant classes
 of neural networks as well as other machine learning models
 have been proposed and later found to be closely related
-\citep[see, e.g.,][]{Haykin2009}. In due course many
+\citep[see, e.g.,][]{Haykin2009}. In due course, many
 concepts, mainly from probabilistic approaches and
 semi-supervised learning, have been absorbed by the field of
 neural networks to form the solid basic principles of deep
@@ -8296,11 +8307,11 @@ neural networks.
 
 The main text of this thesis has been written to show how
 different perspectives and concepts of machine learning
-interact with each other to form basic principles of deep
+interact with each other to form the basic principles of deep
 neural networks. 
 
 In this last chapter, the author briefly summarizes the main
-contents and continues on to discussing potential future
+contents and discusses potential future
 research directions. At the end of this chapter, some
 important models, concepts as well as practical matters that
 have not been discussed in this thesis are briefly
@@ -8314,13 +8325,13 @@ machine learning methods. Mainly, two classes of deep neural
 networks, namely autoencoders and Boltzmann machines, were
 discussed in detail and found to be related to each other.
 The underlying principles of those two models were found to
-be useful in understanding layer-wise pretraining of a deep
+be useful in understanding the layer-wise pretraining of a deep
 multi-layer perceptron.
 
 The thesis began with simple, linear neural networks.
 Linear regression and perceptrons were first described in
 terms of neural networks, and later the equivalent models
-were formulated from probabilistic perspective. Similarly, a
+were formulated from a probabilistic perspective. Similarly, a
 linear autoencoder was shown to be equivalent to principal
 component analysis as well as its probabilistic variant.
 
@@ -8337,15 +8348,15 @@ the manifold assumption which constitutes a central part of
 semi-supervised learning.
 
 Independently from autoencoders, the thesis discussed
-Boltzmann machines extensively. Starting from Hopfield networks
-which may be seen as a deterministic variant of Boltzmann
-machines, the author described in detail estimating
-statistics and learning parameters of Boltzmann machine as
-well as their structurally restricted variants such as
-restricted Boltzmann machines (RBM) and deep Boltzmann
-machines. Furthermore, a justification for viewing Boltzmann
-machines with hidden units as deep neural networks was
-provided in connection to recurrent neural networks.
+Boltzmann machines extensively. Starting from Hopfield
+networks, which may be seen as a deterministic variant of
+Boltzmann machines, the author described in detail
+how to estimate the statistics and learn the parameters of Boltzmann
+machine as well as their structurally restricted variants
+such as the restricted Boltzmann machines (RBM) and the deep
+Boltzmann machines. Furthermore, a justification for viewing
+Boltzmann machines with hidden units as deep neural networks
+was provided in connection to recurrent neural networks.
 
 These two seemingly separate classes of neural networks,
 autoencoder and Boltzmann machines, were shown to be closely
@@ -8356,7 +8367,7 @@ relatedness as well as equivalence. Additionally, a deep
 belief network was described as a combination of an RBM and
 a deep autoencoder with stochastic units.
 
-At the end of the thesis, the author has explained recently
+At the end of the thesis, the author has explained a recently
 introduced method of pretraining a deep multi-layer
 perceptron. This method of pretraining, called layer-wise
 pretraining, is analyzed from two different viewpoints.
@@ -8364,7 +8375,7 @@ Firstly, the fact that some variants of autoencoders capture
 the data manifold was used to view the layer-wise
 pretraining as a way of incrementally extracting more useful
 features. Secondly, the author explained how stacking
-another layer on top of the existing neural network in the
+another layer on top of the existing neural network in 
 layer-wise pretraining can guarantee the improvement in the
 variational lower bound of the marginal log-likelihood.
 
@@ -8373,11 +8384,11 @@ variational lower bound of the marginal log-likelihood.
 
 Two different perspectives from which deep neural networks
 can be understood have been discussed in this thesis. One is
-based on the idea of incrementally capturing data manifold
+based on the idea of incrementally capturing the data manifold
 through stacking multiple layers of nonlinear hidden units.
 The other considers a feedforward computation of a deep
 neural network as performing an approximate inference of the
-posterior distribution over hidden units in higher layer.
+posterior distribution over hidden units in higher layers.
 
 The latter perspective essentially divides a deep neural
 network into two distinct parts. The first part is a latent
@@ -8387,38 +8398,39 @@ decision based on the inferred posterior distribution given
 a sample, on which class the sample belongs to. For example,
 a forward pass computation up until the penultimate layer of
 a multi-layer perceptron (MLP, see Section~\ref{sec:mlp})
-corresponds to performing an approximate inference, and the
+would correspond to performing an approximate inference, and the
 computation from the penultimate layer to the output layer
 to decision-making.
 
 In this framework of a latent variable model, the most exact
-way of performing a classification or a decision-making is
+way of performing classification or decision-making is
 to marginalize out hidden variables $\vh$ to obtain the
 conditional distribution of missing variables $\vx_m$ given
-the states of observed variables $\vx_o$:
+the states of the observed variables $\vx_o$:
 \begin{align*}
     p(\vx_m \mid \vx_o) = \sum_{\vh} p(\vx_m \mid \vh) p(\vh
     \mid \vx_o).
 \end{align*}
 However, since this exact marginalization is often
 computationally intractable, a deep neural network replaces
-this by 
+this with a parametric nonlinear function that computes
 \begin{align*}
-    p(\vx_m \mid \vx_o) \approx  p(\vx_m \mid \vh) Q(\vh
-    \mid \vx_o) \approx \tilde{p}(\vx_m \mid \vx_o)
-    = p\left(\vx_m \mid \vh =
-    \E_Q\left[\vh \mid \vx_o \right]\right)
+   % p(\vx_m \mid \vx_o) \approx  
+    \sum_{\vh} p(\vx_m \mid
+    \vh) Q(\vh \mid \vx_o) 
+    \E_Q\left[p(\vx_m \mid
+    \vh \right]
 \end{align*}
-using a parametric nonlinear function that computes
-$\E_{\tilde{p}}\left[ \vx_m \mid \vx_o \right]$ in a single sweep.
+%$\E_{\tilde{p}}\left[ \vx_m \mid \vx_o \right]$ 
+in a single sweep.
 
 Assuming a simple, unimodal distribution $p(\vx_m \mid
 \vh)$, one consequence of this approximation is that the
 approximate predictive distribution $\tilde{p}(\vx_m \mid
-\vx_o)$ loses most of information in the true predictive
+\vx_o)$ loses most of the information in the true predictive
 distribution $p(\vx_m \mid \vx_o)$. It is natural since
 $\tilde{p}(\vx_m \mid \vx_o)$ is unimodal, while the true
-predictive distribution has many probabilistic modes.
+predictive distribution could have many probabilistic modes.
 
 The inherent limitations of this approximate approach
 employed by deep neural networks are obvious\footnote{Note
@@ -8453,7 +8465,7 @@ way, a deep neural network can learn to approximate a true
 predictive distribution $p(\vx_m \mid \vx_o)$ without going
 through an extra step of approximation in the middle.
 However, if the ultimate goal is to make a decision that
-maximizes the predictive distribution, we still need to be
+maximizes the predictive performance, we still need to be
 able to evaluate either approximately or exactly the
 multi-modal predictive distribution quickly and well, which
 brings us back to one of the limitations of the current
@@ -8476,7 +8488,7 @@ consider any combination of observed components and missing
 components. Therefore this approach is tempting, but as the
 size of a model grows and the number of modes in the
 predictive distribution increases, it becomes impractical to
-use an MCMC sampling for making a rapid decision.
+use MCMC sampling for making a rapid decision.
 
 Hence, we want to have a radically new neural network that
 keeps the best of the two types of deep neural networks
@@ -8492,7 +8504,7 @@ there is no such neural network at the moment\footnote{
 A few recent works are showing some promising directions using
 stochastic neural networks \citet[see,
 e.g.,][]{Bengio2013gsn,Tang2013}.  }. It is, hence, left for
-future to build such a neural network that combines these
+future research to build such a neural network that combines these
 two very different characteristics.
 
 The ultimate goal of deep neural networks and the field of
@@ -8506,23 +8518,22 @@ observed and missing components are not fixed a priori. A
 deep neural network that computes this function will have to
 be powerful and flexible enough to consider all different
 possibilities or modes in the predictive distribution in a
-single sweep of the network in feedforward manner.
+single sweep of the network in a feedforward manner.
 
 
 
 \section{Matters Which Have Not Been Discussed}
 \label{sec:leftovers}
 
-Despite the original intention of describing as much
-detailed
-as possible the basics of deep neural networks, some
-important models and concepts have been left out from the main
-text. The author would like to make brief notes on a few of
-them here to provide any interested reader further
-references.
+Despite the original intention of describing in much
+details the basics of deep neural networks,
+some important models and concepts have been left out from
+the main text. The author would like to briefly mention
+a few of them here, to provide any interested reader with
+some references.
 
 The remainder of this section starts by providing a list of
-the previous works that relate independent component
+the previous work that relates independent component
 analysis as well as general factor analysis to the models
 discussed previously.  Additionally, some references that
 attempted to make these models deeper are presented.  
@@ -8597,7 +8608,7 @@ many models we have discussed.  For instance, ICA formulated
 using the information-theoretic approach by \citet{Bell1995}
 is equivalent to the maximum likelihood solution of sparse
 coding (see Section~\ref{sec:sparse_coding}) in the limit of
-no noise when the numbers of inputs and
+no noise, when the numbers of inputs and
 sources are same \citep{Olshausen1997}.  Furthermore, by
 replacing the orthogonality constraint with the minimal
 reconstruction regularization, it was shown by
@@ -8607,15 +8618,15 @@ soft-sparsity regularization on hidden activations is
 equivalent to ICA. Similarly, an approach that extracts
 principal components can be extended to extract independent
 components by employing certain nonlinear
-activation functions for hidden units \citep[see,
+activation functions for the hidden units \citep[see,
 e.g.,][]{Oja1997,Hyvarinen2001}. ICA is further related
 to a restricted Boltzmann machine (see
 Section~\ref{sec:rbm}) via an energy-based model proposed by
 \citet{Teh2003}.
 
-There have been approaches to extend basic ICA which
+There have been approaches to extend basic ICA, which
 assumes a single layer of sources, or hidden units, to have
-more than one hidden layers. For instance,
+more than one hidden layer. For instance,
 \citet{Lappalainen2000} proposed a nonlinear generative
 model where the visible variables are generated through
 multiple layers of nonlinear hidden units starting from the
@@ -8637,17 +8648,17 @@ distribution \citep[see, e.g.,][and references
 therein]{Bishop2006}. 
 
 Similarly to ICA, factor analysis has also been extended
-into a nonlinear model with potentially a \textit{deep}
+into a nonlinear model with potentially \textit{deep}
 structure. \citet{Raiko2001} and \citet{Raiko2007}, for instance,
 describe a hierarchical nonlinear factor analysis method which
-starts from a set of factors at top and generates
+starts from a set of factors at the top and generates
 sequentially a layer of stochastic hidden units until the
 visible layer of observed variables. This hierarchical model
 can be considered as a generalization of the sigmoid belief
 network (see Section~\ref{sec:sbn_dbn}) such that hidden
 units are not restricted to be binary. A similar model which
 replaces binary units of the sigmoid belief network with
-Gaussian units with squashing nonlinearity functions applied
+Gaussian units with squashing nonlinearity functions 
 was proposed by \citet{Frey1999}.
 
 \subsection{Universal Approximator Property}
@@ -8669,18 +8680,19 @@ reconstruct any input sample arbitrary well, as each of them
 is equivalent to an MLP.
 
 Similarly, universal approximator property can be defined
-for unsupervised models such that a model has the universal
+for unsupervised models. A model has the universal
 approximator property if any distribution can be modeled
 arbitrary well with respect to a chosen divergence
 criterion by the model.
 
-\citet{Roux2008} proved that a restricted Boltzmann machine
-(RBM, see Section~\ref{sec:rbm}) has this property when any
-binary distribution is considered. This naturally extends to
-the fact that a deep Boltzmann machine (DBM, see
+\citet{Roux2008} and \citet{Freund1994}  proved that a
+restricted Boltzmann machine (RBM, see
+Section~\ref{sec:rbm}) has this property when any binary
+distribution is considered. This naturally extends to the
+fact that a deep Boltzmann machine (DBM, see
 Section~\ref{sec:dbm}) and a fully-connected Boltzmann
 machine are both universal approximator, since they are more
-general models of an RBM.  Later, the same authors in
+general than an RBM.  Later, the same authors in
 \citep{Roux2010} showed that a deep belief network (see
 Section~\ref{sec:dbn}) has the same property on any binary
 distribution with the upper-bound on the number of units in
@@ -8707,7 +8719,7 @@ Eqs.~\eqref{eq:bm_prob}--\eqref{eq:bm_mll}). Also,
 except for restricted Boltzmann machines (RBM), it is
 intractable to marginalize hidden units.
 
-\citet{Salakhutdinov2008} proposed to first estimate the
+\citet{Salakhutdinov2008a} proposed to first estimate the
 normalization constant using annealed importance sampling
 \citep{Neal1998} and then to use the estimated constant for
 computing the variational lower bound (see
@@ -8729,7 +8741,8 @@ normalization constant while training a restricted Boltzmann
 machine. Also, in \citepub{Cho2011icml} and
 \citepub{Cho2013ijcnn} an adaptive learning rate which
 estimates the local change in the log-likelihood, or its
-variational lower bound up to the constant multiple, was
+variational lower bound up to the constant multiplicative
+factor, was
 proposed based on the idea of the annealed importance
 sampling.
 
@@ -8748,11 +8761,11 @@ the performance of an RBM.
 \label{sec:hyperopt}
 
 One might have noticed throughout this thesis that there are
-quite many hyper-parameters involved in training these deep
+many hyper-parameters involved in training these deep
 neural networks. Typically, training an unsupervised neural
 network with a single hidden layer involves, for instance
 in the case of a denoising autoencoder, nine
-hyper-parameters which are:
+hyper-parameters:
 \begin{enumerate}
     \itemsep 0em
     \item The number of hidden units
@@ -8766,11 +8779,11 @@ hyper-parameters which are:
     \item Sparsity regularization constant
 \end{enumerate}
 Hence, if we use a denoising autoencoder to pretrain a deep
-multi-layer perceptron (MLP), this number of the
+multi-layer perceptron (MLP), this number of 
 hyper-parameters is multiplied by the number of hidden layers
 in the MLP. Furthermore, there are 6 more hyper-parameters
 that need to be further tuned for finetuning by
-backpropagation, which are
+backpropagation:
 \begin{enumerate}
     \itemsep 0em
     \item Noise variance
@@ -8785,25 +8798,26 @@ pretraining by denoising autoencoders, we need to choose $9L
 + 6$ hyper-parameters correctly. 
 
 When the number of hyper-parameters is low, it is usual to
-use the grid-search to find the best set. It is, however,
+use the grid-search to find the best configuration. It is, however,
 less preferable in the case of deep neural networks, since
 the number of candidate points on the grid grows
-exponentially with respect to the number of hyper-parameters
+exponentially with respect to the number of
+hyper-parameters,
 which grows linearly with respect to the number of hidden
 layers. 
 
 This is highly problematic considering that training even a
 single deep neural network is computationally expensive. One
 cannot allow training exponentially many deep neural
-networks only for selecting a set of hyper-parameters.
+networks only for selecting the hyper-parameters.
 Hence, a hyper-parameter optimization method for deep neural
 networks must be able to find only a \textit{small} set of
 \textit{good} candidate points in the hyper-parameter space.
 
 Based on this motivation, two recent studies
 \citep{Bergstra2011,Snoek2012} explored the idea of
-utilizing Bayesian optimization \citep[see, e.g.,][and
-references therein]{Brochu2010}. The Bayesian optimization
+using Bayesian optimization \citep[see, e.g.,][and
+references therein]{Brochu2010}. Bayesian optimization
 simultaneously models the posterior distribution over a
 function $h(\Psi)$ that maps from a set $\Psi$ of
 hyper-parameters to the performance of a model trained using
@@ -8840,7 +8854,7 @@ and (3) training a (linear) classifier on the extracted
 features.  The first two stages correspond to a single step
 of the already described incremental feature learning.
 
-The underlying idea in the first two stages is based on the
+The underlying idea in the first two stages is based on 
 convolutional neural networks \citep[see,
 e.g.,][]{Lecun1998,Lee2009} where a hidden unit is connected
 only to a small neighborhood, or local patch, in the input
@@ -8856,16 +8870,16 @@ to form a subsampled set of features.
 \citet{Coates2011} empirically compared using different
 neural networks for the first two stages. They compared
 sparse autoencoders (see Section~\ref{sec:spaenc}),
-restricted Boltzmann machines with the sparsity
+restricted Boltzmann machines with sparsity
 regularization, K-means clustering and Gaussian mixtures. In
 most cases they considered, they were able to achieve the
 state-of-the-art performance.
 
 This approach of convolution and pooling can be further used
-as a single stage in the incremental feature learning.  In
-fact, if we started our discussion on the incremental
-feature learning rather from the convolutional neural
-network \citep[see, e.g.,][]{Lecun1998} than from the
+as a single stage in incremental feature learning.  In
+fact, if we had started our discussion on incremental
+feature learning from the convolutional neural
+network \citep[see, e.g.,][]{Lecun1998} rather than from the
 fully-connected MLP, we would have arrived at the idea of
 incremental feature learning where each stage consists of
 \textit{convolution}, \textit{contrast normaliziation}, and
@@ -8877,7 +8891,7 @@ network in their work, to learn hierarchical part-based
 representations of data.
 
 As the aim of this thesis, however, was not on the specific
-tasks of image or audio recognition which are known to
+tasks of image or audio recognition, which are known to
 benefit heavily from this convolutional structure, we have
 not discussed it any further. For more details on learning
 local receptive fields and using them for image
