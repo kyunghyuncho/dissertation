@@ -356,7 +356,7 @@ but are not limited to Hopfield networks
 \citep{Hopfield1982}, self-organizing maps
 \citep{Kohonen1982}, neural networks for principal component
 analysis \citep{Oja1982}, Boltzmann machines
-\citep{Ackley1985}, multi-layer perceptrons
+\citep{Ackley1985}, multilayer perceptrons
 \citep{Rumelhart1986}, radial-basis function networks
 \citep{Broomhead1988}, autoencoders \citep{Baldi1989}, sigmoid
 belief networks \citep{Neal1992} and support vector machines
@@ -384,7 +384,7 @@ with a single hidden layer as well as a structurally
 restricted version of the Boltzmann machine, called a
 restricted Boltzmann machine, have become popular due to
 their application in layer-wise pretraining of deep
-multi-layer perceptrons. 
+multilayer perceptrons. 
 
 Thus, this thesis starts from some of the earlier
 ideas in the artificial neural networks and arrive at those
@@ -434,16 +434,16 @@ the case of supervised models, to those neural networks that
 have only input and output units, although many often
 consider a neural network having a single layer of hidden
 units shallow as well. No intermediate hidden units are
-considered. A \textit{linear regression} network and
-\textit{perceptron} are described as representative examples
+considered. A linear regression network and
+perceptron are described as representative examples
 of supervised, shallow neural networks in
 Section~\ref{sec:supervised_model}.
 
 Unsupervised neural networks which do not have any output
 unit are considered shallow when either there are no hidden
 units or there are only linear hidden units. A
-\textit{Hopfield network} is one example having no hidden
-units, and a \textit{linear autoencoder}, or equivalently
+Hopfield network is one example having no hidden
+units, and a linear autoencoder, or equivalently
 principal component analysis, is an example having linear
 hidden units only. Both of them are briefly described in
 Section~\ref{sec:unsupervised_model}.
@@ -461,9 +461,9 @@ equivalent to inferring the posterior distribution of hidden
 units under certain assumptions.
 
 Based on this preliminary knowledge on shallow neural
-networks, the author tries to loosely define \textit{two
-conditions} which must be satisfied by a neural network to
-be considered \textit{deep} in
+networks, the author tries to loosely define two
+conditions which must be satisfied by a neural network to
+be considered deep in
 Section~\ref{sec:deep_conditions}. These conditions will be
 evaluated for each deep neural network introduced in later
 chapters. The chapter ends by briefly describing how the
@@ -475,44 +475,45 @@ by the stochastic gradient method.
 The first family of deep neural networks is introduced and
 discussed in detail in Chapter~\ref{chap:ffnn}. This family
 consists of feedforward neural networks that have multiple
-layers of nonlinear hidden units.  A \textit{multi-layer
-perceptron} is introduced and two related, but not-so-deep,
-feedforward neural networks, a kernel \textit{support
-vector machine} and an \textit{extreme learning machine} are
+layers of nonlinear hidden units.  A multilayer
+perceptron is introduced and two related, but not-so-deep,
+feedforward neural networks, a kernel support
+vector machine and an extreme learning machine are
 briefly discussed in Section~\ref{sec:mlp}.
 
 The remaining part of the chapter begins by describing
-\textit{deep autoencoders}. With its basic description, a
+deep autoencoders. With its basic description, a
 probabilistic interpretation of the encoder and decoder of a
 deep autoencoder is provided in connection with a
-\textit{sigmoid belief network} and its learning algorithm
+sigmoid belief network and its learning algorithm
 called wake-sleep algorithm in
 Section~\ref{sec:autoencoder_prob}. This allows one to view
 the encoder and decoder as inferring an approximate
 posterior distribution and computing a conditional
 distribution. Under this view, a related approach called
-\textit{sparse coding} is discussed, and an
-\textbf{\textit{explicit sparsification}}, proposed by the
+sparse coding is discussed, and an
+\textbf{explicit sparsification}, proposed by the
 author in \citepub{Cho2013icml}, for a sparse deep
 autoencoder is introduced in Section~\ref{sec:explain_away}.
 
 Another view of an autoencoder is provided afterward based
 on the manifold assumption in Section~\ref{sec:dae_cae}. In
 this view, it is explained how some variants of autoencoders
-such as a \textit{denoising autoencoder} and a
-\textit{contractive autoencoder} are able to capture the
+such as a denoising autoencoder and a
+contractive autoencoder are able to capture the
 manifold on which data lies. 
 
-A 
-%universal 
-learning algorithm, called \textit{backpropagation}, for
-estimating the parameters of a feedforward neural network is
-presented in Section~\ref{sec:backprop}. After a brief
-description of the algorithm, the section further discusses
-the difficulty of training deep feedforward neural networks
-with the backpropagation by introducing some of the
-hypotheses proposed recently. Furthermore, for each
-hypothesis, a potential remedy is described.
+An algorithm called backpropagation for efficiently computing the
+gradient of the cost function of a feedforward neural network
+with respect to the parameters is presented in
+Section~\ref{sec:backprop}. The computed gradient is often used
+by the stochastic gradient method to estimate the parameters.
+
+After a brief description of backpropagation, the section further
+discusses the difficulty of training deep feedforward neural
+networks by introducing some of the hypotheses proposed recently.
+Furthermore, for each hypothesis, a potential remedy is
+described.
 
 \subsection{Boltzmann Machines with Hidden Units}
 
@@ -520,13 +521,13 @@ The second family of deep neural networks considered in this
 dissertation consists of a Boltzmann machine and its
 structurally restricted variants. The author classifies the
 Boltzmann machines as deep neural networks based on the
-observation that any \textit{recurrent neural network} with
+observation that any recurrent neural network with
 nonlinear hidden units is deep, satisfying the 
 conditions defined earlier.
 %(see Section~\ref{sec:rnn_deep}).
 
-The chapter proceeds by describing a \textit{general
-Boltzmann machine} of which all units, regardless of their
+The chapter proceeds by describing a general
+Boltzmann machine of which all units, regardless of their
 types, are fully connected by undirected edges in
 Section~\ref{sec:fbm}. One important consequence of
 formulating the probability distribution of a Boltzmann
@@ -536,16 +537,16 @@ machine can always be constructed when the variables or
 units are transformed with, for instance, a bit-flipping
 transformation. Based on this, in
 Section~\ref{sec:enhanced_grad} the
-\textbf{\textit{enhanced gradient}} which was proposed by
+\textbf{enhanced gradient} which was proposed by
 the author in \citepub{Cho2013nc} is introduced.
 
 In Section~\ref{sec:estimation_bm}, three basic estimation
 principles needed to train a Boltzmann machine are
-introduced. They are \textit{Markov Chain Monte Carlo
-sampling}, \textit{variational approximation}, and
-\textit{stochastic approximation procedure}. An advanced
-sampling method, called \textbf{\textit{parallel
-tempering}}, whose use for training variants of Boltzmann
+introduced. They are Markov Chain Monte Carlo
+sampling, variational approximation, and
+stochastic approximation procedure. An advanced
+sampling method, called \textbf{parallel
+tempering}, whose use for training variants of Boltzmann
 machines was proposed in \citepub{Cho2010ijcnn},
 \citepub{Cho2011icann} and \citepub{Cho2013ijcnn} for
 training variants of Boltzmann machines, is described
@@ -557,15 +558,15 @@ Section~\ref{sec:mrf}, an underlying mechanism based on the
 conditional independence property of a Markov random field
 is explained that justifies restricting the structure of a
 Boltzmann machine. Based on this mechanism, a
-\textit{restricted Boltzmann machine} and \textit{deep
-Boltzmann machine} are explained in
+restricted Boltzmann machine and deep
+Boltzmann machine are explained in
 Section~\ref{sec:rbm}--\ref{sec:dbm}.
 
 After describing the restricted Boltzmann machine in
 Section~\ref{sec:rbm}, the author discusses the connection
 between a product of experts and the restricted Boltzmann
 machine. This connection further leads to the learning
-principle of minimizing \textit{contrastive divergence}
+principle of minimizing contrastive divergence
 which is based on constructing a sequence of distributions
 using Gibbs sampling.
 
@@ -575,10 +576,10 @@ and the Boltzmann machine found earlier by other
 researchers. The close equivalence between the restricted
 Boltzmann machine and the autoencoder with a single hidden
 layer is described in Section~\ref{sec:rbm_aenc}. In due
-course, a \textbf{\textit{Gaussian-Bernoulli restricted
-Boltzmann machine}} is discussed with its \textbf{modified
+course, a \textbf{Gaussian-Bernoulli restricted
+Boltzmann machine} is discussed with its \textbf{modified
 energy function} proposed in \citepub{Cho2011icann}. A
-\textit{deep belief network} is subsequently discussed as a
+deep belief network is subsequently discussed as a
 composite model of a restricted Boltzmann machine and a
 stochastic deep autoencoder in Section~\ref{sec:dbn}.
 
@@ -589,14 +590,15 @@ The last chapter before the conclusion deals with an
 important concept of pretraining, or initializing another
 potentially more complex neural network with unsupervised
 neural networks. This is first motivated by the difficulty
-of training a deep multi-layer perceptron using the plain
-backpropagation discussed in Section~\ref{sec:bp_imp}.
+of training a deep multilayer perceptron 
+%using the plain backpropagation discussed 
+in Section~\ref{sec:bp_imp}.
 
 The first section (Section~\ref{sec:layer_wise_pretraining})
 describes stacking multiple layers of unsupervised neural
 networks with a single hidden layer to initialize a
-multi-layer perceptron, called \textit{layer-wise
-pretraining}. This method is motivated in the framework of
+multilayer perceptron, called layer-wise
+pretraining. This method is motivated in the framework of
 incrementally, or recursively, transforming the coordinates
 of input samples to obtain better representations. In this
 framework, several alternative building blocks are
@@ -608,10 +610,10 @@ neural networks such as Boltzmann machines and deep belief
 networks can be used for discriminative tasks. A direct
 method of learning a joint distribution between an input and
 output is introduced in Section~\ref{sec:drbm}. A
-\textit{discriminative restricted Boltzmann machine} and a
+discriminative restricted Boltzmann machine and a
 deep belief network with the top pair of layers augmented
 with labels are described. A non-trivial method of
-initializing a multi-layer perceptron with a deep Boltzmann
+initializing a multilayer perceptron with a deep Boltzmann
 machine is further explained in Section~\ref{sec:mlp_dbm}.
 
 The author wraps up the chapter by describing in detail how
@@ -625,8 +627,8 @@ layers of restricted Boltzmann machines in
 Section~\ref{sec:inf_sbn_rbm}--\ref{sec:dbn_rbm}.
 Section~\ref{sec:dbm_pre}  explains two pretraining
 algorithms for deep Boltzmann machines. The second
-algorithm, called the \textbf{\textit{two-stage pretraining
-algorithm}}, was proposed by the author in
+algorithm, called the \textbf{two-stage pretraining
+algorithm}, was proposed by the author in
 \citepub{Cho2013icann}.
 
 \subsection{Discussion}
@@ -639,12 +641,12 @@ thesis is summarized.
 %the potentials of deep neural networks in
 %Chapter~\ref{chap:discussion}. 
 This is immediately followed by five subsections that
-discuss some topics that have \textit{not} been discussed
+discuss some topics that have not been discussed
 in, but are relevant to this thesis.
 
 The field of deep neural networks, or deep learning, is
 expanding rapidly, and it is impossible to discuss
-everything in this thesis. Multi-layer perceptrons,
+everything in this thesis. multilayer perceptrons,
 autoencoders and  Boltzmann machines, which are the main topics
 of this thesis, are certainly not the only neural networks
 in the field of deep neural networks. However, as the aim of
@@ -670,7 +672,7 @@ some earlier works that proved or described this property of
 various deep neural networks.
 
 Compared to the feedforward neural networks such as
-autoencoders and multi-layer perceptrons, it is difficult to
+autoencoders and multilayer perceptrons, it is difficult to
 evaluate Boltzmann machines. Even when the structure of the
 network is highly restricted, the existence of the
 intractable normalization constant requires using a
@@ -877,13 +879,13 @@ solve these two tasks.
 
 A directed edge between two units or neurons indicates that
 the output of one unit flows into the other one via the
-edge\footnote{Although it is common to use the terms
+edge.\footnote{Although it is common to use the terms
 \textit{neuron}, \textit{node} and \textit{unit} to indicate
 each variable in a neural network, from here on, we use the
 term \textit{unit}, only. An edge in a neural network is
 also commonly referred to as a synapse, synaptic connection
 or edge, but we use the term \textit{edge} only in this
-thesis.}. It is possible to have multiple edges going out
+thesis.} It is possible to have multiple edges going out
 from a single unit and to have multiple edges coming in.
 Each edge has a weight value that amplifies the signal
 carried by the edge.
@@ -994,13 +996,12 @@ $L_1$-norm of the weights, and the regularization term
 \end{align*}
 does not have an exact analytical solution.
 
-Although we have considered the case of a one-dimensional
-output $y$, it is easy to extend this network to predict a
-multi-dimensional output. Simply, the network will require
-as many output units as the dimensionality of the
-output $\vy$. The solution for the weights $\vw$ can be
-found in exactly the same way as before by solving the weights
-corresponding to each output simultaneously.
+Although we have considered the case of a one-dimensional output
+$y$, this network can be extended to predict a multi-dimensional
+output. Simply, the network will require as many output units as
+the dimensionality of the output $\vy$. The solution for the
+weights $\vw$ can be found in exactly the same way as before by
+solving the weights corresponding to each output simultaneously.
 
 This simple linear neural network is highly restrictive in
 the
@@ -1042,8 +1043,9 @@ where each sample is either classified as \textit{negative}
 %However, we used $0$ and $1$ for more
 %streamlined explanation later.}. 
 
-It is clear from the illustration of a perceptron in
-Fig.~\ref{fig:linreg_net} (b) that the perceptron is
+%It is clear  from
+The illustration of a perceptron in
+Fig.~\ref{fig:linreg_net} (b) shows that the perceptron is
 identical to the linear regression network except that the
 activation function of the output is a nonlinear step
 function.
@@ -1087,7 +1089,7 @@ belongs.
 
 A perceptron can perfectly simulate the unknown function
 $f$, when the training samples are \textit{linearly}
-separable \citep{Minsky1969}.  It means that
+separable \citep{Minsky1969}.  Linear separability means that
 there exists a linear hyperplane that separates $\vx^{(n)}$
 that belongs to the positive class from those that belong to
 the negative class (see Fig.~\ref{fig:linsep}). With a
@@ -1159,8 +1161,8 @@ when the classes are \textit{linearly} separable \citep[see,
 e.g.,][]{Minsky1969}. For instance, a perceptron cannot
 learn to compute an exclusive-or
 (XOR\nomenclature{XOR}{Exclusive-OR}) function. In this
-case, any non-noisy samples from the XOR function are
-clearly separable, however, with a nonlinear boundary.
+case, any non-noisy samples from the XOR function are not
+separable with a linear boundary.
 
 It has been known that a network of perceptrons, having
 between the input units and the output unit one or more
@@ -1182,7 +1184,9 @@ of classification.
 \label{sec:unsupervised_model}
 
 Unlike in supervised learning, we now consider a case where
-there is no target value. Hence, the training set $D$ consists of
+there is no target value. 
+%Hence, 
+The training set $D$ consists of
 only input vectors:
 \begin{align}
     \label{eq:unsup_train}
@@ -1220,10 +1224,10 @@ is desirable to learn not only an unknown function $f$, but
 also another function $g$ which is an inverse function of
 $f$. Opposite to $f$, the inverse function $g$ recognizes a
 given sample by finding a corresponding state of the hidden
-variables\footnote{Note that it is not necessary for $g$ to
+variables.\footnote{Note that it is not necessary for $g$ to
 be an explicit function. In some models such as sparse
 coding in Section~\ref{sec:sparse_coding}, $g$ may be defined
-implicitly.}.
+implicitly.}
 
 Let us start by constructing a neural network with linear
 units. There are as many input units as $p$ corresponding to
@@ -1271,11 +1275,11 @@ $u_{jk}$. See Fig.~\ref{fig:linae} (a) for the illustration.
     \label{fig:linae}
 \end{figure}
 
-This model is called a linear autoencoder\footnote{The same
+This model is called a linear autoencoder.\footnote{The same
 type of neural networks is also called
 \textit{autoassociative} neural networks. In this thesis,
 however, we use the term \textit{autoencoder} which has
-become more widely used recently.}. The encoder of the
+become more widely used recently.} The encoder of the
 autoencoder is
 \begin{align}
     \label{eq:linaenc_encoder}
@@ -1292,10 +1296,10 @@ $\mW=\left[ w_{ij} \right]_{p \times q}$ are the encoder weights, $\mU =
 $\vb$ and $\vc$ are 
 the hidden biases and the visible biases, respectively. It is usual to
 call the layer of the hidden units a
-\textit{bottleneck}\footnote{Although the term
+\textit{bottleneck}.\footnote{Although the term
 \textit{bottleneck} implicitly implies that the size of the layer is
 smaller than that of either the input or output layers, it
-is not necessarily so.}. Note that without loss of
+is not necessarily so.} Note that without loss of
 generality we will omit biases whenever it is necessary to
 make equations uncluttered.
 
@@ -1455,12 +1459,12 @@ where $c$ is an arbitrary
 %$c$ may be chosen arbitrarily due to the choice of the
 %Heaviside function in Eq.~\eqref{eq:hopfield_cond}.
 %}
-, positive constant, given a fixed
-set of training samples. An arbitrary $c$ is possible, since
-the output of \eqref{eq:hopfield_cond} is invariant to the
-scaling of the parameters. Hence, the parameters of the
-Hopfield network do not require any iterative estimation,
-but a single computation.
+, positive constant, given a fixed set of training samples. An
+arbitrary $c$ is possible, since the output of
+\eqref{eq:hopfield_cond} is invariant to the scaling of the
+parameters. 
+%Hence, the parameters of the Hopfield network do not
+%require any iterative estimation, but a single computation.
 
 In summary, the Hopfield network memorizes the training
 samples and is able to retrieve them, starting from either a
@@ -1532,7 +1536,9 @@ confidence.
 \subsubsection{Linear Regression}
 
 A probabilistic model equivalent to the previously described
-linear regression network can be easily built by assuming
+linear regression network can be 
+%easily 
+built by assuming
 that the noise
 $\epsilon$ follows a Gaussian distribution with zero mean
 and its variance is fixed to $s^2$. Then, the conditional
@@ -1585,7 +1591,9 @@ where both $X$ and $Y$ are random variables. One
 interpretation of this rule is that the posterior
 probability of $X$ given $Y$ is proportional to the product
 of the likelihood (or conditional probability) of $Y$ given
-$X$ and the prior probability of $X$. Hence, if both the
+$X$ and the prior probability of $X$. 
+%Hence, 
+If both the
 conditional and prior distributions are specified, the
 posterior probability can be evaluated as their product, up
 to the normalization constant or evidence $p(Y)$.}, as
@@ -1708,7 +1716,8 @@ write the posterior probability as
     &= \frac{1}{1 + \exp\left(-\log \frac{p(\vx \mid y = 1) p(y = 1)}{p(\vx
     \mid y = 0) p(y = 0)}\right)}.
 \end{align*}
-It is easy to see that the posterior probability takes the
+%It is easy to see that 
+The posterior probability above takes the
 form of a sigmoid function with an input 
 \[
 a = \log \frac{p(\vx \mid y = 1) p(y = 1)}{p(\vx
@@ -1768,8 +1777,8 @@ parameterized by the projection matrix $\mW$. The noise term
 $\epsilon$ follows a zero-mean Gaussian distribution with
 its variance $\sigma^2$. Furthermore, we may assume that the
 training samples $\vx^{(n)}$ are centered so that their
-mean is zero\footnote{This is not necessary, but for
-simplicity, it is assumed here.}.
+mean is zero.\footnote{This is not necessary, but for
+simplicity, it is assumed here.}
 
 The hidden variables $\vh$ follow a zero-mean
 unit-covariance multivariate Gaussian distribution such that
@@ -1815,12 +1824,12 @@ where $\mU_q$, $\mL_q$ and $\lambda_i$ are any subset of
 $q$ eigenvectors of the data covariance, the diagonal matrix
 of corresponding eigenvalues, and the $i$-th eigenvalue,
 respectively. $\mR$ is an arbitrary orthogonal
-matrix\footnote{
+matrix.\footnote{
 Any orthogonal matrix can be used as $\mR$, since it does
 not change the sufficient statistics, specifically the
 covariance of the observation, as $\mW\mR\left( \mW\mR\right)^\top
 = \mW\mR \mR^\top \mW^\top = \mW\mW^\top$.
-}.
+}
 Furthermore, in \citep{Tipping1999}, it was shown that $\LL$
 is maximal when the $q$ \textit{largest} eigenvectors and
 eigenvalues of the data covariance were used.
@@ -1874,14 +1883,18 @@ $\HH(Q)$ is an entropy functional of the distribution $Q$.
 %which is independent from
 %$\TT$ so that we can ignore the term.
 
-It is easy to see that $\LL_{Q^{(n)}}(\TT)$ is a lower bound
+%It is easy to see that 
+$\LL_{Q^{(n)}}(\TT)$ is a lower bound
 of $\LL^{(n)}(\TT)$ for all $n$ in Eq.~\eqref{eq:mll_decom},
 since the KL-divergence $\KL(Q^{(n)}\| P^{(n)})$ is always
-non-negative. From this clearly $\sum_{n=1}^N
+non-negative. From this, 
+%clearly 
+we can see that
+$\sum_{n=1}^N
 \LL_{Q^{(n)}}(\TT)$ is a lower bound of the marginal
 log-likelihood $\LL(\TT)$. The lower bound is
 equal to the marginal log-likelihood when an arbitrary
-distribution $Q^{(n)}$ is equivalent to the posterior distribution
+distribution $Q^{(n)}$ is identical to the posterior distribution
 ($\KL(Q^{(n)} \| P^{(n)}) = 0$) for all the training
 samples.
 
@@ -1933,7 +1946,9 @@ These are simplified in the limiting case of $\sigma^2 \to
     \right]^\top.
 \end{align}
 The mean of each hidden unit in
-Eq.~\eqref{eq:ppca_post_ss_mean} clearly corresponds to the
+Eq.~\eqref{eq:ppca_post_ss_mean} 
+%clearly 
+corresponds to the
 encoder of a linear autoencoder in
 Eq.~\eqref{eq:linaenc_encoder}.
 
@@ -2026,10 +2041,9 @@ of all other units $\vx_{-i}$ is
     \TT) = \phi\left( \sum_{j \neq i} w_{ij} x_j + b_i
     \right),
 \end{align}
-where $\phi$ is a sigmoid function. It is easy to see the
-equivalence of this equation and
-Eq.~\eqref{eq:hopfield_cond} after substituting the
-Heaviside function with the sigmoid function. 
+where $\phi$ is a sigmoid function. This equation is equivalent
+to Eq.~\eqref{eq:hopfield_cond} after substituting the Heaviside
+function with the sigmoid function. 
 
 Since it is possible to define a proper distribution,
 learning the weights is done by maximizing the
@@ -2056,12 +2070,12 @@ $w_{ij}$ of the Boltzmann machine is
 where $\td$ and $\tf$ refer to the data distribution defined
 by the training set $D$ and the model distribution defined
 by the Boltzmann machine (see Eq.~\eqref{eq:bm}),
-respectively\footnote{
+respectively.\footnote{
 For the derivations of the conditional distribution in
 Eq.~\eqref{eq:bm_cond} and the gradient in
 Eq.~\eqref{eq:fvbm_update}, see, for instance,
 \citep{Cho2011t}.
-}.
+}
 
 Although computing the statistics of the distribution
 learned by the Boltzmann machine, called the model distribution,
@@ -2077,12 +2091,11 @@ distribution by Gibbs sampling introduced by
 the model distribution will be discussed later in
 Section~\ref{sec:mcmc}.
 
-Even though each unit is now stochastic and a
-valid probability distribution of input samples can be
-learned, the same limitation of the Hopfield network
-persists in the fully-visible Boltzmann machine. It also can
-only model the second-order statistics of the training
-samples. Hence, this again encourages us to consider
+Even though each unit is now stochastic and a valid probability
+distribution of input samples can be learned, the same limitation
+of the Hopfield network persists in the fully-visible Boltzmann
+machine. It also can only model the second-order statistics of
+the training samples, hence this again encourages us to consider
 introducing hidden units.
 
 \section{What Makes Neural Networks Deep?}
@@ -2124,7 +2137,7 @@ training one
 or more layers, until it can properly perform a
 target task with a given dataset. In other words,
 \textit{the data decide how many layers a deep neural network
-needs}\footnote{Yoshua Bengio, personal communication}. 
+needs}.\footnote{Yoshua Bengio, personal communication}
 
 One important consequence of the first condition is that
 since the units in an added layer use the activations of the
@@ -2186,7 +2199,8 @@ $R_e$ approximates the expected cost function
     p(\vx) L(\vx, \TT) d\vx,
 \end{align}
 where $p(\vx)$ is the probability of $\vx$ or the data
-distribution. Clearly, $R(\TT)$ cannot be evaluated directly
+distribution. %Clearly, 
+$R(\TT)$ cannot be evaluated directly
 as the distribution from which the training samples $\left\{
 \vx^{(1)}, \dots, \vx^{(N)} \right\}$ were sampled is
 \textit{unknown}, while the empirical cost $R_e(\TT)$
@@ -2257,16 +2271,16 @@ referred to as a \textit{stochastic gradient method}. As one
 may easily guess from its name, its deterministic
 counterpart is a simple, \textit{batch} gradient method.
 
-The most important advantage of using this method is that
-the computational resource required at each iteration can be
-bounded by a constant with respect to the number of training
-samples. A batch steepest gradient method requires time
-linearly proportional to the number of all training samples.
-On the other hand, it takes constant time to compute a stochastic
-gradient with respect to the
-number of training samples. Furthermore, since only few samples are used for
-computing a stochastic gradient, the memory requirement is
-also much smaller than in the batch method.
+The most important advantage of using this method is that the
+computational resource required at each iteration can be bounded
+by a constant with respect to the number of training samples. A
+batch steepest gradient method requires time linearly
+proportional to the number of all training samples.  On the other
+hand, it takes constant time to compute a stochastic gradient
+with respect to the number of training samples. Furthermore,
+since only few samples are used for computing a stochastic
+gradient, the memory requirement is also much smaller than
+in the batch method.
 
 Many studies \citep[see, e.g.,][]{Bottou2008,Bottou2004}
 have shown that the stochastic gradient method converges to
@@ -2278,13 +2292,13 @@ with the stochastic gradient method compared to the batch
 gradient method in the case of neural networks
 \citep{Lecun1998a}.
 
-Hence, when we talk about estimating
-parameters in this thesis, it is implicitly assumed that the stochastic
-gradient method is used together with a cost, or objective
-function of each model. Most arguments on the advantages and
-disadvantages of learning algorithms specific to different
-neural networks presented later will also assume that the
-stochastic gradient method is used.
+%Hence, 
+When we talk about estimating parameters in this thesis, it is
+implicitly assumed that the stochastic gradient method is used
+together with a cost, or objective function of each model. Most
+arguments on the advantages and disadvantages of learning
+algorithms specific to different neural networks presented later
+will also assume that the stochastic gradient method is used.
 
 Recently there have been many approaches that try to
 overcome the weaknesses of the naive stochastic gradient
@@ -2306,7 +2320,7 @@ scope of this thesis.
 
 
 
-\chapter{Feedforward Neural Networks: \\{\small Multi-layer
+\chapter{Feedforward Neural Networks: \\{\small Multilayer
 Perceptron and Deep Autoencoder}}
 \label{chap:ffnn}
 
@@ -2330,7 +2344,7 @@ propagate through the network layer by layer to the output
 layer.
 
 Here we discuss in more details two types of deep
-feedforward neural networks: a multi-layer
+feedforward neural networks: a multilayer
 perceptron and autoencoder. Unlike the ones from the
 previous chapter, we consider more generalized versions that
 have \textit{multiple layers} of \textit{nonlinear} units.
@@ -2339,7 +2353,7 @@ that are closely related to these neural networks and
 provide different aspects from which these networks can be
 viewed.
 
-\section{Multi-layer Perceptron}
+\section{Multilayer Perceptron}
 \label{sec:mlp}
 
 Let us start by extending the linear regression network and
@@ -2350,8 +2364,8 @@ we may add intermediate layers of nonlinear hidden units
 between the input and output units. A shallow, simple
 perceptron, for instance, can be extended to a deep neural
 network by adding multiple intermediate layers, and this
-deep neural network is often called a \textit{multi-layer
-perceptron} (MLP\nomenclature{MLP}{Multi-layer perceptron})
+deep neural network is often called a \textit{multilayer
+perceptron} (MLP\nomenclature{MLP}{Multilayer perceptron})
 \citep{Rosenblatt1962}. See
 Fig.~\ref{fig:mlp}(a) for an example of the neural network.
 
@@ -2389,14 +2403,14 @@ Fig.~\ref{fig:mlp}(a) for an example of the neural network.
     \begin{minipage}{0.48\textwidth}
         \centering
         \small
-        (a) Multi-layer Perceptron
+        (a) Multilayer Perceptron
     \end{minipage}
     \begin{minipage}{0.48\textwidth}
         \centering
         \small
         (b) Multiple Computational Paths
     \end{minipage}
-    \caption{Illustrations of (a) a multi-layer perceptron
+    \caption{Illustrations of (a) a multilayer perceptron
     and (b) an example of multiple computational paths
     starting from $x_1$ to $\vy$. In (b), the red arrows
     illustrate three different paths sharing hidden units.}
@@ -2460,15 +2474,15 @@ similar to the associated weights $\left[ w_{1,j}^{\qlay{l}},
 units in the layer below. In other words, each unit detects
 a feature in the activation of the layer below.
 
-It is obvious that there exists more than one computational
-path from an input vector to a unit in any intermediate
-layer $l$ ($l > 1$), assuming that there are more than one
-intermediate layers each consisting of more than one hidden
-units and most of the weights parameters are not zero. This
-implies that each intermediate unit \textit{shares} the
-features detected by the units in the lower (closer to the
-input layer) layers.  See Fig.~\ref{fig:mlp}(b) for an
-illustration.
+%It is obvious that 
+Assuming that there are more than one intermediate layers each
+consisting of more than one hidden units and most of the weights
+parameters are not zero, there exists more than one computational
+path from an input vector to a unit in any intermediate layer $l$
+($l > 1$),  This implies that each intermediate unit
+\textit{shares} the features detected by the units in the lower
+(closer to the input layer) layers.  See Fig.~\ref{fig:mlp}(b)
+    for an illustration.
 
 Each intermediate layer is \textit{trainable} in the sense
 that the associated parameters are fitted to a given
@@ -2482,17 +2496,19 @@ where $d(\cdot, \cdot)$ is a suitably chosen distance
 function. For a regression task, the Euclidean distance may be
 used, as in Eq.~\eqref{eq:linreg_cost}, and for a
 classification task, one may use the cross-entropy loss, as in
-Eq.~\eqref{eq:crossentropy_cost}. Learning the parameters of
-multiple layers can be efficiently done by the backpropagation
-algorithm \citep{Rumelhart1986}, which will be discussed more
-in Section~\ref{sec:backprop}.
+Eq.~\eqref{eq:crossentropy_cost}. The parameters can be
+efficiently learned using the stochastic gradient method with the
+gradient computed by the backpropagation algorithm
+\citep{Rumelhart1986} which will be discussed more in
+Section~\ref{sec:backprop}.
 
 The importance of having one or more intermediate layers of
-nonlinear hidden units between the input and output units
-has been highlighted by the universal approximator property
-\citep{Cybenko1989,Hornik1989}. It basically states that
-there exists an MLP with a single hidden layer that can
-approximate a continuous function whose support is on a
+nonlinear hidden units between the input and output units has
+been highlighted by the universal approximator property
+\citep{Cybenko1989,Hornik1989}. It 
+%basically 
+states that there exists an MLP with a single hidden layer that
+can approximate a continuous function whose support is on a
 hypercube, with an arbitrary small error.
 
 %An MLP is sometimes referred to as a feedforward neural
@@ -2511,8 +2527,8 @@ deep neural network.
 
 \subsection{Related, but Shallow Neural Networks}
 
-Here we explain some models that are closely related to an
-MLP, but are not considered deep.
+Here we explain two models that are closely related to an MLP,
+but are not considered deep.
 
 \subsubsection{Support Vector Machines and Kernel Methods}
 \label{sec:svm}
@@ -2526,8 +2542,11 @@ We briefly describe these principles and try to find the
 connection to the MLP here.  For more details on SVMs, the
 readers are referred to \citep{Scholkopf2001}.
 
-The maximum-margin principle provides a principled way of
-regularizing the parameters of a model. For instance, in the
+The maximum-margin principle provides a way of selecting an
+optimal separating hyperplane among multiple possible separating
+hyperplanes.
+%regularizing the parameters of a model. 
+For instance, in the
 case of a classifier separating two classes (see
 Section~\ref{sec:perceptron}), the optimal separating
 hyperplane is the one that has the maximal margin of separation,
@@ -2554,19 +2573,17 @@ terms of support vectors, as in Fig.~\ref{fig:svm}(a).
 
 A kernel method 
 %employed by an SVM 
-for an SVM
-does a similar thing to
-what the intermediate hidden layers of an MLP do. Instead of
-training a linear classifier directly on raw training
-samples, consider training a classifier on, possibly
-nonlinearly, transformed samples. Let us denote the
+for an SVM does a similar thing to what the intermediate hidden
+layers of an MLP do. Instead of training a linear classifier
+directly on raw training samples, consider training a classifier
+on, possibly nonlinearly, transformed samples. Let us denote the
 nonlinear vector transformation $\phi$. Then, in essence,
 the classifier is trained not on $D = \left\{ \left(
 \vx^{(n)}, y^{(n)} \right) \right\}_{n=1}^N$, but on
 $\tilde{D} = \left\{ \left( \phi(\vx^{(n)}), y^{(n)} \right)
-\right\}$. It is easy to see the connection to MLPs
-explained earlier by comparing $\phi$ to the multiple
-intermediate layers of hidden units.
+\right\}$. The connection to MLPs explained earlier can be found
+by comparing $\phi$ to the multiple intermediate layers of hidden
+units.
 
 However, instead of using an explicit transformation $\phi$,
 the kernel method uses a \textit{kernel} function $k(\cdot,
@@ -2646,7 +2663,7 @@ Fig.~\ref{fig:svm}(b).
         (b) Equivalent MLP
     \end{minipage}
     \caption{Illustrations of (a) the maximum-margin
-    principle and (b) constructing a multi-layer
+    principle and (b) constructing a multilayer
     perceptron equivalent to a given support vector machine.
     In (a), there are two classes (denoted by black and
     white circles). A solid line is the maximum-margin
@@ -2664,16 +2681,17 @@ Fig.~\ref{fig:svm}(b).
 %nonlinear function used in the hidden units is not
 %necessarily bounded from either up or down.
 
-It suggests that a kernel method is one way to extend the
-simple, linear neural network by adding one intermediate
-nonlinear hidden layer. However, this is often considered a
-\textit{shallow} neural network, since the number of
-intermediate hidden layers is limited to one, and the added
-layer is usually \textit{not} trainable \citep{Bengio2007a}.
-Because there is only a single intermediate layer, there is
-no sharing of features detected in the lower layers.
-Essentially, a kernel method is a principled way to apply a
-template-matching approach to a machine learning problem.
+% FIXME: Bergstra demanded removing this paragraph, and I agree
+%It suggests that a kernel method is one way to extend the
+%simple, linear neural network by adding one intermediate
+%nonlinear hidden layer. However, this is often considered a
+%\textit{shallow} neural network, since the number of
+%intermediate hidden layers is limited to one, and the added
+%layer is usually \textit{not} trainable \citep{Bengio2007a}.
+%Because there is only a single intermediate layer, there is
+%no sharing of features detected in the lower layers.
+%Essentially, a kernel method is a principled way to apply a
+%template-matching approach to a machine learning problem.
 
 We do not consider nor discuss kernel methods, as
 well as SVMs, any further in this thesis.  It should be,
@@ -2681,7 +2699,7 @@ however, noted that there has been a few attempts to make it
 deeper recently by \citet{Cho2009} and \citet{Damianou2012}.
 Also, there has been a study linking the maximum-margin
 principle used in SVMs to a learning criterion of
-multi-layer perceptrons as well as a simpler perceptron
+multilayer perceptrons as well as a simpler perceptron
 \citep[see, e.g.,][]{Collobert2004}.
 
 \subsubsection{Extreme Learning Machines}
@@ -2699,11 +2717,11 @@ Eq.~\eqref{eq:mlp_cost}. While the parameters of all layers
 of an MLP are jointly estimated, in an ELM, only the
 parameters of the last output layer or the outgoing weights
 from the penultimate layer to the output layer, are
-adapted\footnote{
+adapted.\footnote{
 A similar idea of learning only the parameters of the last
 output layer has also been proposed and used for
 recurrent neural networks \citep[see, e.g.,][]{Jaeger2009}.
-}.
+}
 
 This is equivalent to using shallow supervised neural
 networks, presented in Section~\ref{sec:supervised_model}
@@ -2738,18 +2756,22 @@ arising from the existence of many, potentially infinite
 local minima, again unlike an MLP. These reasons have led
 to the popularity of ELM recently \citep{Huang2011}.
 
-Similarly to the SVM we discussed right before, an ELM is
-not a deep neural network.  Firstly, it
-is not clear whether stacking any more intermediate layers
-with randomly sampled parameters would improve the
-performance.  If we naively consider the Cover's theorem,
-there is no theoretical or empirical motivation for using
-multiple layers of gradually increasing dimensionality
-compared to just using a large number of hidden units in a
-single intermediate layer.  Thus, it does not satisfy the
-first condition.  Secondly, the parameters between the input
-and intermediate hidden layers are \textit{not} trained,
-further violating the second condition.
+
+
+% FIXME: Bergstra demanded removing this paragraph as well..
+% FIXME: let's re-write it later!
+%Similarly to the SVM we discussed right before, an ELM is
+%not a deep neural network.  Firstly, it
+%is not clear whether stacking any more intermediate layers
+%with randomly sampled parameters would improve the
+%performance.  If we naively consider the Cover's theorem,
+%there is no theoretical or empirical motivation for using
+%multiple layers of gradually increasing dimensionality
+%compared to just using a large number of hidden units in a
+%single intermediate layer.  Thus, it does not satisfy the
+%first condition.  Secondly, the parameters between the input
+%and intermediate hidden layers are \textit{not} trained,
+%further violating the second condition.
 
 
 \section{Deep Autoencoders}
@@ -2951,7 +2973,8 @@ and the equality holds only when $Q(\vh)$ is the true
 posterior distribution. See Section~\ref{sec:ppca} to see
 how the lower bound is derived.
 
-It is easy to see that this corresponds to learning the
+%It is easy to see that 
+This corresponds to learning the
 parameters of the decoder of an autoencoder by minimizing
 the cross-entropy loss in Eq.~\eqref{eq:crossentropy_cost}.
 The only difference is that the bottleneck layer consists of
@@ -2980,14 +3003,14 @@ log-likelihood that corresponds to the negative sum of
 squared reconstruction error (see
 Eq.~\eqref{eq:autoencoder_cost}).
 
-However, this interpretation does neither provide an
-intuitive way of learning the parameters $\TT_f$ of the
-encoder $f$ nor tell us how latent representations should be
-designed.  \citet{Vincent2010} argued that minimizing the
-reconstruction error in an autoencoder trained by, for
-instance, backpropagation is equivalent to maximizing the
-lower bound of the mutual information between the input
-$\vx$ and latent representation $\vh$. 
+However, this interpretation does neither provide an intuitive
+way of learning the parameters $\TT_f$ of the encoder $f$ nor
+tell us how latent representations should be designed.
+\citet{Vincent2010} argued that minimizing the reconstruction
+error in an autoencoder trained by, for instance, stochastic
+gradient descent is equivalent to maximizing the lower bound of
+the mutual information between the input $\vx$ and latent
+representation $\vh$. 
 %A wake-sleep algorithm, which will
 %be discussed in more detail later, proposed by
 %\citet{Hinton1995} learns $\TT_f$, and $\TT_g$ together, by
@@ -3030,7 +3053,8 @@ by iteratively sampling from
 where $\phi$ is a sigmoid function (see
 Eq.~\eqref{eq:sigmoid}). 
 
-Obviously, the probability of each component $x_i$ given the
+%Obviously, 
+The probability of each component $x_i$ given the
 activations of the units in the layer above is
 \begin{align}
     \label{eq:sbn_gen_x}
@@ -3043,13 +3067,18 @@ intra-layer edges. This is not necessary, but makes it much
 easier to understand the generative process the network is
 modeling.
 
-Once the sigmoid belief network has been trained, one 
-important task is to \textit{infer} the states of the hidden
-units given a novel sample. However, it is not trivial to do
-so due to the nonlinear nature of multiple layers of the
-hidden units.
+Once the sigmoid belief network has been trained, one important
+task is to \textit{infer} the states of the hidden units given a
+novel sample. However, it is not trivial to do so due to the
+nonlinear nature of multiple layers of the hidden units.
+Inference may be performed by generating a set of samples from
+the posterior distribution over binary hidden units 
+\citep{Neal1992} or by approximating the posterior distribution with a
+simpler distribution \citep[see, e.g.,][]{Saul1996,Jordan1999}.
+However, both approaches may easily become computational inefficient to
+be used in practice. 
 
-\citet{Hinton1995} proposed a wake-sleep algorithm, which is
+Instead, \citet{Hinton1995} proposed a wake-sleep algorithm, which is
 based on the principle of minimum description length
 %\citep[see, e.g.,][and references therein]{Grunwald2007},
 \citep{Rissanen1978},
@@ -3112,7 +3141,8 @@ is updated by
     \label{fig:sbn}
 \end{figure}
 
-It is easy to spot the similarity between the deep
+%It is easy to spot 
+We can notice the similarity between the deep
 autoencoder and the sigmoid belief network trained with the
 wake-sleep algorithm (see Fig.~\ref{fig:sbn} for an
 example). Both of them maintain two sets of parameters;
@@ -3139,20 +3169,20 @@ the up-down algorithm proposed to train a deep belief
 network \citep{Hinton2006nc} later in
 Section~\ref{sec:det_vs_sto}.
 
-A deep belief network (DBN\nomenclature{DBN}{Deep belief
-network}) \citep{Hinton2006nc} extends the
-sigmoid belief network by adding a layer of undirected
-network on its top. For the remaining lower layers, the DBN
-keeps, as did the sigmoid belief network, two separate sets
-of parameters; recognition and generative parameters
-\citep{Hinton2006nc}.  Except for the top two layers which
-are connected with undirected edges, it is clear that the
-encoder and decoder of a deep autoencoder correspond to the
-deterministic version of the recognition and generation
-weights of the DBN.
-
-More on the deep belief network will be presented in
-Section~\ref{sec:dbn}.
+%A deep belief network (DBN\nomenclature{DBN}{Deep belief
+%network}) \citep{Hinton2006nc} extends the
+%sigmoid belief network by adding a layer of undirected
+%network on its top. For the remaining lower layers, the DBN
+%keeps, as did the sigmoid belief network, two separate sets
+%of parameters; recognition and generative parameters
+%\citep{Hinton2006nc}.  Except for the top two layers which
+%are connected with undirected edges, it is clear that the
+%encoder and decoder of a deep autoencoder correspond to the
+%deterministic version of the recognition and generation
+%weights of the DBN.
+%
+%More on the deep belief network will be presented in
+%Section~\ref{sec:dbn}.
 
 \subsection{Gaussian Process Latent Variable Model}
 
@@ -3249,11 +3279,9 @@ iterative optimization algorithm.
     \label{fig:gplvm}
 \end{figure}
 
-Once the hyper-parameters and the hidden representations
-$\mH$ of the training samples were learned by
-optimization, it is easy to find a projection of
-a novel hidden representation on the input space by the fact
-that
+Once the hyper-parameters and the hidden representations $\mH$ of
+the training samples were learned by optimization, a novel hidden
+representation can be projected on the input space by 
 \begin{align*}
     p(\mX \mid \mH, \sigma^2) = \frac{1}{(2\pi)^{\frac{qN}{2}}
     \left| \mK \right|^{\frac{q}{2}}} \exp \left\{
@@ -3281,10 +3309,14 @@ parameters can be computed can be used. See
 Fig.~\ref{fig:gplvm}(b) for the relationship between the
 GP-LVM and the back-constraint.
 
-One of the obvious choices is the encoder part of a deep
+One 
+%of the obvious choices 
+possible choice is the encoder part of a deep
 autoencoder. As the back-constraint can be considered to
-find a mean of the posterior distribution of hidden
-variables given an input, we can naturally see the encoder
+find the mean of the posterior distribution of hidden
+variables given an input, we can 
+%naturally 
+see the encoder
 as doing a recognition/inference.
 
 
@@ -3514,7 +3546,9 @@ framework of sparse coding, the sparse code must be found
 via optimization, for instance by an orthogonal matching
 pursuit (OMP\nomenclature{OMP}{Orthogonal matching pursuit}) algorithm \citep{Davis1994}.
 
-Most of those algorithms basically start from an all-zero
+Most of those algorithms 
+%basically 
+start from an all-zero
 code and sequentially search for a hidden unit that
 satisfies a certain criterion such as the reduction in the
 reconstruction error. The search continues until the number
@@ -3635,9 +3669,12 @@ If we consider any model that has hidden units, we find that
 either encoding (autoencoders) or inference (probabilistic
 PCA and sparse coding) is equivalent to a (nonlinear)
 mapping $f$ that has its domain $\PP \subseteq \RR^p$
-and range $\QQ \subseteq \RR^q$. $\PP$ is naturally defined
-by the set of training samples, while $\QQ$ is defined by a
-regularization term. For instance, the range of the encoder
+and range $\QQ \subseteq \RR^q$. $\PP$ is 
+%naturally 
+defined by the set of training samples, while $\QQ$ is defined by
+regularizing the average hidden activation probability.
+%a regularization term. 
+For instance, the range of the encoder
 of a regular PCA, which does not have any regularization or
 constraint, is unrestricted and equals to $\RR^q$.
 
@@ -3694,10 +3731,11 @@ components to zero by
     \|\vh\|_1 - \left(1 - \bar{\rho}\right), 0\right),
     0\right),
 \end{align}
-where $\max$ applies to each component. It is obvious to see
-that $\bar{\rho}$ which defines a target sparsity, should be
-set to one minus the target hidden activation probability
-$\rho$ in Eq.~\eqref{eq:srbm_reg}.
+where $\max$ applies to each component. 
+%It is obvious to see that 
+$\bar{\rho}$ which defines a target sparsity should be set to one
+minus the target hidden activation probability $\rho$ in
+Eq.~\eqref{eq:srbm_reg}.
 
 This simple approach was empirically shown to be effective
 when a sparse autoencoder trained on clean samples was
@@ -3733,12 +3771,13 @@ reached from $\vx$ by
 where $\epsilon \in \RR^d$. Thus, the degree of freedom is
 $d$ which is smaller than $p$.
 
-Intuitively, this says that the number of local variations
-in the above case $q$, allowed for a sample to remain 
-on the manifold, is smaller than the dimensionality $p$ of
-the original space to which it belongs to. Furthermore, any
-other variation pushes the sample outside the manifold,
-making it invalid, or a noisy sample of the data.
+%Intuitively, 
+This says that the number of local variations in the above case
+$q$, allowed for a sample to remain on the manifold, is smaller
+than the dimensionality $p$ of the original space to which it
+belongs to. Furthermore, any other variation pushes the sample
+outside the manifold, making it invalid, or a noisy sample of the
+data.
 
 Under this assumption, it is desirable to transform the
 coordinate system of an original space into one that
@@ -3786,24 +3825,23 @@ actual target task, either classification or regression,
 will benefit from it.
 
 Unless we are lucky, however, we cannot expect that this type of
-transformation that captures the data manifold will be
-discovered when
-we estimate the parameters of an MLP. It might happen that
-minimizing the cost function in Eq.~\eqref{eq:mlp_cost} ends
-up in the (local) solution that corresponds to the situation
-where intermediate hidden layers gradually capture the data
-manifold, but it is not likely nor guaranteed.
+transformation that captures the data manifold will be discovered when we
+estimate the parameters of an MLP. It might happen that minimizing the cost
+function in Eq.~\eqref{eq:mlp_cost} ends up in the (local) solution that
+corresponds to the situation where intermediate hidden layers gradually
+capture the data manifold, but it is not likely nor guaranteed.
 
-Instead, there is another approach that gradually builds up
-a sequence of transformations, starting from the raw data.
-This incremental way of transforming coordinates is known
-widely as a greedy layer-wise pretraining
-\citep{Hinton2006}. This will be discussed more in
+Instead, there is another approach that gradually builds up a
+sequence of transformations, starting from the raw data, that 
+encourages the hidden layers of an MLP to disentangle the factors
+of variations along the data manifold.  This incremental way of
+transforming coordinates is known widely as a greedy layer-wise
+pretraining \citep{Hinton2006}. This will be discussed more in
 Chapter~\ref{chap:pretraining}, and in the remainder of this
-section we will look at two variants of autoencoders that
-are known to capture the data manifold. These two models
-have been recently shown to be good candidates for gradually
-capturing the data manifold.
+section we will look at two variants of autoencoders that are
+known to capture the data manifold. These two models have been
+recently shown to be good candidates for gradually capturing the
+data manifold.
 
 
 \subsection{Denoising Autoencoder and Explicit Noise
@@ -3827,7 +3865,10 @@ where $\vx$ and $\tilde{\vx}$ are clean and noisy versions
 of the same sample, and $f$ and $g$ are the encoder and
 decoder of the autoencoder, respectively. 
 
-Naturally, this can be done trivially by modifying the cost
+%Naturally, 
+This can be done 
+%trivially 
+by modifying the cost
 function in Eq.~\eqref{eq:autoencoder_cost} so that noise is
 explicitly injected before the encoder is applied to
 training samples.  When the cost function is modified
@@ -3848,7 +3889,7 @@ defined by Eqs.~\eqref{eq:ae_encoder} and
 \eqref{eq:ae_decoder}.  $\kappa$ is a stochastic operator
 that adds 
 %zero-mean 
-random noise to the input\footnote{
+random noise to the input.\footnote{
 $\kappa(\vx)$ may be designed to corrupt the input using the
 combination of multiple types of noise. In
 \citep{Vincent2010}, the following types of noise were
@@ -3863,7 +3904,7 @@ proposed:
         components to either the maximum or minimum allowed
         value
 \end{enumerate}
-}.
+}
 
 The denoising autoencoder finds a coordinate system of the
 data manifold.
@@ -3989,11 +4030,12 @@ $\kappa(\vx)$ is similar, or has a similar property to
 $\vx$. The property shared by those two points may be their
 classes or their probabilities in the data distribution.
 
-An extremely easy and obvious way to incorporate this prior
-knowledge is to use corrupted or transformed versions of
-training samples $\left\{ \vx^{(n)} \right\}_{n=1}^N$ when
-estimating the parameters of a model \citep[see,
-e.g.,][Chapter 5.5]{Bishop2006}. 
+%An extremely easy and obvious 
+One way to incorporate this prior
+knowledge is to use corrupted or transformed versions of training
+samples $\left\{ \vx^{(n)} \right\}_{n=1}^N$ when estimating the
+parameters of a model \citep[see, e.g.,][Chapter
+5.5]{Bishop2006}. 
 
 For instance, in the case of an MLP, the aim of the neural
 network is to find a nonlinear mapping from an input to its
@@ -4023,8 +4065,9 @@ the input corrupted by some level of noise will nevertheless
 be mapped to its desired output which is the output expected
 from the clean input. 
 
-It is natural to use the stochastic gradient method
-described in Section~\ref{sec:stochastic_grad} to minimize
+%It is natural to use 
+The stochastic gradient method
+described in Section~\ref{sec:stochastic_grad} can be used to minimize
 Eq.~\eqref{eq:mlp_cost_noisy}. At each iteration, a randomly
 chosen subset of the training set is stochastically
 corrupted by $\kappa$ before the steepest descent direction
@@ -4155,28 +4198,31 @@ machines (see Section~\ref{sec:rbm}) in
 Before finishing our discussion on deep feedforward neural
 networks, in this section, we briefly describe an efficient
 algorithm that computes the gradient of a cost function with
-respect to each parameter of a deep feedforward neural
-network. The algorithm, called backpropagation\footnote{
-The name \textit{backpropagation} was coined by
-\citet{Rumelhart1986} to denote a learning algorithm for
-estimating the parameters of a multi-layer perceptron.
-However, the main idea underlying backpropagation is to use
-a chain rule to compute the gradient of a cost function with
-respect to the parameters of a multi-layer perceptron, and
-the computed gradient may be used with any learning
-algorithm that utilizes it. It has, hence, become more
-common to use the term backpropagation to refer to the
-algorithm that computes the gradient, separate from an
-algorithm that adjusts the parameters using the computed
-gradient.  However, in this thesis, we refer by
-\textit{backpropagation} a learning algorithm that adjusts
-the parameters of a multi-layer perceptron using the
-gradient computed using the chain rule.
-}, was proposed
-by \citet{Rumelhart1986}.
+respect to each parameter of a deep feedforward neural network.
+The algorithm, called backpropagation, was proposed for
+multilayer perceptrons by \citet{Rumelhart1986}. 
+
+%The algorithm, called backpropagation\footnote{
+%The name \textit{backpropagation} was coined by
+%\citet{Rumelhart1986} to denote a learning algorithm for
+%estimating the parameters of a multilayer perceptron.
+%However, the main idea underlying backpropagation is to use
+%a chain rule to compute the gradient of a cost function with
+%respect to the parameters of a multilayer perceptron, and
+%the computed gradient may be used with any learning
+%algorithm that utilizes it. It has, hence, become more
+%common to use the term backpropagation to refer to the
+%algorithm that computes the gradient, separate from an
+%algorithm that adjusts the parameters using the computed
+%gradient.  However, in this thesis, we refer by
+%\textit{backpropagation} a \textit{first-order} learning
+%algorithm that adjusts the parameters of a multilayer perceptron
+%using the gradient computed using the chain rule only.
+%}, was proposed
+%by \citet{Rumelhart1986}.
 
 In order to compute the gradient, we first perform a
-\textit{forward} pass. For each sample $\vx$, we recursively
+forward pass. For each sample $\vx$, we recursively
 compute the activation of the $j$-th hidden unit
 $h_j^{\qlay{l}}$
 at the $l$-th hidden layer by
@@ -4205,10 +4251,10 @@ network.
 For simplicity, we have omitted biases without loss of
 generality.
 
-After the forward pass, we begin the \textit{backward} pass,
-where a local gradient $\delta$ is computed per each unit.
-For each output unit, where a desired output $y_j$ is
-available, the local gradient is
+After the forward pass, we begin the backward pass, where a local
+gradient $\delta$ is computed per each unit.  For each output
+unit, where a desired output $y_j$ is available, the local
+gradient is
 \[
 \delta_j = \frac{\partial J}{\partial u_j} 
 \]
@@ -4244,23 +4290,39 @@ function, then
 h_j^{\qlay{l-1}} \right).
 \]
 
-Once all the inputs and local gradients are computed, the
+Once all the inputs and local gradients are computed, we can
+compute the
+partial derivatives with respect to the
 top-level and intermediate-level weight parameters $u_{kj}$
-and $w_{ij}^{\qlay{l}}$ are respectively updated by
-\begin{align}
-    \label{eq:backprop}
-    u_{kj} &\leftarrow u_{kj} - \eta \left( \delta_j
+and $w_{ij}^{\qlay{l}}$ 
+%are respectively updated 
+by
+\begin{align*}
+    %\label{eq:backprop}
+    \frac{\partial J}{\partial u_{kj}} =& \delta_j
     h_k^{\qlay{L}}
-    \right) 
     \nonumber \\
-    w_{ij}^{\qlay{l}} &\leftarrow w_{ij}^{\qlay{l}} - \eta \left(
-    \delta_j^{\qlay{l+1}} h_i^{\qlay{l-1}}\right) \text{, }\forall l \geq 2 
+    \frac{\partial J}{\partial w_{ij}^{\qlay{l}}} =&
+    \delta_j^{\qlay{l+1}} h_i^{\qlay{l-1}} \text{, }\forall l \geq 2 
     \nonumber \\
-    w_{ij}^{\qlay{1}} &\leftarrow w_{ij}^{\qlay{1}} - \eta \left(
-    \delta_j^{\qlay{2}} x_i
-    \right),
-\end{align}
-where $\eta$ is a learning rate. See Fig.~\ref{fig:backprop}
+    \frac{\partial J}{\partial w_{ij}^{\qlay{1}}} =&
+    \delta_j^{\qlay{2}} x_i.
+\end{align*}
+%\begin{align*}
+%    %\label{eq:backprop}
+%    u_{kj} &\leftarrow u_{kj} - \eta \left( \delta_j
+%    h_k^{\qlay{L}}
+%    \right) 
+%    \nonumber \\
+%    w_{ij}^{\qlay{l}} &\leftarrow w_{ij}^{\qlay{l}} - \eta \left(
+%    \delta_j^{\qlay{l+1}} h_i^{\qlay{l-1}}\right) \text{, }\forall l \geq 2 
+%    \nonumber \\
+%    w_{ij}^{\qlay{1}} &\leftarrow w_{ij}^{\qlay{1}} - \eta \left(
+%    \delta_j^{\qlay{2}} x_i
+%    \right),
+%\end{align*}
+%where $\eta$ is a learning rate. 
+See Fig.~\ref{fig:backprop}
 for the illustration of the forward and backward passes.
 
 \begin{figure}[t]
@@ -4306,22 +4368,22 @@ modification (see Section~\ref{sec:rnn_deep} to see how a
 recurrent neural network can be \textit{unfolded} over time
 to become a deep feedforward neural network). 
 
-Here we showed how to compute the gradient using a single
-sample, but extending it to multiple samples is
-straightforward by taking an average of
-gradients computed from a number of samples at each update. It is usual to
-use the gradient computed by the backpropagation to perform
-stochastic gradient descent on the cost function using a
-subset of training samples at a time (see
-Section~\ref{sec:stochastic_grad}). One often refers to this
-approach as \textit{stochastic backpropagation}.
+Here we showed how to compute the gradient using a single sample
+only, but it is possible to extend it to the case of multiple
+samples by taking an average of gradients computed from a number
+of samples at each update. It is usual to use the gradient
+computed by the backpropagation to perform stochastic gradient
+descent on the cost function using a subset of training samples
+at a time (see Section~\ref{sec:stochastic_grad}). 
+%One often
+%refers to this approach as \textit{stochastic backpropagation}.
 
 \subsection{How to Make Lower Layers Useful}
 \label{sec:bp_imp}
 
 However, it has been noticed by many researchers that it is not easy to
 train deep neural networks using plain stochastic
-backpropagation \citep[see, e.g.,][]{Bengio2007a}.
+gradient descent \citep[see, e.g.,][]{Bengio2007a}.
 Especially, neural networks with more than two intermediate
 layers of hidden units usually result in a worse
 generalization performance\footnote{By
@@ -4345,17 +4407,17 @@ units in the layer immediately below as an input. However,
 this capability of the top two layers does not translate to
 the performance of the neural network on unseen samples.
 
-In other words, training an MLP with backpropagation will
-simply adapt the parameters of the top layers to fit the
-training set as well as possible. The algorithm in general
-will \textit{not} necessarily prefer a solution that aims to
-force the lower intermediate layers, which act as
-\textit{feature detectors} according to our discussion in
+In other words, training an MLP with stochastic gradient descent
+will simply adapt the parameters of the top layers to fit the
+training set as well as possible. The algorithm in general will
+\textit{not} necessarily prefer a solution that aims to force the
+lower intermediate layers, which act as \textit{feature
+detectors} according to our discussion in
 Section~\ref{sec:mlp}, to detect important features.  A
 simple experiment by \citet{Bengio2007nips} showed further
 that even when the top layers are \textit{not} powerful
 enough to minimize the cost function almost perfectly, the
-plain stochastic backpropagation will fail to make the lower
+plain stochastic gradient descent will fail to make the lower
 intermediate layers any more useful.
 
 In an extreme case, it might be that the top two layers, the
@@ -4394,19 +4456,19 @@ called \textit{second neural network renaissance}
 \citep{Schmidhuber2011}.  We will discuss in more detail this
 approach in Chapter~\ref{chap:pretraining}.
 
-However, the hypothesis by \citet{Bengio2007nips} is not the
-only explanation available.  \citet{Martens2010} pointed
-out that another potential factor that makes it difficult to
-estimate the parameters of lower layers of a deep MLP, or a
-deep autoencoder by a plain backpropagation is the existence
-of a pathological curvature of the cost function, not the
-powerfulness of the top few layers. 
+However, the hypothesis by \citet{Bengio2007nips} is not the only
+explanation available.  \citet{Martens2010} pointed out that
+another potential factor that makes it difficult to estimate the
+parameters of lower layers of a deep MLP, or a deep autoencoder
+by stochastic gradient descent is the existence of a pathological
+curvature of the cost function, not the powerfulness of the top
+few layers. 
 
 \citet{Martens2010} claimed that the directions of the cost
 function that correspond to the parameters in the lower
 layers have lower curvature compared to those corresponding
 to the parameters in the top few layers. In this scenario,
-the plain backpropagation, relying solely on the first-order
+the plain gradient descent, relying solely on the first-order
 information, is unable to make rapid, if any, progress in
 those directions with low curvatures, leaving the parameters
 of the lower layers mostly unchanged.
@@ -4439,34 +4501,29 @@ direction which is known to be efficient in estimating the
 parameters of an MLP \citep{Amari1998}.
 
 \citet{Glorot2010} extensively tested plain stochastic
-backpropagation in training deep MLPs. They were able to
+gradient descent in training deep MLPs. They were able to
 provide some practical advice on the choice of nonlinear
 functions of hidden units as well as how to initialize the
 parameters to avoid being stuck in a poor
 local optimum or a plateau.
 
 %Before finishing this section, 
-However, one must be careful about making any definite
-conclusion on using plain backpropagation. The
-underlying factor of the difficulty might simply be a lack
-of patience, and extremely longer training, potentially
-assisted by the recent advances in utilizing GPUs
-\citep{Raina2009}, might help avoiding the aforementioned
-problem.
+However, one must be careful about making any definite conclusion
+on using a plain gradient descent approach. The underlying factor
+of the difficulty might simply be a lack of patience, and
+extremely longer training, potentially assisted by the recent
+advances in utilizing GPUs \citep{Raina2009}, might help avoiding
+the aforementioned problem.
 
 Recently, for instance, \citet{Ciresan2012g} showed that a
-deep MLP trained with the plain stochastic backpropagation
+deep MLP trained with the plain stochastic gradient descent
 can achieve state-of-the-art results on handwritten
 digits classification \textit{without} any of the methods
 described earlier. Many recent papers from the same group
 \citep[see, e.g.][]{Ciresan2012c,Ciresan2012b,Ciresan2012f}
 presented deep (convolutional) neural networks  achieving
 the state-of-the-art performances on various tasks
-using just plain stochastic backpropagation.
-
-
-
-
+using just plain stochastic gradient descent.
 
 
 \chapter{Boltzmann Machines with Hidden Units}
@@ -4499,9 +4556,9 @@ described in Section~\ref{sec:fvbm} to a general,
 fully-connected Boltzmann machine \citep{Ackley1985}.  A
 fully-connected Boltzmann machine has, in addition to a set
 of visible stochastic units, a separate set of
-\textit{hidden} units\footnote{Whenever it is clear that a
+\textit{hidden} units.\footnote{Whenever it is clear that a
 referred unit is stochastic, we will drop the term
-\textit{stochastic}.}. 
+\textit{stochastic}.} 
 
 %\begin{figure}[t]
 \begin{wrapfigure}{I}{0.4\textwidth}
@@ -4544,7 +4601,9 @@ the negative energy of the network by
 where $\vb$ and $\vc$ are vectors of the biases to the
 visible and hidden units, respectively. $\TT$ indicates the
 set of all parameters including $\vb$, $\vc$, $\mW$, $\mU$
-and $\mV$. Naturally, we define a probability of a state
+and $\mV$. 
+%Naturally, 
+From this, we define a probability of a state
 $\left[ \vx^\top, \vh^\top \right]^\top$ with the Boltzmann
 distribution by
 \begin{align}
@@ -4594,17 +4653,17 @@ with respect to a parameter $\theta$ is
     \right>_{p\left(\vx, \vh \mid \TT\right)}.
 \end{align}
 
-The first term computes the expectation of the
-partial derivative of the negative energy with respect to
-the parameter under the posterior distribution of the hidden
-units, with the visible units fixed to training samples from
-the empirical, or data, distribution. The
-second term is the expectation of the same quantity under
-the model distribution represented by the Boltzmann machine.
-It is obvious that computing these terms exactly is
-intractable. Both terms require evaluating the
-partial derivative of the negative energy exponentially many
-times. 
+The first term computes the expectation of the partial derivative
+of the negative energy with respect to the parameter under the
+posterior distribution of the hidden units, with the visible
+units fixed to training samples from the empirical, or data,
+      distribution. The second term is the expectation of the
+      same quantity under the model distribution represented by
+      the Boltzmann machine.
+%It is obvious that 
+Unfortunately, computing these terms exactly is intractable. Both
+terms require evaluating the partial derivative of the negative
+energy exponentially many times. 
 
 Hence, we must resort to estimating them with various
 techniques instead of trying to compute them exactly. The
@@ -4646,10 +4705,11 @@ last term, corresponding to the entropy of the data
 distribution, does not depend on the parameters $\TT$ and
 can be safely ignored.
 
-It is easy to see that Eq.~\eqref{eq:bm_kldiv} is equivalent
+%It is easy to see that 
+Eq.~\eqref{eq:bm_kldiv} is equivalent
 to Eq.~\eqref{eq:bm_mll}, since
 \[
-\left< \log P_\infty(\vx) \right>_{P_0} \approx \frac{1}{N}
+\left< \log P_\infty(\vx) \right>_{P_0} = \frac{1}{N}
 \sum_{n=1}^N \log \sum_{\vh} p(\vx^{(n)}, \vh \mid \TT)
 \]
 which is exactly the marginal log-likelihood of
@@ -4665,7 +4725,9 @@ contrastive divergence \citep{Hinton2002}.
 It is interesting to notice that the addition of any constant
 to the energy function of a Boltzmann machine does
 \textit{not} alter the probability distribution it defines
-over the state space. This can be easily verified by the
+over the state space. This can be 
+%easily 
+verified by the
 fact that the new normalization constant $\tilde{Z}(\TT)$
 after adding a constant to the energy is just the original
 normalization constant $Z(\TT)$ multiplied by the exponential
@@ -4911,13 +4973,12 @@ they applied the transformation only to visible units.
 
 \section{Boltzmann Machines with Hidden Units are Deep}
 
-Before discussing Boltzmann machines further, in this
-section, we first provide an intuitive explanation as to why
-Boltzmann machines, especially with hidden units, are
-considered deep. This is done by showing that a recurrent
-neural network, after being unfolded over time, is deep and
-an equivalent recurrent neural network can be constructed
-for each Boltzmann machine.
+Before discussing Boltzmann machines further, in this section, we
+first provide an intuitive explanation as to why Boltzmann
+machines, especially with hidden units, are considered deep. This
+is done by showing that a recurrent neural network, after being
+unfolded over time, is deep and an equivalent recurrent neural
+network can be constructed for each Boltzmann machine.
 
 A recurrent neural network consists of input, output and
 hidden units as usual with any other types of neural
@@ -5091,14 +5152,14 @@ of samples augmented by their labels. Each label is
 considered to be transformed into a binary vector using a
 $1$-of-$K$ coding.  That is, the visible units are divided
 into those $\vx$ that correspond to input components and
-those $\vy$ that correspond to label components\footnote{ 
+those $\vy$ that correspond to label components.\footnote{ 
 A practical description of how a
 Boltzmann machine trained on samples augmented with their
 labels will be presented in more detail in Section~\ref{sec:drbm}.
 Here, this model is only used to illustrate how
 an equivalent recurrent neural network can be built for a Boltzmann
 machine.
-}.
+}
 Furthermore, let us assume that there is no edge between the
 sets of the input and label units and also no edge inside
 those sets. Then, we may rewrite the energy function of the
@@ -5191,14 +5252,16 @@ each time $t$.
     \label{fig:bm_rnn}
 \end{figure}
 
-It is easy to see that this way of viewing the simulation of
-the BM is equivalent to performing a feedforward pass
-through time in a recurrent neural network. One difference
-to the recurrent neural network described in
-Section~\ref{sec:rnn_deep} is that the visible units are
-fixed to a sample over time. 
+%It is easy to see that 
+This way of viewing the simulation of the BM is equivalent to
+performing a feedforward pass through time in a recurrent neural
+network. One difference to the recurrent neural network described
+in Section~\ref{sec:rnn_deep} is that the visible units are fixed
+to a sample over time. 
 
-Also, it is obvious that there are multiple computation
+Also, 
+    %it is obvious that 
+there are multiple computation
 paths from the visible units via both the hidden and label
 units to the label units at some time $t > 1$. Furthermore,
 all the parameters in the BM, or in the equivalent recurrent
@@ -5321,9 +5384,10 @@ regardless of the initial distribution $p^{\qt{0}}$:
     p^{\qt{t}}(\vx) = \tilde{p}(\vx)\text{ as }t \to
     \infty\text{, }\forall p^{\qt{0}}.
 \end{align}
-Intuitively, it will be impossible to use the chain to
-collect samples from a target distribution, if the
-simulation of the chain converges to one or more
+%Intuitively, 
+Otherwise, it will be impossible to use the chain to
+collect samples from a target distribution, since the
+simulation of the chain may converge to one or more
 distributions that are \textit{not} the target distribution,
 depending on the initial distribution.
 
@@ -5444,11 +5508,11 @@ and $p$ is the dimensionality of $\vx$, while changing $k$
 in a predefined schedule. It is usual to simply cycle $k$
 through all the components sequentially.
 
-Because the conditional probability of each unit in a
-Boltzmann machine (Eq.~\eqref{eq:bm_cond}) is well defined
-and easily evaluated, it is natural to use Gibbs
-sampling to evaluate the statistics of the distributions
-$p(\vh \mid \vx, \TT)$ and $p(\vx, \vh \mid \TT)$. 
+Because the conditional probability of each unit in a Boltzmann
+machine (Eq.~\eqref{eq:bm_cond}) is well defined and easily
+evaluated, it is natural to use Gibbs sampling to evaluate the
+statistics of the distributions $p(\vh \mid \vx, \TT)$ and
+$p(\vx, \vh \mid \TT)$. 
 %Using the
 %Gibbs sampling, it is now possible to estimate, for
 %instance, the gradient in Eq.~\eqref{eq:bm_grad}.
@@ -5609,7 +5673,7 @@ distributions. As $\beta$ approaches $1$ (model
 distribution), it becomes more difficult for the plain Gibbs
 sampling to explore the whole state space efficiently.
 
-In this regard, the obvious advantage of parallel
+In this regard, the most important advantage of parallel
 tempering when compared to Gibbs sampling is that 
 parallel tempering can avoid being trapped in a single mode.
 This is possible, since the samples from the Gibbs sampling
@@ -5844,9 +5908,11 @@ the model distribution using Gibbs sampling. Then,
     H_\infty \approx \frac{1}{N_0} \sum_{n=1}^{N_0}
     h\left(\left.\vx^{(n)}, \vh^{(n)} \right| \TT^{\qt{t}}\right).
 \end{align*}
-The obvious problem is that it is difficult to choose or
-determine $N_0$. Furthermore, $N_0$ might be determined too
-large to be of any practical use.
+The 
+%obvious 
+problem is that it is difficult to choose or determine $N_0$.
+Furthermore, $N_0$ might be determined too large to be of any
+practical use.
 
 A computationally efficient method to overcome this problem
 was proposed by \citet{Younes1988}. This algorithm, sometimes
@@ -5967,19 +6033,20 @@ a state $\mV$ is defined by
     \left(\mV_c\right),
 \end{align*}
 where $Z$ is a normalization constant and $C$ is the set of all
-possible cliques\footnote{A \textit{clique} is a complete
+possible cliques.\footnote{A \textit{clique} is a complete
 subgraph, where all vertices in the subgraph are fully
-connected to each other \citep[see, e.g.,][]{Bondy2008}.}.
+connected to each other \citep[see, e.g.,][]{Bondy2008}.}
 $\varphi_c\left(\mV_c\right)$ is a positive potential
 function assigned to a clique $c$. It is usual that the
 unnormalized probability ($p^*(\mV) = Z p(\mV)$) is easy to
 compute, while it is intractable to compute $Z$ exactly.
 
-It is straightforward to see that a Boltzmann machine is a
-special case of MRFs. Each variable of the Boltzmann machine
-corresponds to a vertex, and edges between all pairs
-indicate that it is a complete, undirected graph. A
-potential function of all cliques of two vertices is
+%It is straightforward to see that 
+From this, we can see that a Boltzmann machine is a special case
+of MRFs. Each variable of the Boltzmann machine corresponds to a
+vertex, and edges between all pairs indicate that it is a
+complete, undirected graph. A potential function of all cliques
+of two vertices is
 \[
 \varphi_{ij} = \exp \left\{ x_i x_j w_{ij} \right\},
 \]
@@ -6058,7 +6125,8 @@ This will greatly speed up the sampling process, assuming
 that parallel computation is easily accessible and
 implementable.
 
-Now it is easy to see why it is difficult to evaluate
+%Now it is easy to see why 
+It is unfortunately difficult to evaluate
 statistics of a fully-connected Boltzmann machine by
 collecting samples. When the Markov blanket of each unit
 consists of all other units, sampling must be done for each
@@ -6180,7 +6248,8 @@ sampling in the case of RBMs.
     \label{fig:rbm_gibbs}
 \end{figure}
 
-Furthermore, it is easy to see that we can efficiently
+Furthermore, %it is easy to see that 
+we can efficiently
 compute the posterior distribution over the hidden units
 exactly, since the posterior distribution is fully
 factorized. The exact posterior distribution ${p(\vh \mid
@@ -6265,7 +6334,9 @@ probability of both the visible and hidden variables:
     \sum_{\vh} \frac{1}{Z(\TT)} \prod_{j=1}^q
     \tilde{\varphi}_j (\vx \mid \TT_j)^{h_j}.
 \end{align}
-Furthermore, one can clearly see that the posterior
+Furthermore, one can 
+%clearly 
+see that the posterior
 probability of $\vh$ given the state of $\vx$ is factorized
 so that each $h_j$ is independent from all other hidden
 variables. The posterior probability of $h_j$ is given by
@@ -6408,9 +6479,9 @@ can immediately see, computing Eq.~\eqref{eq:rbm_cd_grad}
 requires neither running the Gibbs sampler for indefinite
 time nor checking the convergence of the sampling chain.
 Empirically, minimizing CD was found to learn a good model
-even with $k$ as small as $1$\footnote{ From here on, we
+even with $k$ as small as $1$.\footnote{ From here on, we
 will occasionally refer to the learning algorithm that
-minimizes CD as CD learning, when there is no ambiguity.  }.
+minimizes CD as CD learning, when there is no ambiguity.}
 
 Although minimizing CD has been used successfully in
 practice since it was introduced,
@@ -6563,10 +6634,11 @@ discovered and presented by \citet{Bengio2009},
 \citet{Swersky2011} and \citet{Vincent2011}.
 
 We continue on to describing a deep belief network
-\citep{Hinton2006nc} which is an extension of the sigmoid
-belief network described earlier in
-Section~\ref{sec:sbn_dbn} as one of the related approaches
-of deep autoencoders. 
+\citep{Hinton2006nc} which is an extension of the sigmoid belief
+network 
+%described earlier in Section~\ref{sec:sbn_dbn} 
+as one of
+the related approaches of deep autoencoders. 
 %Furthermore, in doing so, we introduce
 %a concept of layer-wise pretraining which constitutes an
 %important part of learning algorithms of deep neural
@@ -6616,7 +6688,8 @@ the marginal log-likelihood, considering only a single
 sample for now, can be expanded by
 \begin{align}
     \label{eq:rbm_grad_exp}
-    \frac{\partial \LL(\TT)}{\partial \theta} &= 
+    \frac{\partial \LL(\TT)}{\partial \theta} = 
+    \lim_{t\to\infty}&
     \sum_{s=1}^{t-1} \left( \E\left[ \frac{\partial \log
     p(\vx^{\qt{s}} \mid \vh^{\qt{s}})}{\partial \theta}
     \right]  + \E \left[ \frac{\partial \log p(\vh^{\qt{s}}
@@ -6665,7 +6738,8 @@ Eq.~\eqref{eq:rbm_grad_exp_ext} becomes
 \sum_{n=1}^N \frac{\partial \log p(\vx^{(n)} \mid
 \hat{\vh}^{(n)})}{\partial \theta}.
 \]
-It is straightforward to see that this is the gradient of
+%It is straightforward to see that 
+This is the gradient of
 the cross-entropy loss of a single-layer autoencoder with a
 single hidden layer of sigmoid hidden units.
 
@@ -6675,7 +6749,8 @@ the marginal log-likelihood, while minimizing the
 reconstruction error or cross-entropy corresponds to a
 \textit{deterministic approximation}. Since the latter
 truncated one more term from the expansion, the latter
-obviously results in a more biased estimation, if we look at
+%obviously 
+results in a more biased estimation, if we look at
 the resulting model as an RBM. 
 
 However, the objective function of an autoencoder, which is
@@ -6722,7 +6797,7 @@ Gaussian distribution whose mean is determined by the
 weighted sum of the states of the hidden units. The
 conditional probability of each hidden unit being one is
 determined by the weighted sum of the states of the visible
-units \textit{scaled} by their variances\footnote{
+units \textit{scaled} by their variances.\footnote{
 The energy function of a GRBM was originally proposed by
 \citet{Hinton2006} to be
 \[
@@ -6744,7 +6819,7 @@ of the visible unit.  In \citepub{Cho2011icann}, it was
 claimed that this formulation makes estimating $\sigma_i$'s
 easier, and hence we use the modified definition of the energy
 function here.
-}.
+}
 It should be noticed that despite the change of the visible
 units' types, there is essentially no change in its learning
 algorithm compared to the original RBM with binary visible
@@ -6777,8 +6852,7 @@ Then, the score function of the GRBM is
     \label{eq:grbm_score}
     \psi_i (\vx \mid \TT) &= \frac{\partial \log p^*(\vx \mid
     \TT)}{\partial x_i} 
-    \nonumber \\
-    &= \frac{b_i - x_i}{\sigma_i^2} + \sum_{j=1}^q \hat{h}_j
+    = \frac{b_i - x_i}{\sigma_i^2} + \sum_{j=1}^q \hat{h}_j
     \frac{w_{ij}}{\sigma_i^2}.
 \end{align}
 Furthermore, we will need
@@ -6819,7 +6893,8 @@ Eq.~\eqref{eq:grbm_sm_cost_orig} can be rewritten as
 \end{align*}
 where $C$ is a constant that does not depend on $\TT$.
 
-It is easy to see that the first term inside the summation
+%It is easy to see that 
+The first term inside the summation
 is the reconstruction error of a single-layer autoencoder
 with a tied set of weights $\mW$ (see
 Eq.~\eqref{eq:autoencoder_cost}). The other term can be
@@ -6859,11 +6934,14 @@ via score matching.
 \end{wrapfigure}
 %\end{figure}
 
-In Section~\ref{sec:sbn_dbn}, we presented the sigmoid
-belief network in relation with a deep autoencoder and
-subsequently briefly described the deep belief network.
-Here, we present another view of the DBN as a combination of
-a sigmoid belief network and an RBM.
+In Section~\ref{sec:sbn_dbn}, we presented the sigmoid belief
+network in relation with a deep autoencoder
+%and subsequently
+%briefly described the deep belief network.  
+Here, we describe a deep belief network
+(DBN\nomenclature{DBN}{Deep belief network}) \citep{Hinton2006nc}
+which extends the sigmoid belief network by adding a layer of
+undirected network on its top. 
 
 The deep belief network (DBN), proposed by
 \citet{Hinton2006nc}, is a hybrid model that has both
@@ -6879,7 +6957,7 @@ states of the units in the layer immediately below. See
 Fig.~\ref{fig:dbn} for the illustration.
 
 In this case, as we did with Boltzmann machines previously,
-we may define the energy as
+we may define the energy of a DBN as
 \begin{align}
     \label{eq:dbn_energy}
     -E(\vx, \vh^{\qlay{1}}, \dots, \vh^{\qlay{L}} \mid \TT)
@@ -7051,7 +7129,7 @@ specifically engineered for other tasks.
 In Section~\ref{sec:bp_imp}, we briefly discussed the so
 called layer-wise pretraining, where shallow
 unsupervised neural networks were used to initialize the
-parameters of a deep multi-layer perceptron (MLP). Notably,
+parameters of a deep multilayer perceptron (MLP). Notably,
 a stack of, for instance, restricted Boltzmann machines used
 for initializing an MLP was trained without any prior
 knowledge that it will be used for classification.
@@ -7133,7 +7211,7 @@ layers of nonlinear transformations.
     \psfrag{(3) Combine}[Bc][Bc][1.0][0]{}
     \includegraphics[width=0.7\columnwidth]{figures/pretrain_mlp.eps}
     \caption{Illustration of the layer-wise pretraining of
-    a multi-layer perceptron. The dashed directed lines
+    a multilayer perceptron. The dashed directed lines
     indicate \textit{copying} of either pretrained models or
     the activations of the hidden units of the pretrained
     models.}
@@ -7142,12 +7220,12 @@ layers of nonlinear transformations.
 
 This suggests a possibility of incrementally building a
 sequence of intermediate layers that gradually extract
-better and better representations of data\footnote{We say
+better and better representations of data.\footnote{We say
 the \textit{representation is better} when better
 \textit{generalization} performance on another machine
 learning task, for instance classification, can be achieved
 using the representation compared to using the raw
-representation \citep{Bengio2007nips}.}. This is different
+representation \citep{Bengio2007nips}.} This is different
 from
 how the parameters of an MLP were estimated. For an MLP, we
 first fix the structure of the model and jointly optimize
@@ -7187,7 +7265,9 @@ Eq.~\eqref{eq:ae_encoder}) or the conditional probability of
 hidden units of a restricted Boltzmann machine (RBM, see
 Eq.~\eqref{eq:rbm_cond_h}).
 
-Hence, it is natural to estimate the parameters $\mW$ and
+Hence, 
+%it is natural to 
+we may estimate the parameters $\mW$ and
 $\vc$ as if a pair of those two layers would form either an
 autoencoder with a single hidden layer or a restricted
 Boltzmann machine. We start from the bottom by training the
@@ -7221,8 +7301,9 @@ possible, though not necessary, to \textit{finetune} them
 all together for a specific target task. For instance, an
 MLP can be initialized by stacking the learned sequence and
 be trained continuing from the \textit{pretrained}
-parameters using backpropagation (see
-Section~\ref{sec:backprop}). A deep autoencoder with more
+parameters.
+%using backpropagation (see Section~\ref{sec:backprop}). 
+A deep autoencoder with more
 than one intermediate layer can also benefit from this
 approach \citep{Hinton2006}. In this context, the approach
 of incremental feature learning is often referred to as a
@@ -7236,7 +7317,8 @@ Task}
 \label{sec:dunn}
 
 Throughout this thesis, we have mostly concentrated on
-\textit{unsupervised} neural networks.  There are obvious
+\textit{unsupervised} neural networks.  There are 
+%obvious
 tasks to which these unsupervised neural networks can
 trivially be applied.
 
@@ -7256,10 +7338,11 @@ codes for documents \citep{Salakhutdinov2009s}.  Also,
 \citet{Salakhutdinov2007} showed that an RBM can be
 successfully used for collaborative filtering. 
 
-However, obviously, these unsupervised models cannot be used
-directly for performing any supervised task.  This is
-clear as none of these models have at their disposal known
-outputs of training samples.
+However, 
+    %obviously, 
+these unsupervised models cannot be used directly for performing
+any supervised task.  This is clear as none of these models have
+at their disposal known outputs of training samples.
 
 As in the layer-wise pretraining discussed earlier in this
 chapter, however, the unsupervised neural networks can be
@@ -7268,7 +7351,7 @@ supervised models. In the layer-wise pretraining,
 recursively stacking shallow unsupervised neural networks
 was shown to extract better representations that are more
 suitable for classification, which may be improved further by
-finetuning the stack with backpropagation.
+finetuning the whole stack.% with backpropagation.
 
 In the remainder of this section, we introduce other approaches
 than the previously discussed layer-wise pretraining
@@ -7435,7 +7518,7 @@ purely to perform discriminative modeling
 \subsection{Deep Boltzmann Machine to Initialize an MLP}
 \label{sec:mlp_dbm}
 
-It is straightforward to initialize a multi-layer perceptron
+It is straightforward to initialize a multilayer perceptron
 (MLP) with a deep belief network (DBN) as well as a
 restricted Boltzmann machine (RBM). Once the parameters of
 those unsupervised neural networks are estimated, we can
@@ -7519,7 +7602,7 @@ $\tilde{\vh}^{\qlay{L-1}}$ by $\mU^{\qlay{L-1}}$.
     \includegraphics[width=0.75\columnwidth]{figures/dbm_mlp.eps}
     \caption{A deep Boltzmann machine with two hidden
     layers, on the left, is transformed to initialize a
-    multi-layer perceptron on the right. $\vmu^{\qlay{2}}$ is a
+    multilayer perceptron on the right. $\vmu^{\qlay{2}}$ is a
     vector of the variational parameters of the second
     hidden layer of the DBM.}
     \label{fig:dbm_mlp}
@@ -7529,8 +7612,10 @@ This way of constructing an MLP (see Fig.~\ref{fig:dbm_mlp})
 guarantees that the activation of the last hidden layer of
 the MLP after a forward pass with the initialized weights
 will coincide with their variational parameters. From there
-on, we can use backpropagation (see
-Section~\ref{sec:backprop}) to further finetune the model.
+on, we can finetune the model to optimize for classification
+performance.
+%use backpropagation (see
+%Section~\ref{sec:backprop}) to further finetune the model.
 
 For instance, in \citep{Salakhutdinov2009a} and
 \citep{Hinton2012}, this way of initializing an MLP with a
@@ -7564,8 +7649,9 @@ another perspective from which the incremental
 transformation can be viewed.
 
 In Section~\ref{sec:dbn}, we described the learning
-algorithm for training a deep belief network (DBN). It is
-obvious now to see that the first stage of the learning
+algorithm for training a deep belief network (DBN). 
+%It is obvious now to see that 
+It should be noticed that the first stage of the learning
 algorithm does almost exactly what the incremental feature
 learning introduced earlier in this chapter does. Starting
 from a single restricted Boltzmann machine (RBM) trained on
@@ -7652,9 +7738,9 @@ another layer that corresponds to the visible layer of the
 RBM is connected with the downward directed edges whose
 weights are fixed to those of the RBM. We repeat this step
 infinitely, and we get the infinitely deep sigmoid belief
-network with tied weights\footnote{For simplicity, we
+network with tied weights.\footnote{For simplicity, we
 omit biases, but they can be considered a part of the
-weights.}. 
+weights.}
 
 Let us perform ancestral sampling from a layer, very far up
 from the first layer denoted $\vx^{\qlay{-L}}$, in the infinite
@@ -7668,7 +7754,8 @@ $\vh^{\qlay{-L+1}}$, $\vh^{\qlay{-L+2}}$, $\vh^{\qlay{-L+2}}$, \dots,
 $\vh^{\qlay{-1}}$, and $\vx^{\qlay{0}}$, where $\vx^{\qlay{0}}$ is the
 visible layer (See Fig.~\ref{fig:inf_sbn}). 
 
-It is easy to see that this is exactly what Gibbs sampling
+%It is easy to see that 
+This is exactly what Gibbs sampling
 does to get samples from the model distribution of an RBM.
 If this procedure starts from a layer far enough from the
 visible layer, the Gibbs chain will reach the equilibrium
@@ -7717,8 +7804,9 @@ units are in the first hidden layer of a DBN.
 An interesting observation can be made here.  The same set
 of parameters $\TT_1$ is used to model both the
 conditional distribution $p(\vx \mid \vh^{\qlay{1}})$ and the
-prior distribution $p(\vh^{\qlay{1}})$. From this observation, it
-is natural to consider \textit{replacing} the prior of
+prior distribution $p(\vh^{\qlay{1}})$. From this observation, 
+%it is natural to 
+we may consider \textit{replacing} the prior of
 $\vh^{\qlay{1}}$ such that it is not anymore constrained to be
 modeled with the same parameters $\TT_1$.
 In other words, we would like to replace
@@ -7735,11 +7823,11 @@ an RBM from Section~\ref{sec:inf_sbn_rbm}. Then, since the DBN
 considered here has as many units in $\vh^{\qlay{2}}$ as there
 are in the visible layer $\vx$, we get the same model even
 after replacing the prior, if we fix $\TT_2$ to
-$\TT_1$\footnote{ If we only consider the weights, assuming
+$\TT_1$.\footnote{ If we only consider the weights, assuming
 that the weights include the biases,
 $\mW_{\qlay{2}}=\mW_{\qlay{1}}^\top$.
 However, without loss of generality, we simply state that
-$\TT_2=\TT_1$.  }.
+$\TT_2=\TT_1$.  }
 
 Let us write the variational lower bound of the marginal
 log-likelihood, as described in
@@ -7905,13 +7993,12 @@ Table~\ref{tbl:dbn_ae} summarizes these differences.
 \end{table}
 
 
-The latter choice of an approximate posterior distribution
-has two obvious advantages. Firstly, the computation is
-easier, since no sampling is required. Also, the
-approximated variational parameters are less noisy, since no
-stochastic mechanism is involved. However, this choice
-nullifies the guarantee discussed earlier in
-Section~\ref{sec:dbn_rbm}.
+The latter choice of an approximate posterior distribution has
+two advantages. Firstly, the computation is easier, since no
+sampling is required. Also, the approximated variational
+parameters are less noisy, since no stochastic mechanism is
+involved. However, this choice nullifies the guarantee discussed
+earlier in Section~\ref{sec:dbn_rbm}.
 
 Based on this and the similarity between the fully
 factorized approximate posterior and the encoder of a
@@ -8030,7 +8117,9 @@ Eq.~\eqref{eq:dbn_two_layer} as
     \TT_2) \right)
     \right).
 \end{align}
-From this, it is clear that replacing the prior of the first
+From this, 
+%it is clear 
+we can see that replacing the prior of the first
 hidden layer to improve the lower bound is equivalent to
 estimating $\TT_2$ such that the new prior distribution
 $p(\vh^{\qlay{1}}\mid\TT_2)$ becomes closer to the aggregate
@@ -8333,25 +8422,25 @@ through companies such as Google, Microsoft and Apple.  For
 instance, Google Goggles\footnote{
 http://www.google.fi/mobile/goggles/ } uses a deep belief
 network (see Section~\ref{sec:dbn}) in
-production\footnote{See the invited talk \textit{Machine
+production.\footnote{See the invited talk \textit{Machine
 Learning in Google Goggles} by Hartmut Neven at the
 International Conference on Machine Learning 2011:
-http://techtalks.tv/talks/machine-learning-in-google-goggles/54457/}.
+http://techtalks.tv/talks/machine-learning-in-google-goggles/54457/}
 Microsoft has replaced the existing speech recognition
 algorithm based on Gaussian mixtures with one based on deep
 neural networks \citep{Deng2013}. Furthermore, the voice
 assistance feature of Apple's iPhone, called Siri, as well
 as Google's Street View are also known to utilize deep
-neural networks\footnote{See the article \textit{Scientists
+neural networks.\footnote{See the article \textit{Scientists
 See Promise in Deep-Learning Programs} by John Markoff
 featured in the New York Times on 23 November 2012: \\
 http://www.nytimes.com/2012/11/24/science/scientists-see-advances-in-deep-learning-a-part-of-artificial-intelligence.html
-}.
+}
 
 These recent successes of deep neural networks in both
 academic research and commercial applications may be
 attributed to several recent breakthroughs. Layer-wise
-pretraining of a multi-layer perceptron proposed by
+pretraining of a multilayer perceptron proposed by
 \citep{Hinton2006,Bengio2007nips,Ranzato2007} showed that a
 clever way of initializing parameters can easily overcome
 the difficulties of optimizing a large, deep neural network.
@@ -8362,7 +8451,7 @@ success of deep neural networks, for example, in
 unsupervised and transfer learning tasks \citep[see,
 e.g.,]{Guyon2011,Mesnil2012,Raina2007}. Beside the
 layer-wise pretraining as well as unsupervised learning,
-several modifications to multi-layer perceptrons, such as
+several modifications to multilayer perceptrons, such as
 novel nonlinear hidden units \citep[see,
 e.g.,][]{Nair2010,Glorot2011,Goodfellow2013} and dropout
 regularization \citep{Hinton2012}, have further pushed the
@@ -8408,7 +8497,7 @@ networks, namely autoencoders and Boltzmann machines, were
 discussed in detail and found to be related to each other.
 The underlying principles of those two models were found to
 be useful in understanding the layer-wise pretraining of a deep
-multi-layer perceptron.
+multilayer perceptron.
 
 The thesis began with simple, linear neural networks.
 Linear regression and perceptrons were first described in
@@ -8418,7 +8507,7 @@ linear autoencoder was shown to be equivalent to principal
 component analysis as well as its probabilistic variant.
 
 The author went on to describing their deeper, nonlinear
-versions which are a multi-layer perceptron in the case of
+versions which are a multilayer perceptron in the case of
 supervised models, and a deep autoencoder in the case of
 unsupervised models. Especially, the thesis focused mainly
 on autoencoders. The autoencoder was interpreted as
@@ -8450,7 +8539,7 @@ belief network was described as a combination of an RBM and
 a deep autoencoder with stochastic units.
 
 At the end of the thesis, the author has explained a recently
-introduced method of pretraining a deep multi-layer
+introduced method of pretraining a deep multilayer
 perceptron. This method of pretraining, called layer-wise
 pretraining, is analyzed from two different viewpoints.
 Firstly, the fact that some variants of autoencoders capture
@@ -8479,7 +8568,7 @@ samples without labels, and then the second part makes a
 decision based on the inferred posterior distribution given
 a sample, on which class the sample belongs to. For example,
 a forward pass computation up until the penultimate layer of
-a multi-layer perceptron (MLP, see Section~\ref{sec:mlp})
+a multilayer perceptron (MLP, see Section~\ref{sec:mlp})
 would correspond to performing an approximate inference, and the
 computation from the penultimate layer to the output layer
 to decision-making.
@@ -8506,19 +8595,23 @@ this with a parametric nonlinear function that computes
 %$\E_{\tilde{p}}\left[ \vx_m \mid \vx_o \right]$ 
 in a single sweep.
 
-Assuming a simple, unimodal distribution $p(\vx_m \mid
-\vh)$, one consequence of this approximation is that the
+One consequence of 
+assuming a simple, unimodal distribution $p(\vx_m \mid \vh)$, 
+is that the
 approximate predictive distribution $\tilde{p}(\vx_m \mid
 \vx_o)$ loses most of the information in the true predictive
-distribution $p(\vx_m \mid \vx_o)$. It is natural since
-$\tilde{p}(\vx_m \mid \vx_o)$ is unimodal, while the true
+distribution $p(\vx_m \mid \vx_o)$. This is due to the
+unimodality of 
+$\tilde{p}(\vx_m \mid \vx_o)$ 
+%is unimodal, 
+while the true
 predictive distribution could have many probabilistic modes.
 
 The inherent limitations of this approximate approach
-employed by deep neural networks are obvious\footnote{Note
+employed by deep neural networks are obvious.\footnote{Note
 that the discussion in this section has been highly
 motivated and influenced by Section 5 of
-\citep{Bengio2013future}.}. There is no guarantee that the
+\citep{Bengio2013future}.} There is no guarantee that the
 parametric form employed by a deep neural network of an
 approximate posterior distribution $Q$ is good enough to
 make the above approximation close to the exact
@@ -8530,12 +8623,12 @@ only a single mode of the true posterior distribution, but
 we usually cannot tell how representative the found mode is.
 If the true posterior distribution is highly multi-modal,
 this approximation based on an arbitrary mode will be
-generally poor.  Lastly, it is not obvious how a deep neural
+generally poor.  Lastly, it is not clear how a deep neural
 network can cope with a more flexible setting where the
-observed components are not fixed a priori\footnote{In a
+observed components are not fixed a priori.\footnote{In a
 classical setting of, for instance, classification, we know
 in advance that label components are not going to be
-observed but all other components are.}. 
+observed but all other components are.}
 
 A way has been proposed to overcome each of these
 limitations. For instance, one may bypass the problem of
@@ -8582,10 +8675,10 @@ contained in a complex multi-modal predictive distribution
 must be maintained, just like a Boltzmann machine is able to
 learn a multi-modal distribution (see
 Chapter~\ref{chap:bm}). To the author's current knowledge,
-there is no such neural network at the moment\footnote{
+there is no such neural network at the moment.\footnote{
 A few recent works are showing some promising directions using
 stochastic neural networks \citet[see,
-e.g.,][]{Bengio2013gsn,Tang2013}.  }. It is, hence, left for
+e.g.,][]{Bengio2013gsn,Tang2013}.  } It is, hence, left for
 future research to build such a neural network that combines these
 two very different characteristics.
 
@@ -8623,7 +8716,7 @@ attempted to make these models deeper are presented.
 The models described so far in this thesis are fairly
 powerful in the sense that many of them have the universal
 approximator property. In Section~\ref{sec:mlp}, it was
-stated that a multi-layer perceptron has the universal
+stated that a multilayer perceptron has the universal
 approximator property, but no results about the other models
 were presented nor described. Thus, a list of previous
 research results which showed and proved the universal approximator
@@ -8643,7 +8736,7 @@ Throughout this thesis, there was no discussion on selecting
 hyper-parameters that are necessary for training a deep
 neural network. Section~\ref{sec:hyperopt} briefly describes
 a problem of hyper-parameter selection in one particular
-setting of pretraining and finetuning a multi-layer
+setting of pretraining and finetuning a multilayer
 perceptron, and introduces recently proposed
 hyper-parameter optimization approaches based on Bayesian
 optimization.
@@ -8745,7 +8838,7 @@ was proposed by \citet{Frey1999}.
 \label{sec:uap}
 
 In Section~\ref{sec:mlp}, it was mentioned that a
-multi-layer perceptron (MLP) with a single hidden layer has
+multilayer perceptron (MLP) with a single hidden layer has
 the universal approximator property provided that there are
 enough hidden units. %From this result on an MLP, 
 It is natural to question whether any other model
@@ -8768,7 +8861,7 @@ criterion by the model.
 \citet{Roux2008} and \citet{Freund1994}  proved that a
 restricted Boltzmann machine (RBM, see
 Section~\ref{sec:rbm}) has this property when any binary
-distribution is considered. This naturally extends to the
+distribution is considered. This extends to the
 fact that a deep Boltzmann machine (DBM, see
 Section~\ref{sec:dbm}) and a fully-connected Boltzmann
 machine are both universal approximator, since they are more
@@ -8793,11 +8886,13 @@ all MoGs can be modeled by GRBMs.
 One important reason that makes training a Boltzmann machine
 more difficult than, for instance, an autoencoder is that
 the exact computation of the cost function is intractable.
-This is an obvious consequence from having an intractable
+This is 
+%an obvious consequence from having 
+due to an intractable
 normalization constant in its formulation (see
-Eqs.~\eqref{eq:bm_prob}--\eqref{eq:bm_mll}). Also,
-except for restricted Boltzmann machines (RBM), it is
-intractable to marginalize hidden units.
+Eqs.~\eqref{eq:bm_prob}--\eqref{eq:bm_mll}). Furthermore, except
+for restricted Boltzmann machines (RBM), it is intractable to
+marginalize hidden units.
 
 \citet{Salakhutdinov2008a} proposed to first estimate the
 normalization constant using annealed importance sampling
@@ -8859,11 +8954,11 @@ hyper-parameters:
     \item Sparsity regularization constant
 \end{enumerate}
 Hence, if we use a denoising autoencoder to pretrain a deep
-multi-layer perceptron (MLP), this number of 
+multilayer perceptron (MLP), this number of 
 hyper-parameters is multiplied by the number of hidden layers
 in the MLP. Furthermore, there are 6 more hyper-parameters
-that need to be further tuned for finetuning by
-backpropagation:
+that need to be further tuned for finetuning: 
+% by backpropagation:
 \begin{enumerate}
     \itemsep 0em
     \item Noise variance
@@ -9009,7 +9104,7 @@ Machines}{Neural Computation}{Volume 25 Issue 3 Pages
 %\adderrata{This is wrong}
 % Add the publication pdf file, the filename is the
 % parameter (must be the last).
-\addpublicationpdf[scale=1.3,offset=0 0]{papers/Cho2013nc.pdf}
+%\addpublicationpdf[scale=1.3,offset=0 0]{papers/Cho2013nc.pdf}
 
 % Set the publication information.
 \def\reprintname{}
@@ -9021,7 +9116,7 @@ the 28th International Conference on Machine Learning (ICML 2011)}
 {June}{2011}{The authors}{Cho2011icml}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf{papers/Cho2011icml.pdf}
+%\addpublicationpdf{papers/Cho2011icml.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9032,7 +9127,7 @@ Conference on Neural Networks (IJCNN
 2010)}{pages 1--8}{July}{2010}{IEEE}{Cho2010ijcnn}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf{papers/Cho2010ijcnn.pdf}
+%\addpublicationpdf{papers/Cho2010ijcnn.pdf}
 
 \def\reprintname{Reprinted with kind permission of Springer
 Science+Business Media.}
@@ -9045,7 +9140,7 @@ Conference on Artificial Neural Networks (ICANN
 2012)}{pages 81--88}{September}{2012}{Springer Science+Business Media}{Cho2012icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf[scale=1.3,offset=0 -10]{papers/Cho2012icann.pdf}
+%\addpublicationpdf[scale=1.3,offset=0 -10]{papers/Cho2012icann.pdf}
 
 % Set the publication information.
 \addpublication[conference]{Kyunghyun Cho,
@@ -9057,7 +9152,7 @@ Conference on Artificial Neural Networks (ICANN
 Media}{Cho2011icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2011icann.pdf}
+%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2011icann.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9067,7 +9162,7 @@ Boltzmann Machines}{Proceedings of the 2013 International Joint Conference on Ne
 Networks (IJCNN 2013)}{}{August}{2013}{IEEE}{Cho2013ijcnn}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf{papers/Cho2013ijcnn.pdf}
+%\addpublicationpdf{papers/Cho2013ijcnn.pdf}
 
 % Set the publication information.
 \def\reprintname{Reprinted with kind permission of Springer
@@ -9080,7 +9175,7 @@ on Artificial Neural Networks (ICANN
 2013)}{}{September}{2013}{Springer Science+Business Media}{Cho2013icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013icann.pdf}
+%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013icann.pdf}
 
 \def\reprintname{}
 % Set the publication information.
@@ -9091,7 +9186,7 @@ Conference on Machine Learning (ICML
 2013)}{432--440}{June}{2013}{The authors}{Cho2013icml}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf{papers/Cho2013icml.pdf}
+%\addpublicationpdf{papers/Cho2013icml.pdf}
 
 % Set the publication information.
 \def\reprintname{Reprinted with kind permission of Springer
@@ -9103,7 +9198,7 @@ on Artificial Neural Networks (ICANN
 Media}{Cho2013icannA}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013iclr.pdf}
+%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013iclr.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9116,7 +9211,7 @@ Acoustics, Speech, and Signal Processing (ICASSP
 2013)}{}{May}{2013}{IEEE}{Cho2013icassp}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-\addpublicationpdf{papers/Cho2013icassp.pdf}
+%\addpublicationpdf{papers/Cho2013icassp.pdf}
 
 %% Set the publication information.
 %\addpublication[conference,submitted]{Kyunghyun
