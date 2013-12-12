@@ -234,7 +234,7 @@ on the context. For instance, $\phi$ is a Heaviside function
 (see Eq.~\eqref{eq:heaviside_func}) when used in a Hopfield
 network, but is a logistic sigmoid function (see
 Eq.~\eqref{eq:sigmoid}) in the case of Boltzmann machines.
-However, there should be no confusion, as its definition
+There should not be any confusion, as its definition
 will always be explicitly given at each usage.
 
 \section*{Probability and Distribution}
@@ -346,9 +346,9 @@ sign classification \citep{Ciresan2012c} have been shown to
 benefit from using a large, deep neural network.
 
 Although the recent surge of popularity stems from the
-breakthrough, involving a layer-wise pretraining, in 2006
-\citep{Hinton2006,Bengio2007nips,Ranzato2007}, research on
-artificial neural networks in general has begun as
+introduction of layer-wise pretraining proposed in 2006 by
+\citet{Hinton2006,Bengio2007nips,Ranzato2007}, research on
+artificial neural networks began as
 early as 1958 when \citet{Rosenblatt1958} proposed a
 perceptron learning algorithm. Since then, various kinds of
 artificial neural networks have been proposed. They include,
@@ -659,10 +659,11 @@ analysis (ICA\nomenclature{ICA}{Independent component analysis}), and the author
 that present the relationship between the ICA and the deep
 neural networks in Section~\ref{sec:ica_fa}.
 
-Although deep neural networks have shown extremely
-competitive performance in various machine learning tasks,
-the theoretical motivation for using them is still debated.
-At least, one well-founded theoretical property of most of
+%Although deep neural networks have shown extremely
+%competitive performance in various machine learning tasks,
+%the theoretical motivation for using them is still debated.
+%At least, 
+One well-founded theoretical property of most of
 deep neural networks discussed in this thesis is the
 universal approximator property, stating that a model with
 this property can approximate the target function, or
@@ -963,7 +964,8 @@ by multiplying $\vy = \left[y^{(1)}, y^{(2)}, \dots, y^{(N)}
 \right]^\top$ to a pseudo-inverse of $\mX^\top = \left[
 \vx^{(1)}, \vx^{(2)}, \dots, \vx^{(N)}\right]^\top$. 
 
-However, when there exists a regularization term, the
+%However, 
+When there exists a regularization term, the
 problem in Eq.~\eqref{eq:linreg_cost} may not
 have an analytical solution depending on the type of the
 regularization term. In this case, one must resort to
@@ -985,8 +987,9 @@ In this case, we still have an analytical solution
     \right)^{-1} \mX \vy.
 \end{align*}
 
-With other regularization terms, however, it is usual that
-there is no analytical solution.  For instance, the
+It is, however, usual with other regularization terms that there
+is no analytical solution.
+For instance, the
 \textit{least absolute shrinkage and selection operator}
 (lasso\nomenclature{lasso}{Least absolute shrinkage and selection
 operator}) \citep{Tibshirani1994} regularizes the
@@ -1114,11 +1117,10 @@ rule:
 This will converge to the correct solution as long as the
 given training set is linearly separable.
 
-Note that it is not necessary to use the Heaviside step
-function. It is possible to use any other nonlinear
-saturating function whose range is limited from above and
-below so that it can approximate the Heaviside function.
-One such example is a sigmoid function whose range is
+Note that it is possible to use any other nonlinear saturating
+function whose range is limited from above and below so that it
+can approximate the Heaviside function. One such example is a
+sigmoid function whose range is
 $\left[ 0, 1 \right]$:
 \begin{align}
     \label{eq:sigmoid}
@@ -1126,7 +1128,8 @@ $\left[ 0, 1 \right]$:
 \end{align}
 In this case, a given sample $\vx$ is classified positive if
 the output is greater than, or equal to, $0.5$, and
-otherwise as negative. Another possible choice is a
+otherwise as negative. 
+Another possible choice is a
 hyperbolic tangent function whose range is $\left[ -1, 1
 \right]$:
 \begin{align}
@@ -1208,7 +1211,8 @@ $\vh \in \RR^q$. This leads to
 \textit{latent variable models} in statistics \citep[see,
 e.g.,][]{Murphy2012}.
 
-However, this is not the only way to formulate an
+%However, 
+This is, however, not the only way to formulate an
 unsupervised model. Another way is to build a model that
 learns direct relationships among the input components $x_1,
 \dots, x_p$. This does not require any hidden variable, but
@@ -1218,18 +1222,21 @@ still learns an (unknown) structure of the model.
 \subsection{Linear Autoencoder and Principal Component Analysis}
 \label{sec:linear_autoencoder}
 
-Firstly, we look at the case where hidden variables are
-assumed to have generated training samples. In this case, it
-is desirable to learn not only an unknown function $f$, but
-also another function $g$ which is an inverse function of
-$f$. Opposite to $f$, the inverse function $g$ recognizes a
+%Firstly, 
+In this section, we look at the case where hidden variables are
+assumed to have linearly generated training samples. In this case, it
+is desirable for us to learn not only an unknown function $f$, but
+also another function $g$ that is an (approximate) inverse function of
+$f$. Opposite to $f$, $g$ recognizes a
 given sample by finding a corresponding state of the hidden
 variables.\footnote{Note that it is not necessary for $g$ to
 be an explicit function. In some models such as sparse
 coding in Section~\ref{sec:sparse_coding}, $g$ may be defined
 implicitly.}
 
-Let us start by constructing a neural network with linear
+Let us 
+%start by 
+construct a neural network with linear
 units. There are as many input units as $p$ corresponding to
 components of an input vector, denoted by $\vx$, and $q$
 linear units that correspond to the hidden variables,
@@ -1526,12 +1533,11 @@ of, for instance, kernel functions and potentially even
 (some of) the training samples.} by $\TT$, that is, ${p(y \mid \vx,
 \TT)}$.
 
-With the estimated parameters $\tilde{\TT}$, the prediction
-of the output $\hat{y}$ given a new sample $\vx$ can be
-computed from the conditional distribution $p(y \mid
-\vx, \tilde{\TT})$. It is typical to use the mean of the
-distribution as a prediction and its variance as a
-confidence.
+The prediction of the output $\hat{y}$ given a new sample $\vx$
+can be computed from the conditional distribution $p(y \mid \vx,
+        \tilde{\TT})$ with the estimated parameters
+$\tilde{\TT}$. It is typical to use the mean of the distribution
+as a prediction and its variance as a confidence.
 
 \subsubsection{Linear Regression}
 
@@ -1834,13 +1840,13 @@ Furthermore, in \citep{Tipping1999}, it was shown that $\LL$
 is maximal when the $q$ \textit{largest} eigenvectors and
 eigenvalues of the data covariance were used.
 
-However, we are more interested in solving PCA using
-the expectation-maximization
+%However, 
+In this section, however, we are more interested in solving PCA
+using the expectation-maximization
 (EM\nomenclature{EM}{Expectation-Maximization}) algorithm
-\citep{Dempster1977}, which was proposed by
-\citet{Roweis1998}.  It will make the connection to the
-linear autoencoder introduced in
-Section~\ref{sec:linear_autoencoder} more clear.
+\citep{Dempster1977}, which was proposed by \citet{Roweis1998}.
+It will make the connection to the linear autoencoder introduced
+in Section~\ref{sec:linear_autoencoder} more clear.
 
 The EM algorithm is an iterative algorithm used to find a
 maximum-likelihood estimate when the probabilistic model
@@ -2117,7 +2123,7 @@ A straightforward requirement of a deep neural network
 follows from its name. A deep neural network is
 \textit{deep}. That is, it has
 multiple, usually more than three, layers of units.
-However, this does not fully characterize the deep neural
+This, however, does not fully characterize the deep neural
 networks we are interested in.
 
 In essence, we say that a neural network is deep 
@@ -2206,7 +2212,8 @@ as the distribution from which the training samples $\left\{
 \textit{unknown}, while the empirical cost $R_e(\TT)$
 can be in many cases exactly computed.
 
-However, there is another way to look at the empirical cost
+%However, 
+There is another way to look at the empirical cost
 function. Instead of considering a set of training samples
 as an initially \textit{given} fixed set, we may consider
 them as a sequence of sampled points from an unknown
@@ -2313,7 +2320,8 @@ Also, \citet{Le2011} compared the performances of various
 second-order optimization methods in training deep neural
 networks against the stochastic gradient descent.
 
-However, we will not further discuss on the stochastic
+%However, 
+We will not further discuss on the stochastic
 gradient method and its extensions, as they are out of the
 scope of this thesis.
 
@@ -2519,11 +2527,11 @@ hypercube, with an arbitrary small error.
 %models, an MLP is a directed \textit{acyclic} graph
 %\citep{Bondy2008}.
 
-This model is a typical example of a deep neural network
-that can be characterized by having \textit{multiple layers
-of trainable feedforward nonlinear hidden units}. This
-model trivially satisfies the two conditions for being a
-deep neural network.
+A multilayer perceptron described in this section is a typical
+example of a deep neural network that can be characterized by
+having \textit{multiple layers of trainable feedforward nonlinear
+hidden units}. This model trivially satisfies the two
+conditions for being a deep neural network.
 
 \subsection{Related, but Shallow Neural Networks}
 
@@ -2585,13 +2593,14 @@ $\tilde{D} = \left\{ \left( \phi(\vx^{(n)}), y^{(n)} \right)
 by comparing $\phi$ to the multiple intermediate layers of hidden
 units.
 
-However, instead of using an explicit transformation $\phi$,
-the kernel method uses a \textit{kernel} function $k(\cdot,
-\cdot)$ between two samples. This is justified by looking at
-a dual form of the objective function in
-Eq.~\eqref{eq:svm_primal} obtained by introducing Lagrangian
-multipliers $\valpha$.  In a dual form, the output $y$ of an
-unseen, test sample $\vx$ is written as
+%However, 
+The kernel method uses a \textit{kernel} function $k(\cdot,
+        \cdot)$ between two samples, instead of using an explicit
+transformation $\phi$.  This is justified by looking at a dual
+form of the objective function in Eq.~\eqref{eq:svm_primal}
+obtained by introducing Lagrangian multipliers $\valpha$.  In a
+dual form, the output $y$ of an unseen, test sample $\vx$ is
+written as
 \begin{align*}
     y = \phi \left( \sum_{n=1}^N \alpha_n y^{(n)}
     {\vx^{(n)}}^\top \vx + b \right),
@@ -2604,7 +2613,7 @@ $k(\vx^{(n)}, \vx)$.
 In fact, it is possible to build an equivalent MLP when a
 certain type of kernel function is used. For instance, an
 MLP equivalent to the SVM with the hyperbolic tangent kernel
-function (see Eq.~\eqref{eq:tanh})
+function %(see Eq.~\eqref{eq:tanh})
 \begin{align*}
     k(\vx, \vx') = \tanh(\beta_0 \vx^\top \vx' + \beta_1)
 \end{align*}
@@ -3003,7 +3012,8 @@ log-likelihood that corresponds to the negative sum of
 squared reconstruction error (see
 Eq.~\eqref{eq:autoencoder_cost}).
 
-However, this interpretation does neither provide an intuitive
+%However, 
+This interpretation, however, does neither provide an intuitive
 way of learning the parameters $\TT_f$ of the encoder $f$ nor
 tell us how latent representations should be designed.
 \citet{Vincent2010} argued that minimizing the reconstruction
@@ -3075,7 +3085,7 @@ Inference may be performed by generating a set of samples from
 the posterior distribution over binary hidden units 
 \citep{Neal1992} or by approximating the posterior distribution with a
 simpler distribution \citep[see, e.g.,][]{Saul1996,Jordan1999}.
-However, both approaches may easily become computational inefficient to
+Both approaches may easily become computational inefficient to
 be used in practice. 
 
 Instead, \citet{Hinton1995} proposed a wake-sleep algorithm, which is
@@ -3154,7 +3164,8 @@ a sample. The decoder and the generative parameters
 \textit{generate} a sample given the states of the hidden
 units.
 
-However, unlike the encoder in the autoencoder which
+%However, 
+Unlike the encoder in the autoencoder which
 computes the activation of each hidden unit
 \textit{deterministically}, the recognition of the sigmoid
 belief network computes the activation \textit{probability}
@@ -3288,7 +3299,7 @@ representation can be projected on the input space by
     -\frac{1}{2} \text{tr} (\mK^{-1} \mH \mH^\top) \right\}.
 \end{align*}
 
-However, it is not trivial to find the hidden representation
+It is not trivial, however, to find the hidden representation
 given a novel sample. One has to, again, resort to using an
 iterative optimization method, which usually is done
 simultaneously while the hyper-parameters are estimated.
@@ -3678,7 +3689,8 @@ For instance, the range of the encoder
 of a regular PCA, which does not have any regularization or
 constraint, is unrestricted and equals to $\RR^q$.
 
-However the inference procedure of sparse
+%However 
+The inference procedure of sparse
 coding, for instance, according to the constraint in
 Eq.~\eqref{eq:sp_const_orig}, maps an input $\vx \in \PP$ to
 $\QQ$ which includes only those points $\vh$ that satisfy 
@@ -3938,8 +3950,12 @@ $\vx + \epsilon$ in a small area surrounding $\vx$, defined
 by $\kappa$, will map almost exactly to $\vh$. This applies
 to $\vx'$ as well. 
 
-However, we should pay attention to a point $\bar{\vx}$ in
-an \textit{overlapping} area. For instance, a middle point
+%However, 
+A point $\bar{\vx}$ in an \textit{overlapping} area needs a
+closer observation.
+%We should pay attention to a point $\bar{\vx}$ in
+%an \textit{overlapping} area. 
+For instance, a middle point
 $\bar{\vx} = \frac{\vx + \vx'}{2}$ between $\vx$ and $\vx'$
 will neither be reconstructed exactly to $\vx$ nor $\vx'$.
 Instead, it will be reconstructed to be a point between
@@ -4381,16 +4397,18 @@ at a time (see Section~\ref{sec:stochastic_grad}).
 \subsection{How to Make Lower Layers Useful}
 \label{sec:bp_imp}
 
-However, it has been noticed by many researchers that it is not easy to
-train deep neural networks using plain stochastic
-gradient descent \citep[see, e.g.,][]{Bengio2007a}.
-Especially, neural networks with more than two intermediate
-layers of hidden units usually result in a worse
-generalization performance\footnote{By
+It has been observed that neural networks with more than two
+intermediate hidden layers trained using plain stochastic
+gradient descent often exhibit worse generalization performance\footnote{By
 \textit{generalization performance}, we refer to the
 performance of a trained model on an unseen, novel sample.
-} than those with only one or two intermediate layers
-\citep{Bengio2007nips}.
+}
+than neural networks with only one or two intermediate layers
+\citep[see, e.g.][]{Bengio2007a}. This is surprising, as we
+expect a larger model with more parameters to have a higher
+modeling capacity and thus result in better performance. In this
+section, we discuss some of the hypothese explaining this
+surprising phenomenon.
 
 One important hypothesis explaining the underlying
 reasons for this phenomenon was proposed by
@@ -4456,7 +4474,8 @@ called \textit{second neural network renaissance}
 \citep{Schmidhuber2011}.  We will discuss in more detail this
 approach in Chapter~\ref{chap:pretraining}.
 
-However, the hypothesis by \citet{Bengio2007nips} is not the only
+%However, 
+The hypothesis by \citet{Bengio2007nips} is not the only
 explanation available.  \citet{Martens2010} pointed out that
 another potential factor that makes it difficult to estimate the
 parameters of lower layers of a deep MLP, or a deep autoencoder
@@ -4508,12 +4527,13 @@ parameters to avoid being stuck in a poor
 local optimum or a plateau.
 
 %Before finishing this section, 
-However, one must be careful about making any definite conclusion
-on using a plain gradient descent approach. The underlying factor
-of the difficulty might simply be a lack of patience, and
-extremely longer training, potentially assisted by the recent
-advances in utilizing GPUs \citep{Raina2009}, might help avoiding
-the aforementioned problem.
+%However, 
+One must be careful about making any definite conclusion on using
+a plain gradient descent approach. The underlying factor of the
+difficulty might simply be a lack of patience, and extremely
+longer training, potentially assisted by the recent advances in
+utilizing GPUs \citep{Raina2009}, might help avoiding the
+aforementioned problem.
 
 Recently, for instance, \citet{Ciresan2012g} showed that a
 deep MLP trained with the plain stochastic gradient descent
@@ -4741,7 +4761,8 @@ is independent of the states of both $\vx$ and $\vh$:
     &= \exp\left\{ C \right\} Z(\TT).
 \end{align*}
 
-With this property in mind, we may now investigate a
+%With this property in mind, 
+We may now investigate a
 case where the states of some units are transformed. To make
 equations uncluttered, in this section, we do not
 distinguish between visible and hidden units, and use $\vx$
@@ -4799,8 +4820,9 @@ transformation is chosen to be other than the bit-flipping
 transformation, there are potentially infinitely many update
 directions available, as will be discussed later.
 
-With a given bit-flipping transformation $\vf$, we first
-\textit{transform} the Boltzmann machine according to
+We first
+\textit{transform} the Boltzmann machine with a given
+bit-flipping transformation $\vf$, according to
 Eqs.~\eqref{eq:bm_tilde_w}--\eqref{eq:bm_tilde_b}. The
 transformed model is \textit{updated} by one step of the
 stochastic gradient method, and then, is \textit{transformed
@@ -4949,9 +4971,10 @@ shifting transformation such that
 \citepub{Cho2013ijcnn}, also proposed independently the same
 transformation for Gaussian visible units.
 
-With the shifting transformation $\vbeta$, one can construct
-the equivalent Boltzmann machine with the following
-parameters
+One can construct
+the equivalent Boltzmann machine 
+given the shifting transformation $\vbeta$ 
+with the following parameters
 \begin{align*}
     \tilde{w}_{ij} &= w_{ij} \\
     \tilde{b}_i &= b_i + \sum_{j} w_{ij} \beta_j.
@@ -5413,10 +5436,11 @@ and introduce a proposal distribution $Q$ from which we can
 readily and efficiently sample.
 
 Let us define a transition probability $\T$ as
-\begin{align*}
+\begin{align}
+    \label{eq:trans}
     \T(\tilde{\vx} \mid \vx) = Q(\tilde{\vx}\mid \vx)
     \alpha(\tilde{\vx}, \vx),
-\end{align*}
+\end{align}
 where the acceptance probability $\alpha(\tilde{\vx}, \vx)$ is
 defined as
 \begin{align}
@@ -5458,9 +5482,9 @@ $\tilde{p}(\vx) = \tfrac{p^*(\vx)}{\int p^*(\vx') \dd{\vx'}}$.
     \end{algorithmic}
 \end{algorithm}
 
-With this, we can sample from the target
-distribution $\tilde{p}$ following the procedure described
-in Alg.~\ref{alg:mh}.
+We can sample from the target
+distribution $\tilde{p}$ With the transition operator in Eq.~\eqref{eq:trans}, 
+following the procedure described in Alg.~\ref{alg:mh}.
 %\begin{itemize}
 %    \itemsep 0em
 %    \item[(Proposal)] Sample $\vx'$ from $Q(\vx \mid
@@ -5471,10 +5495,10 @@ in Alg.~\ref{alg:mh}.
 %        (Reject) Otherwise, set $\vx_{\qt{t+1}} =
 %        \vx_{\qt{t}}$.
 %\end{itemize}
-With some mild assumptions on the proposal distribution $Q$,
-the distribution of $\vx_{\qt{t}}$ will converge to the target
+The distribution of $\vx_{\qt{t}}$ will converge to the target
 distribution $\tilde{p}(\vx)$ using the Metropolis-Hastings
-method.
+method
+with some mild assumptions on the proposal distribution $Q$,
 
 \subsubsection{Gibbs Sampling}
 \label{sec:gibbs}
@@ -5485,16 +5509,17 @@ of Boltzmann machines. Gibbs sampling can be derived by
 using the conditional distribution of a single component $k$
 given the state of all other components, denoted by $-k$, as
 the proposal distribution $Q$. That is,
-\begin{align*}
+\begin{align}
+    \label{eq:gibbs_prop}
     Q(\tilde{\vx} \mid \vx) = p(\vx_k \mid \vx_{-k}),
-\end{align*}
+\end{align}
 where $\tilde{\vx}_{-k} = \vx_{-k}$.
 This choice makes the acceptance probability $\alpha$ always
 one so that every sample is accepted.
 
-With this proposal distribution and the property of
-accepting always, the Gibbs sampling can be implemented
-simply by repeatedly collecting a new sample from
+With the proposal distribution in Eq.~\eqref{eq:gibbs_prop} and
+the property of accepting always, the Gibbs sampling can be
+implemented simply by repeatedly collecting a new sample from
 \begin{align*}
     \vx' = \left[ x_1, x_2, \cdots,
     x'_k, \cdots, x_p \right],
@@ -5508,38 +5533,34 @@ and $p$ is the dimensionality of $\vx$, while changing $k$
 in a predefined schedule. It is usual to simply cycle $k$
 through all the components sequentially.
 
-Because the conditional probability of each unit in a Boltzmann
-machine (Eq.~\eqref{eq:bm_cond}) is well defined and easily
-evaluated, it is natural to use Gibbs sampling to evaluate the
+It is straightforward to use Gibbs sampling to evaluate the
 statistics of the distributions $p(\vh \mid \vx, \TT)$ and
-$p(\vx, \vh \mid \TT)$. 
-%Using the
-%Gibbs sampling, it is now possible to estimate, for
-%instance, the gradient in Eq.~\eqref{eq:bm_grad}.
+$p(\vx, \vh \mid \TT)$, because the conditional probability of
+each unit in a Boltzmann machine (Eq.~\eqref{eq:bm_cond}) is well
+defined and easily evaluated.
 
-However, this sampling-based approach, especially with the
-Gibbs sampling, may not be practical due to several reasons.
+This sampling-based approach, especially with the Gibbs sampling,
+however, may not be practical due to several reasons.
 Firstly, it is usually difficult, if not impossible, to
 determine the convergence of the Markov chain, which leaves
 collecting as many samples as possible the only option.
-Secondly, Gibbs sampling or any other
-Metropolis-Hastings method with a local proposal
-distribution in which each consecutive sampling steps can
-only make a local change, will require a large amount of
-steps to
-explore the whole distribution, especially when there are multiple modes
-in it. 
+Secondly, Gibbs sampling or any other Metropolis-Hastings
+method with a local proposal distribution in which each
+consecutive sampling steps can only make a local change,
+will require a large amount of steps to explore the whole
+distribution, especially when there are multiple modes in
+it. 
 
-The latter issue is especially prevalent when one tries to sample
-from the joint distribution $p(\vx, \vh \mid \TT)$.  The
-joint distribution, and consequently the marginal
-distribution of $\sum_{\vh} p(\vx, \vh \mid \TT)$, is after
-all optimized to have multiple modes that correspond to,
-for instance, different classes or clusters of a given
-training set. Unless the training set consists of samples
-from a unimodal distribution, the joint distribution $p(\vx,
-\vh \mid \TT)$ that models the training set well enough will
-always have more than one modes.
+The latter issue of requiring a large amount of steps is
+especially prevalent when one tries to sample from the joint
+distribution $p(\vx, \vh \mid \TT)$.  The joint distribution, and
+consequently the marginal distribution of $\sum_{\vh} p(\vx, \vh
+        \mid \TT)$, is after all optimized to have multiple modes
+that correspond to, for instance, different classes or clusters
+of a given training set. Unless the training set consists of
+samples from a unimodal distribution, the joint distribution
+$p(\vx, \vh \mid \TT)$ that models the training set well enough
+will always have more than one modes.
 
 
 %\subsubsection{Other than Gibbs Sampling: Parallel Tempering}
@@ -5811,9 +5832,9 @@ in this approach. The limitation comes from the unimodality
 of the fully factorized form of the approximate posterior
 distribution $Q$.
 
-Because all hidden units were assumed to be independent from
-each other, $Q$ can only have a single mode, unless
-$\mu_j=0.5$ for some $j$. If the distribution approximated
+$Q$ can only have a single mode, unless $\mu_j=0.5$ for some $j$,
+because all hidden units were assumed to be independent from
+each other. If the distribution approximated
 by $Q$ has more than one mode, due to the property of the
 KL-divergence and the order\footnote{Note that the order of
 $Q$ and $P$ matters when their KL-divergence is computed, as
@@ -5897,13 +5918,12 @@ hidden units conditioned on $\vx^{(n)}$. Then,
     \right| \TT^{\qt{t}}\right).
 \end{align*}
 
-However, the problem is with the second term $H_\infty$
-which
-requires running a Gibbs sampling chain until 
-convergence. For instance, let us assume that we collected a
-finite number $N_0$ of samples $\left\{ (\vx^{(1)},
-\vh^{(1)}), \dots, (\vx^{(N_0)}, \vh^{(N_0)}) \right\}$ from
-the model distribution using Gibbs sampling. Then, 
+The problem is with the second term $H_\infty$ which requires
+running a Gibbs sampling chain until convergence. For instance,
+let us assume that we collected a finite number $N_0$ of
+samples $\left\{ (\vx^{(1)}, \vh^{(1)}), \dots,
+(\vx^{(N_0)}, \vh^{(N_0)}) \right\}$ from the model
+distribution using Gibbs sampling. Then, 
 \begin{align*}
     H_\infty \approx \frac{1}{N_0} \sum_{n=1}^{N_0}
     h\left(\left.\vx^{(n)}, \vh^{(n)} \right| \TT^{\qt{t}}\right).
@@ -6272,9 +6292,10 @@ distribution which was replaced with the $N$
 training samples $\left\{ \vx^{(1)}, \dots,
 \vx^{(N)}\right\}$. 
 
-However, this property of an RBM that enables parallelized
+%However, 
+This property of an RBM that enables parallelized
 Gibbs sampling and exact computation of posterior
-distribution over hidden units do \textit{not} fully avoid
+distribution over hidden units, however, do \textit{not} fully avoid
 the difficulty in computing the second term of the gradient.
 Firstly, this efficient parallelized implementation does not
 overcome the fundamental weakness of Gibbs sampling that it
@@ -6447,7 +6468,8 @@ samples.
 
 With these interpolated distributions, \citet{Hinton2002}
 proposed a learning algorithm that minimizes a contrastive
-divergence, instead of maximizing the log-likelihood. The
+divergence, instead of maximizing the log-likelihood. 
+The
 $k$-step contrastive divergence
 (CD\nomenclature{CD}{Contrastive divergence}) is defined as a
 difference between $\KL(P_0 \| P_{\infty})$ and $\KL(P_k \|
@@ -6744,17 +6766,18 @@ the cross-entropy loss of a single-layer autoencoder with a
 single hidden layer of sigmoid hidden units.
 
 This result says that minimizing contrastive divergence is
-an extreme \textit{stochastic approximation} of maximizing
+an extreme \textit{stochastic} approximation of maximizing
 the marginal log-likelihood, while minimizing the
 reconstruction error or cross-entropy corresponds to a
-\textit{deterministic approximation}. Since the latter
+\textit{deterministic} approximation. Since the latter
 truncated one more term from the expansion, the latter
 %obviously 
 results in a more biased estimation, if we look at
 the resulting model as an RBM. 
 
-However, the objective function of an autoencoder, which is
-a negative reconstruction error, can be exactly and
+The objective function of an autoencoder, however,
+    %which is a negative reconstruction error, 
+    can be exactly and
 efficiently computed, while computing the marginal
 log-likelihood of an RBM is intractable. This makes it
 easier to learn parameters by minimizing the reconstruction
@@ -7338,10 +7361,10 @@ codes for documents \citep{Salakhutdinov2009s}.  Also,
 \citet{Salakhutdinov2007} showed that an RBM can be
 successfully used for collaborative filtering. 
 
-However, 
-    %obviously, 
-these unsupervised models cannot be used directly for performing
-any supervised task.  This is clear as none of these models have
+%obviously, 
+%However, 
+These unsupervised models cannot be used directly for performing
+any supervised task. This is clear as none of these models have
 at their disposal known outputs of training samples.
 
 As in the layer-wise pretraining discussed earlier in this
@@ -7888,7 +7911,8 @@ This guarantee of improving the variational lower bound
     \item RBMs are trained to maximize the log-likelihood.
 \end{enumerate}
 
-However, in practice, most of these conditions are violated. The weights
+%However, 
+In practice, most of these conditions are violated. The weights
 of the newly added RBM are often randomly initialized, and
 the probabilities rather than samples of the lower hidden
 units are used. Furthermore, in most cases due to the
@@ -7898,7 +7922,7 @@ contrastive divergence.
 \subsubsection{Stochastic Units vs. Deterministic Units}
 \label{sec:det_vs_sto}
 
-Let us discuss slightly more about using probabilities
+Let us discuss more about using probabilities
 instead of actual samples as training samples for training
 an upper RBM. This can be considered as using a different
 approximate posterior distribution $Q$.
@@ -7915,7 +7939,7 @@ across layers, but only mutually independent inside each
 layer given the sampled activations of the units in the
 lower layer.
 
-Because of this we obtain the variational parameters
+We can obtain the variational parameters
 $\vmu^{\qlay{l}}$ iteratively, starting from the first hidden
 layer by
 \begin{align}
@@ -7946,7 +7970,8 @@ Again, the approximate posterior distribution is defined by
 \tilde{Q}(\vh) = \prod_{l=1}^L \tilde{q}_{\tilde{\vmu}^{\qlay{l}}}\left(
 \vh^{\qlay{l}} \right)
 \]
-However, in this case we assume a \textit{fully}-factorized
+%However, 
+In this case we assume a \textit{fully}-factorized
 distribution. 
 
 To cope with this assumption, the procedure for computing
@@ -7961,8 +7986,8 @@ following formula:
 \end{align}
 
 One can immediately see that this is equivalent to the
-encoder part of a \textit{deterministic} autoencoder.
-However, the decoder part still differs from an autoencoder
+encoder part of a \textit{deterministic} autoencoder, 
+however the decoder part still differs from an autoencoder
 in the sense that it propagates down sampled activations,
 not the real-valued probabilities.  Roughly put, this
 difference can be understood so that the decoder of the
@@ -8582,8 +8607,7 @@ the states of the observed variables $\vx_o$:
     p(\vx_m \mid \vx_o) = \sum_{\vh} p(\vx_m \mid \vh) p(\vh
     \mid \vx_o).
 \end{align*}
-However, since this exact marginalization is often
-computationally intractable, a deep neural network replaces
+A deep neural network, however, replaces
 this with a parametric nonlinear function that computes
 \begin{align*}
    % p(\vx_m \mid \vx_o) \approx  
@@ -8593,7 +8617,8 @@ this with a parametric nonlinear function that computes
     \vh \right]
 \end{align*}
 %$\E_{\tilde{p}}\left[ \vx_m \mid \vx_o \right]$ 
-in a single sweep.
+in a single sweep, since this exact marginalization is often
+computationally intractable.
 
 One consequence of 
 assuming a simple, unimodal distribution $p(\vx_m \mid \vh)$, 
@@ -8639,13 +8664,13 @@ a restricted Boltzmann machine \citep{Mnih2011}. In this
 way, a deep neural network can learn to approximate a true
 predictive distribution $p(\vx_m \mid \vx_o)$ without going
 through an extra step of approximation in the middle.
-However, if the ultimate goal is to make a decision that
-maximizes the predictive performance, we still need to be
-able to evaluate either approximately or exactly the
-multi-modal predictive distribution quickly and well, which
-brings us back to one of the limitations of the current
-approach based on the approximate inference of hidden
-variables.
+
+If the ultimate goal is to make a decision that maximizes the
+predictive performance, we still need to be able to evaluate
+either approximately or exactly the multi-modal predictive
+distribution quickly and well. This brings us back to one of the
+limitations of the current approach based on the approximate
+inference of hidden variables.
 
 A Boltzmann machine provides a principled way to overcome
 the problem of having to use an approximate inference of the
@@ -8741,14 +8766,13 @@ perceptron, and introduces recently proposed
 hyper-parameter optimization approaches based on Bayesian
 optimization.
 
-This thesis is directed towards deep neural networks, but it must be
-reminded that not all models nor research directions have
-been covered. For instance, the entire text was written
-assuming that all training samples are independent and
-identically distributed, ignoring any temporal dependence.
-However, a recurrent neural network described in
-Section~\ref{sec:rnn_deep} is capable of learning temporal
-dependencies between samples.
+This thesis is directed towards deep neural networks, but it must
+be reminded that not all models nor research directions have been
+covered. For instance, the entire text was written assuming that
+all training samples are independent and identically distributed,
+ignoring any temporal dependence.  A recurrent neural network
+described in Section~\ref{sec:rnn_deep} is, however, capable
+of learning temporal dependencies between samples.
 
 Furthermore, it was implicitly assumed that a target task is
 permutation invariant, meaning that the structure of a deep
