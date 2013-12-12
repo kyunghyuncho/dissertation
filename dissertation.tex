@@ -461,12 +461,18 @@ equivalent to inferring the posterior distribution of hidden
 units under certain assumptions.
 
 Based on this preliminary knowledge on shallow neural
-networks, the author tries to loosely define two
-conditions which must be satisfied by a neural network to
+networks, the author discusses some 
+%tries to loosely define two
+conditions 
+%which must be 
+that are often satisfied by a neural network to
 be considered deep in
-Section~\ref{sec:deep_conditions}. These conditions will be
-evaluated for each deep neural network introduced in later
-chapters. The chapter ends by briefly describing how the
+Section~\ref{sec:deep_conditions}. 
+%These conditions will be
+%evaluated for each deep neural network introduced in later
+%chapters. 
+
+The chapter ends by briefly describing how the
 parameters of a neural network can be efficiently estimated
 by the stochastic gradient method.
 
@@ -521,9 +527,11 @@ The second family of deep neural networks considered in this
 dissertation consists of a Boltzmann machine and its
 structurally restricted variants. The author classifies the
 Boltzmann machines as deep neural networks based on the
-observation that any recurrent neural network with
-nonlinear hidden units is deep, satisfying the 
-conditions defined earlier.
+observation that Boltzmann machines are recurrent neural
+networks and that any recurrent neural network with
+nonlinear hidden units is deep.
+%, satisfying the 
+%conditions defined earlier.
 %(see Section~\ref{sec:rnn_deep}).
 
 The chapter proceeds by describing a general
@@ -832,11 +840,13 @@ probabilistic perspective will be useful later in
 interpreting a deep neural networks as a machine
 performing probabilistic inference and generation.
 
-At the end of this section, we introduce conditions
+At the end of this chapter, we 
+%introduce 
+discuss some conditions
 that distinguish deep neural networks from the simple neural
 networks introduced in the earlier part of this chapter.
-Those conditions will be used as a basis for constructing deep
-neural networks from the simpler, shallower neural networks.
+%Those conditions will be used as a basis for constructing deep
+%neural networks from the simpler, shallower neural networks.
 
 \section{Supervised Model}
 \label{sec:supervised_model}
@@ -952,9 +962,12 @@ $\left\{ u(\vx^{(n)}) \right\}$ with respect to $\vw$:
     \left(\vw, D\right),
 \end{align}
 where $\Omega$ and $\lambda$ are the regularization term and
-its strength. Regularization is an oft-used method for
-preventing an estimated model from overfitting to training
-samples.
+its strength. Regularization is a method for controlling the
+complexity of a model to prevent the model from overfitting
+to training samples.
+%an oft-used method for
+%preventing an estimated model from overfitting to training
+%samples.
 
 If we assume the case of no regularization ($\lambda = 0$),
 we can find the analytical solution of $\hat{\vw}$ by a
@@ -1507,7 +1520,8 @@ the readers to, for instance, \citep{Murphy2012,Barber2012,Bishop2006}.
 
 \subsection{Supervised Model}
 
-Let us start by looking at discriminative modeling from
+%Let us start by looking at
+Here we consider discriminative modeling from
 the probabilistic perspective. Again, we assume that a set
 $D$ of $N$ input/output pairs, as in
 Eq.~\eqref{eq:set_disc}, is given. The same model in
@@ -2115,19 +2129,19 @@ corresponding to input and output layers. A linear
 autoencoder or PCA consists of an input layer and a single
 hidden layer, considering that the input and the output
 layers of the linear autoencoder represent the same
-variable. Then we must ask ourselves: \textit{what must a
+variable. Then we must ask ourselves: \textit{what does a
 neural network satisfy in order to be called a \textbf{deep
 neural network}?}
 
 A straightforward requirement of a deep neural network
 follows from its name. A deep neural network is
-\textit{deep}. That is, it has
-multiple, usually more than three, layers of units.
-This, however, does not fully characterize the deep neural
-networks we are interested in.
+\textit{deep}. That is, it has multiple, usually more than
+three, layers of units.  This, however, does not fully
+characterize the deep neural networks we are interested in.
 
-In essence, we say that a neural network is deep 
-when the following two conditions are met \citep[see, e.g.,][]{Bengio2007a}:
+In essence, we often say that a neural network is deep when
+the following two conditions are met \citep[see,
+e.g.,][]{Bengio2007a}:
 \begin{enumerate}
     \itemsep 0em
     \item The network can be extended by adding layers consisting of multiple units.
@@ -2139,11 +2153,11 @@ From these conditions, it should be understood that there is
 no absolute number of layers that distinguishes deep neural
 networks from shallow ones. Rather, the depth of a deep
 neural network grows by a generic procedure of adding and
-training one
-or more layers, until it can properly perform a
+training one or more layers, until it can properly perform a
 target task with a given dataset. In other words,
-\textit{the data decide how many layers a deep neural network
-needs}.\footnote{Yoshua Bengio, personal communication}
+\textit{the data decide how many layers a deep neural
+network needs}.\footnote{Yoshua Bengio, personal
+communication}
 
 One important consequence of the first condition is that
 since the units in an added layer use the activations of the
@@ -2162,12 +2176,12 @@ unit in the added, upper layers.
 %network can benefit from generative modeling when, in fact,
 %the network will be used for classification.
 
-In the following chapters of this thesis, we will look at
-deep neural networks that have become widely used recently,
-and discuss how they satisfy these conditions given above.
-For each of those networks, the structure as well as
-learning algorithms to estimate its parameters will be
-presented and explained.
+%In the following chapters of this thesis, we will look at
+%deep neural networks that have become widely used recently,
+%and discuss how they satisfy these conditions given above.
+%For each of those networks, the structure as well as
+%learning algorithms to estimate its parameters will be
+%presented and explained.
 
 \section{Learning Parameters: Stochastic Gradient Method}
 \label{sec:stochastic_grad}
@@ -2364,18 +2378,18 @@ viewed.
 \section{Multilayer Perceptron}
 \label{sec:mlp}
 
-Let us start by extending the linear regression network and
-the
-perceptron introduced in Section~\ref{sec:supervised_model}.
-Based on the structures shown in Fig.~\ref{fig:linreg_net},
-we may add intermediate layers of nonlinear hidden units
-between the input and output units. A shallow, simple
-perceptron, for instance, can be extended to a deep neural
-network by adding multiple intermediate layers, and this
-deep neural network is often called a \textit{multilayer
-perceptron} (MLP\nomenclature{MLP}{Multilayer perceptron})
-\citep{Rosenblatt1962}. See
-Fig.~\ref{fig:mlp}(a) for an example of the neural network.
+Let us extend the linear regression network and
+the perceptron introduced in
+Section~\ref{sec:supervised_model}.  Based on the structures
+shown in Fig.~\ref{fig:linreg_net}, we may add intermediate
+layers of nonlinear hidden units between the input and
+output units. A shallow, simple perceptron, for instance,
+can be extended to a deep neural network by adding multiple
+intermediate layers, and this deep neural network is often
+called a \textit{multilayer perceptron}
+(MLP\nomenclature{MLP}{Multilayer perceptron})
+\citep{Rosenblatt1962}. See Fig.~\ref{fig:mlp}(a) for an
+example of the neural network.
 
 \begin{figure}[t]
     \begin{minipage}{0.48\textwidth}
@@ -2530,8 +2544,9 @@ hypercube, with an arbitrary small error.
 A multilayer perceptron described in this section is a typical
 example of a deep neural network that can be characterized by
 having \textit{multiple layers of trainable feedforward nonlinear
-hidden units}. This model trivially satisfies the two
-conditions for being a deep neural network.
+hidden units}. 
+%This model trivially satisfies the two
+%conditions for being a deep neural network.
 
 \subsection{Related, but Shallow Neural Networks}
 
@@ -2864,9 +2879,11 @@ may be measured by any suitable distance metric such as, for
 instance, a squared Euclidean distance or a cross-entropy
 loss in the case of binary inputs.
 
-We may call this a \textit{deep} autoencoder, as this
-network satisfies the conditions of being a deep neural
-network. The network can be further extended by employing
+We may call this a \textit{deep} autoencoder, as 
+%this
+%network satisfies the conditions of being a deep neural
+%network. 
+this network can be further extended by employing
 more intermediate hidden layers, and each and every layer is
 trainable.
 
@@ -4375,14 +4392,15 @@ for the illustration of the forward and backward passes.
     \label{fig:backprop}
 \end{figure}
 
-The gradient of each weight parameter relies only on the
-input and local gradient of the adjacent vertices. This
-implies that the backpropagation is \textit{not} limited to
-training a feedforward neural network, but may also be
-applied to a recurrent neural network with a slight
-modification (see Section~\ref{sec:rnn_deep} to see how a
-recurrent neural network can be \textit{unfolded} over time
-to become a deep feedforward neural network). 
+%The gradient of each weight parameter relies only on the
+%input and local gradient of the adjacent vertices. This
+%implies that the backpropagation is \textit{not} limited to
+%training a feedforward neural network, but may also be
+%applied to a recurrent neural network with a slight
+%modification.
+%(see Section~\ref{sec:rnn_deep} to see how a
+%recurrent neural network can be \textit{unfolded} over time
+%to become a deep feedforward neural network). 
 
 Here we showed how to compute the gradient using a single sample
 only, but it is possible to extend it to the case of multiple
@@ -4558,15 +4576,15 @@ to extend them without any additional hidden units. Hence,
 in this chapter, we discuss BMs that have hidden units in
 addition to the usual visible units.
 
-In this chapter, we start with a general
-description of a BM with hidden units. Then, we give  a
-brief explanation why any recurrent neural network with
-hidden units may be considered as a deep neural network
-\citep[see, e.g.,][]{Bengio2013rec}. This will provide a
-basis on which any Boltzmann machine, which is one
-particular type of recurrent neural networks, with hidden
-units is considered \textit{deep}. Afterwards, we discuss
-more about BMs with hidden units in depth.
+In this chapter, we start with a general description of a BM
+with hidden units. Then, we give  a brief explanation why
+any recurrent neural network with hidden units may be
+considered as a deep neural network \citep[see,
+e.g.,][]{Bengio2013rec}. This will provide a basis on which
+any Boltzmann machine, which is one particular type of
+recurrent neural networks, with hidden units is considered
+\textit{deep}. Afterwards, we discuss more about BMs with
+hidden units in depth.
 
 \section{Fully-Connected Boltzmann Machine}
 \label{sec:fbm}
@@ -5039,7 +5057,7 @@ hidden units are \textit{deep} neural networks.
 Deep}
 \label{sec:rnn_deep}
 
-Let us start with a simplified recurrent neural network
+Let us consider a simplified recurrent neural network
 consisting of an input layer, a single nonlinear hidden
 layer and a output layer. Each hidden layer receives signal
 from the hidden layer at the previous time $t-1$. The set
@@ -5132,9 +5150,10 @@ and this network shares the weights parameters of each
 layer.  See Fig.~\ref{fig:rnn}(b) for the structure of this
 unfolded network.
 
-This unfolded recurrent neural network satisfies, like a
-plain MLP, the two conditions described in
-Section~\ref{sec:deep_conditions} in a non-trivial way. 
+This unfolded recurrent neural network is deep, since it satisfies
+%, like a plain MLP, 
+the two conditions described in
+Section~\ref{sec:deep_conditions}. % in a non-trivial way. 
 
 First, the network can be easily extended, just like an MLP,
 by adding one or more hidden layers. However, in the case of
@@ -5143,18 +5162,6 @@ each layer instead of the number of layers, when viewed as
 the time-unfolded network. This is an obvious consequence
 from the fact that potentially the time-unfolded network
 already has infinitely many layers.
-
-%First, the network can be easily extended by simply
-%lengthening the training sequences. In fact, when the
-%network is given a novel sample, it can be used to predict
-%as long a sequence as one wants by continuing the
-%feedforward propagation. Though, this continued
-%feedforward propagation is not guaranteed to work well if
-%the number of time steps taken becomes larger than the
-%training sequences. However, it should be noticed that a
-%fully-visible Boltzmann machine does \textit{not} satisfy
-%this condition, as there is no layer having \textit{hidden}
-%units in the unfolded network.
 
 The second condition is trivially satisfied as each layer is
 parameterized. One can modify the backpropagation algorithm
@@ -5747,7 +5754,9 @@ approximation, which has already been discussed briefly
 earlier in Section~\ref{sec:autoencoder_vari}, can be
 applied to computing the statistics of a Boltzmann machine.
 
-Let us start by restating how the marginal log-likelihood in
+Let us 
+%start by 
+restate how the marginal log-likelihood in
 general can be decomposed into two terms, which was
 presented in Eqs.~\eqref{eq:mll_decom}--\eqref{eq:mll_post}:
 \begin{align}
@@ -6669,7 +6678,8 @@ the related approaches of deep autoencoders.
 \subsection{Restricted Boltzmann Machines and Autoencoders}
 \label{sec:rbm_aenc}
 
-Let us start with rather shallow models that have only a
+%Let us start with
+Here we consider rather shallow models that have only a
 single hidden layer consisting of nonlinear units, which are
 restricted Boltzmann machines and autoencoders with a single
 intermediate hidden layer. 
@@ -8830,9 +8840,10 @@ model where the visible variables are generated through
 multiple layers of nonlinear hidden units starting from the
 mutually independent top hidden units, or sources. They
 called this model Bayesian nonlinear independent component
-analysis. This qualifies as a deep neural network by
-satisfying the first two conditions provided in
-Section~\ref{sec:deep_conditions}.
+analysis. 
+%This qualifies as a deep neural network by
+%satisfying the first two conditions provided in
+%Section~\ref{sec:deep_conditions}.
 
 When put into a probabilistic framework, most of these
 generative models, including principal component analysis,
