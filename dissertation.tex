@@ -1199,14 +1199,14 @@ of classification.
 \section{Unsupervised Model}
 \label{sec:unsupervised_model}
 
-Unlike in supervised learning, we now consider a case where
-there is no target value. 
+Unlike in supervised learning, unsupervised learning
+considers a case where there is no target value. 
 %Hence, 
-The training set $D$ consists of
-only input vectors:
+In this case, the training set $D$ consists of only input
+vectors:
 \begin{align}
     \label{eq:unsup_train}
-D=\left\{ \vx^{(n)} \right\}_{n=1}^N.
+    D=\left\{ \vx^{(n)} \right\}_{n=1}^N.
 \end{align}
 
 Similarly to the supervised case, we may assume that each
@@ -1214,15 +1214,15 @@ $\vx$ in $D$ is a noisy observation of an unknown hidden
 variable such that
 \begin{align}
     \label{eq:lvm}
-    \vx = f(\vh) + \epsilon,
+    \vx = f(\vh). % + \epsilon,
 \end{align}
-where $\epsilon$ indicates noise. Whereas we aimed
+%where $\epsilon$ indicates noise. 
+Whereas we aimed
 to find the function or mapping $f$ given both input and
 output previously in supervised models, our aim here is to
 find both the unknown function $f$ and the hidden variables
-$\vh \in \RR^q$. This leads to 
-\textit{latent variable models} in statistics \citep[see,
-e.g.,][]{Murphy2012}.
+$\vh \in \RR^q$. This leads to \textit{latent variable
+models} in statistics \citep[see, e.g.,][]{Murphy2012}.
 
 %However, 
 This is, however, not the only way to formulate an
@@ -1395,11 +1395,11 @@ units only, and each visible unit is a \textit{nonlinear},
 \textit{deterministic} unit, following
 Eq.~\eqref{eq:nonlinear_unit1}, that corresponds to each
 component of an input vector $\vx$. We connect each pair of
-the units $x_i$ and $x_j$ with an undirected edge $e_{ij}$
-that has the weight $w_{ij}$, as in Fig.~\ref{fig:linae} (b).
-We add to each unit $x_i$ a bias term $b_i$. Furthermore, let us
-define an \textit{energy} of the constructed neural network
-as
+the binary units $x_i$ and $x_j$ with an undirected edge $e_{ij}$
+that has the weight $w_{ij}$, as in Fig.~\ref{fig:linae}
+(b).  We add to each unit $x_i$ a bias term $b_i$.
+Furthermore, let us define an \textit{energy} of the
+constructed neural network as
 \begin{align}
     \label{eq:hopfield_energy}
     -E(\vx \mid \TT) = \frac{1}{2} \sum_{i \neq j} w_{ij}
@@ -2216,7 +2216,7 @@ $R_e$ approximates the expected cost function
 \begin{align}
     \label{eq:slt_exp_cost}
     R(\TT) = \E_{\vx} \left[ L(\vx, \TT) \right] = \int
-    p(\vx) L(\vx, \TT) d\vx,
+    p(\vx) L(\vx, \TT) \dd{\vx},
 \end{align}
 where $p(\vx)$ is the probability of $\vx$ or the data
 distribution. %Clearly, 
@@ -2478,7 +2478,7 @@ the vector of hidden activations one layer below
 $\vh_{\qlay{l-1}} \in \left[ 0, 1\right]^p$ is transformed into
 $\vh_{\qlay{l}} \in \left[0, 1\right]^q$, if the sigmoid nonlinear
 activation function is used. Therefore, if we consider the
-composition compositeof the intermediate layers as a single nonlinear
+composition of the intermediate layers as a single nonlinear
 transformation, it can be said that the top layer performs a
 \textit{linear} regression, or classification, on the
 nonlinearly transformed dataset. 
@@ -3366,13 +3366,13 @@ approximate posterior distribution, or the distribution
 computed by the encoder of an autoencoder, is a factorized
 distribution. That is, the hidden units in the intermediate
 layer are mutually independent given the states of the
-visible units below. This is beneficial in the sense that the
-number of parameters required to express the (conditional)
-probability distribution over the hidden units in a single
-layer is reduced to $q-1$, where $q$ is the number of the
-hidden units. On the other hand, if they are \textit{not}
-independent from each other, it will require up to an exponential
-number of parameters.
+visible units below. This is beneficial in the sense that
+the number of parameters required to express the
+(conditional) probability distribution over the hidden units
+in a single layer is reduced to $q-1$, where $q$ is the
+number of the hidden units. On the other hand, if they are
+\textit{not} independent from each other, it will require up
+to an exponential number of parameters.
 
 This approximation, however, severely prevents possible
 competitions among the hidden units. For instance, the
@@ -4425,23 +4425,26 @@ than neural networks with only one or two intermediate layers
 \citep[see, e.g.][]{Bengio2007a}. This is surprising, as we
 expect a larger model with more parameters to have a higher
 modeling capacity and thus result in better performance. In this
-section, we discuss some of the hypothese explaining this
+section, we discuss some of the hypotheses explaining this
 surprising phenomenon.
 
-One important hypothesis explaining the underlying
-reasons for this phenomenon was proposed by
-\citet{Bengio2007nips}. According to this hypothesis, this
-difficulty may come from the fact that the parameters of the
-lower layers (closer to a layer with input units) are poorly
-estimated since \textit{the top three layers, consisting of
-the output layer and two last hidden layers, are capable
-enough of learning a given training set almost perfectly}.
-They essentially act as a deep neural network with a single
-intermediate hidden layer, which already has a universal
-approximator property, using the activation of the hidden
-units in the layer immediately below as an input. However,
-this capability of the top two layers does not translate to
-the performance of the neural network on unseen samples.
+One important hypothesis explaining the underlying reasons
+for this phenomenon was proposed by \citet{Bengio2007nips}.
+According to this hypothesis, this difficulty may come from
+the fact that the parameters of the lower layers (closer to
+a layer with input units) are 
+%poorly estimated 
+not well utilized
+since
+\textit{the top three layers, consisting of the output layer
+and two last hidden layers, are capable enough of learning a
+given training set almost perfectly}.  They essentially act
+as a deep neural network with a single intermediate hidden
+layer, which already has a universal approximator property,
+using the activation of the hidden units in the layer
+immediately below as an input. However, this capability of
+the top two layers does not translate to the performance of
+the neural network on unseen samples.
 
 In other words, training an MLP with stochastic gradient descent
 will simply adapt the parameters of the top layers to fit the
@@ -4994,7 +4997,7 @@ the equivalent Boltzmann machine
 given the shifting transformation $\vbeta$ 
 with the following parameters
 \begin{align*}
-    \tilde{w}_{ij} &= w_{ij} \\
+    \tilde{w}_{ij} &= w_{ij}, \\
     \tilde{b}_i &= b_i + \sum_{j} w_{ij} \beta_j.
 \end{align*}
 However, in this case, there are \textit{infinitely} many
@@ -9139,7 +9142,7 @@ Machines}{Neural Computation}{Volume 25 Issue 3 Pages
 %\adderrata{This is wrong}
 % Add the publication pdf file, the filename is the
 % parameter (must be the last).
-%\addpublicationpdf[scale=1.3,offset=0 0]{papers/Cho2013nc.pdf}
+\addpublicationpdf[scale=1.3,offset=0 0]{papers/Cho2013nc.pdf}
 
 % Set the publication information.
 \def\reprintname{}
@@ -9151,7 +9154,7 @@ the 28th International Conference on Machine Learning (ICML 2011)}
 {June}{2011}{The authors}{Cho2011icml}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf{papers/Cho2011icml.pdf}
+\addpublicationpdf{papers/Cho2011icml.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9162,7 +9165,7 @@ Conference on Neural Networks (IJCNN
 2010)}{pages 1--8}{July}{2010}{IEEE}{Cho2010ijcnn}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf{papers/Cho2010ijcnn.pdf}
+\addpublicationpdf{papers/Cho2010ijcnn.pdf}
 
 \def\reprintname{Reprinted with kind permission of Springer
 Science+Business Media.}
@@ -9175,7 +9178,7 @@ Conference on Artificial Neural Networks (ICANN
 2012)}{pages 81--88}{September}{2012}{Springer Science+Business Media}{Cho2012icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf[scale=1.3,offset=0 -10]{papers/Cho2012icann.pdf}
+\addpublicationpdf[scale=1.3,offset=0 -10]{papers/Cho2012icann.pdf}
 
 % Set the publication information.
 \addpublication[conference]{Kyunghyun Cho,
@@ -9187,7 +9190,7 @@ Conference on Artificial Neural Networks (ICANN
 Media}{Cho2011icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2011icann.pdf}
+\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2011icann.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9197,7 +9200,7 @@ Boltzmann Machines}{Proceedings of the 2013 International Joint Conference on Ne
 Networks (IJCNN 2013)}{}{August}{2013}{IEEE}{Cho2013ijcnn}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf{papers/Cho2013ijcnn.pdf}
+\addpublicationpdf{papers/Cho2013ijcnn.pdf}
 
 % Set the publication information.
 \def\reprintname{Reprinted with kind permission of Springer
@@ -9210,7 +9213,7 @@ on Artificial Neural Networks (ICANN
 2013)}{}{September}{2013}{Springer Science+Business Media}{Cho2013icann}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013icann.pdf}
+\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013icann.pdf}
 
 \def\reprintname{}
 % Set the publication information.
@@ -9221,7 +9224,7 @@ Conference on Machine Learning (ICML
 2013)}{432--440}{June}{2013}{The authors}{Cho2013icml}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf{papers/Cho2013icml.pdf}
+\addpublicationpdf{papers/Cho2013icml.pdf}
 
 % Set the publication information.
 \def\reprintname{Reprinted with kind permission of Springer
@@ -9233,7 +9236,7 @@ on Artificial Neural Networks (ICANN
 Media}{Cho2013icannA}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013iclr.pdf}
+\addpublicationpdf[scale=1.3,offset=0 -35]{papers/Cho2013iclr.pdf}
 
 \def\reprintname{Reprinted with permission.}
 % Set the publication information.
@@ -9246,7 +9249,7 @@ Acoustics, Speech, and Signal Processing (ICASSP
 2013)}{}{May}{2013}{IEEE}{Cho2013icassp}
 % No errata
 % Add the publication pdf file, the filename is the parameter.
-%\addpublicationpdf{papers/Cho2013icassp.pdf}
+\addpublicationpdf{papers/Cho2013icassp.pdf}
 
 %% Set the publication information.
 %\addpublication[conference,submitted]{Kyunghyun
