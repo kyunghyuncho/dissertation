@@ -1,0 +1,590 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+
+% Simpler bibsection for CV sections
+% (thanks to natbib for inspiration)
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newenvironment{bibsection}
+    {\minipage[t]{\linewidth}\list{}{%
+        \setlength{\leftmargin}{\bibhang}%
+        \setlength{\itemindent}{-\leftmargin}%
+        \setlength{\itemsep}{\bibsep}%
+        \setlength{\parsep}{\z@}%
+        }}
+    {\endlist\endminipage}
+\makeatother
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+%% This gives us fun enumeration environments. compactitem will be nice.
+\usepackage{paralist}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+%
+% Usage: \makeheading{name}
+%
+% Place at top of document. It should be the first thing.
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+%
+% Follow this section IMMEDIATELY with the first line of the section
+% text. Do not put whitespace in between. That is, do this:
+%
+%       \section{My Information}
+%       Here is my information.
+%
+% and NOT this:
+%
+%       \section{My Information}
+%
+%       Here is my information.
+%
+% Otherwise the top of the section header will not line up with the top
+% of the section. Of course, using a single comment character (%) on
+% empty lines allows for the function of the first example with the
+% readability of the second example.
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactitem}[#1]}{\end{compactitem}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+% 
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{KyungHyun Cho}
+
+\section{Contact Information}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{2in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+\href{http://ics.tkk.fi/en/}%
+     {Department of Information and Computer Science} & \\
+\href{http://www.aalto.fi/}{Aalto University}  \href{http://www.tkk.fi/}{School of Science} &  \\
+FI-02150 Espoo, Finland  & \textit{Phone:} +358 40 179 5220 \\
+\textit{Homepage:} http://users.ics.tkk.fi/kcho/ & \textit{E-mail:}
+\href{mailto:kyunghyun.cho@aalto.fi}{kyunghyun.cho@aalto.fi}\\
+\end{tabular}
+
+\section{Citizenship}
+%
+Republic of Korea
+
+%\section{Research Interests}
+%%
+%\textbf{Deep Learnings}
+%\begin{innerlist}
+%\item Boltzmann machine-based approach for deep neural
+%    architectures.
+%\item Complex Bayesian networks and Markov random fields.
+%\end{innerlist}
+%~\\
+%\textbf{Machine Learning Applications}
+%\begin{innerlist}
+%\item Computer vision and natural image processing.
+%\item Advanced robotics.
+%\item Bioinformatics and neuroinformatics.
+%\end{innerlist}
+
+\section{Education}
+%
+\href{http://www.tkk.fi/}{\textbf{Aalto University School of Science}},
+Finland
+\begin{outerlist}
+
+\item[] M.Sc. with distinction (GPA: 4.68/5, Thesis: 5/5),
+        \href{http://ics.tkk.fi/}, April 2011
+        \begin{innerlist}
+        \item Thesis: Improved Learning Methods for
+            Restricted Boltzmann Machines.
+        \item Programme: Master's programme in machine learning and data mining.
+        \end{innerlist}
+\end {outerlist}
+
+\blankline
+
+\href{http://www.kaist.ac.kr/}{\textbf{Korea Advanced Institute of Science and Technology}},
+Korea
+\begin{outerlist}
+
+\item[] B.S. (GPA: 3.25/4.3, Final-year GPA: 3.75/4.3),
+        \href{http://cs.kaist.ac.kr}
+             {Computer Science}, August 2009
+\end{outerlist}
+
+\blankline
+
+\href{http://www.unimelb.edu.au/}{\textbf{University of Melbourne}},
+Australia
+\begin{outerlist}
+
+\item[] Exchange student,
+        \href{http://www.csse.unimelb.edu.au} 
+             {Computer Science \& Software Engineering}, Fall 2003
+\end{outerlist}
+
+
+\section{Award}
+%
+\textbf{Humantech Thesis Prize}
+\begin{innerlist}
+\item Bronze Award, 2005
+\item Sponsored by Samsung Electronics.
+\item \textbf{Thesis} SDN: The Next Generation CDN Technology - On-demand Web-based Service Delivery
+%\item \textbf{Details} SDN is a Service Delivery Network which employs the on-demand computing and service delivery. A service is a set of web applications and data composing a web site. SDN allocates edge computing resources dynamically and delivers the Internet service provider’s service when the dedicated system becomes overloaded. SDN performs accurate load monitoring, hierarchical resource management, cost-oriented load distribution and service delivery.
+\end{innerlist}
+
+
+\section{Publication}
+%
+KyungHyun Cho, Tapani Raiko and Alexander Ilin.
+\textbf{Enhanced Gradient and Adaptive Learning Rate for Training
+Restricted Boltzmann Machines}.
+in the proceedings of the International Conference on
+Machine Learning (ICML 2011), Bellevue, Washington, USA,
+28 June-02 July, 2011. (to appear) \\
+~\\
+KyungHyun Cho, Alexander Ilin and Tapani Raiko.
+\textbf{Improved Learning of Gaussian-Bernoulli Restricted Boltzmann
+Machines}.
+in the proceedings of the International Conference on
+Artificial Neural Networks (ICANN 2011), Espoo, Finland,
+14-17 June, 2011. (to appear)\\
+~\\
+Tapani Raiko, KyungHyun Cho and Alexander Ilin.
+\textbf{Enhanced Gradient for Learning Boltzmann Machines}.
+The Learning Workshop 2011, Fort Lauderdale, Florida, USA, 13-16
+April, 2011. (Abstract only)\\
+~\\
+KyungHyun Cho, Tapani Raiko and Alexander Ilin.
+\textbf{Parallel Tempering is Efficient for Learning
+Restricted Boltzmann Machines}.
+in the proceedings of the International Joint Conference on
+Neural Networks (IJCNN 2010), Barcelona, Spain, 18-23 July,
+2010.
+
+
+\section{Patents}
+%
+\textbf{Apparatus and Method for automatically blocking spoofing by address resolution protocols}
+\begin{innerlist}
+\item Registered at The Korea Intellectual Property Office, 2007
+\item Registration No. 10-0863-3130000
+\end{innerlist}
+
+\blankline
+
+\textbf{Security device and Method using security input device}
+\begin{innerlist}
+\item Submitted at The Korea Intellectual Property Office, 2009
+\item Registration No. 10-2009-0039674
+\end{innerlist}
+
+
+\section{Academic Experience}
+\href{http://ics.tkk.fi}{\textbf{Aalto University}}, \\
+Department of Information and Computer Science, \\
+School of Science and Technology, Aalto University, Finland
+\begin{outerlist}
+\item[] \textit{Teaching Assistant}%
+    \hfill \textbf{September 2010 to December 2010}
+    \begin{innerlist}
+            \item \textbf{Course} Research Project in Information and Computer Science
+            \item \textbf{Responsibility} Organizing and coordinating the image segmentation competition.
+     \end{innerlist}
+
+\item[] \textit{Honours Programme}%
+    \hfill \textbf{September 2010 to April 2011}
+    \begin{innerlist}
+            \item Participating in research as a part-time research assistant
+            \item \textbf{Topic} Experimental study on Restricted Boltzmann Machine as a non-linear, unsupervised feature detector for enhancing the industry-related image segmentation performance. In-depth research on how to train Restricted Boltzmann Machine optimally.
+     \end{innerlist}
+
+\item[] \textit{Summer Internship}%
+    \hfill \textbf{June 2009 to August 2010}
+    \begin{innerlist}
+            \item Participated in research as a full-time research assistant
+            \item \textbf{Topic} Experimental study on Restricted Boltzmann Machine as a non-linear, unsupervised feature detector for enhancing the natural image classification performance.
+     \end{innerlist}
+
+\item[] \textit{Teaching Assistant}%
+    \hfill \textbf{January 2010 to May 2010}
+    \begin{innerlist}
+            \item \textbf{Course} Special Course in
+                Information and Computer Science $<$Deep
+                Learning for AI$>$
+            \item \textbf{Responsibility} Designing the term
+                project.
+     \end{innerlist}
+
+\item[] \textit{Honours Programme}%
+    \hfill \textbf{October 2009 to May 2010}
+    \begin{innerlist}
+            \item Participated in research as a part-time research assistant
+            \item \textbf{Topic} Experimental study on properties of learning algorithms for Restricted Boltzmann Machine which is a basic building block for the deep belief network using various advanced Bayesian probabilistic techniques including parallel tempered sampling.
+     \end{innerlist}
+
+\end{outerlist}
+
+\blankline
+
+\href{http://www.kaist.ac.kr}{\textbf{Korea Advanced Institute of Science and Technology}}, \\
+Department of Computer Science, \\
+College of Information Science and Technology, \\
+Korea Advanced Institute of Science and Technology, Korea
+\begin{outerlist}
+
+\item[] \textit{Undergraduate Researcher}
+        \hfill \textbf{February 2008 to May 2009}
+\begin{innerlist}
+\item \href{http://msc.kaist.ac.kr/}{Mechatronics, Systems and Control Lab.}
+\item \textbf{Supervisor} Professor Kyung-Soo Kim
+\item Participated in various projects requiring both software techniques and mechanical engineering skills.
+\end{innerlist}
+
+\item[] \textit{Undergraduate Researcher}
+        \hfill \textbf{March 2004 to November 2004}
+\begin{innerlist}
+\item \href{http://nclab.kaist.ac.kr/}{Network Computing Lab.}
+\item \textbf{Supervisor} Professor Junehwa Song
+\item Participated in the \href{http://nclab.kaist.ac.kr/sdn/}{project SDN (Service Delivery Network)}.
+%\item Designed the overall architecture of Service Delivery Network which is composed of multiple web application cache and multiple database cache. As designed, developed the prototypes for the SDN management server, the web application cache and database cache using Java and C++. Prototypes were developed fully.
+%\item \textbf{Thesis} SDN: The Next Generation CDN Technology – On-demand Web-based Service Delivery
+%\item \textbf{Award} Bronze award in Humantech thesis award.
+\end{innerlist}
+
+
+\end{outerlist}
+
+
+\section{Professional Experience}
+%
+\textbf{\href{http://www.zenrobotics.com/}{ZenRobotics Inc.}}, Finland
+\hfill \textbf{September 2010 to December 2010}
+\begin{outerlist}
+
+\item[] \textit{Part-time student researcher}%
+\begin{innerlist}
+\item Research on the image recognition using advanced machine learning methods.
+\item Survey on the robotics.
+\end{innerlist}
+
+\end{outerlist}
+
+\blankline
+
+%
+\textbf{\href{http://www.interactivy.com/}{Interactivy}}, Korea
+\hfill \textbf{July 2009 to August 2009}
+\begin{outerlist}
+
+\item[] \textit{Software engineer}%
+\begin{innerlist}
+\item Developed UPnP-based home media server for digital televisions.
+\end{innerlist}
+
+\end{outerlist}
+
+\blankline
+
+\textbf{\href{http://www.kabeon.com/}{Kabeon Co., Ltd.}}, Korea
+\hfill \textbf{December 2007 to January 2008}
+\begin{outerlist}
+
+\item[] \textit{Network software designer}%
+\begin{innerlist}
+\item Conceptualized the integration between IEEE 802.16e and IEEE 802.11.
+\item Developed a software simulator.
+\end{innerlist}
+
+\end{outerlist}
+
+
+\blankline
+
+\href{http://www.corecess.com/}{\textbf{Corecess Inc.}}, Korea
+\hfill \textbf{December 2004 to November 2007}
+\begin{outerlist}
+
+\item[] \textit{IP/Ethernet Switch/Router Software Engineer}
+
+    \begin{innerlist}
+    \item Web-based subscriber authentication for access
+        switches.
+    \item Developed a mechanism for preventing ARP spoofing.
+    \item Software platform migration from Linux 2.4 to
+        Linux 2.6.
+    \item Participated in developing and deploying GE-PON
+        and Gigabit DWDM-PON OLT/ONT.
+    \item Implemented IEEE 802.1X, PPPoE, L2TP and other
+        protocols.
+    \item Maintenance of IPv4 routing protocols based on IPI
+        ZebOS.
+    \end{innerlist}
+
+\end{outerlist}
+
+\blankline
+
+\textbf{\href{http://www.nexvi.com/}{Nexvi Inc.}}, Korea
+\hfill \textbf{September 2004 to November 2004}
+\begin{outerlist}
+
+\item[] \textit{Part-time software engineer}%
+\begin{innerlist}
+\item Developed a device driver and firmware for a banking
+    pin-pad.
+\end{innerlist}
+
+\end{outerlist}
+
+
+\section{Community service}
+%
+\textbf{\href{http://www.suomikorea.com/kosafi}{Korean Student Association in Finland}}, Finland
+\hfill \textbf{Since September 2009}
+\begin{outerlist}
+
+\item[] \textit{Chief Coordinator of External Affairs}%
+\begin{innerlist}
+\item From September 2010 to August 2011
+\end{innerlist}
+%
+%\item[] \textit{Official web site development for Korean Movie Day}%
+%\begin{innerlist}
+%\item \href{http://koreanmovie.dy.fi/}{Reservation site for Korean Movie Day}
+%\end{innerlist}
+%
+%\item[] \textit{Official web site administrator}%
+%\begin{innerlist}
+%\item Manage \href{http://www.suomikorea.com/kosafi}{Korean Students Association in Finland}.
+%\end{innerlist}
+%
+\end{outerlist}
+
+\blankline
+
+%
+\textbf{\href{http://www.worldvision.or.kr/}{WorldVision Korea}}, Korea
+\hfill \textbf{March 2007 to July 2007}
+\begin{outerlist}
+\item[] \textit{Volunteer translator}%
+%\begin{innerlist}
+%\item Translated letters between the sponsored children and their sponsors.
+%\end{innerlist}
+
+\end{outerlist}
+
+\blankline
+
+\section{Languages and Certificates}
+%
+\textbf{Test of English as a Foreign Language (TOEFL)}
+	\hfill \textbf{June 2010}
+\begin{innerlist}
+\item Issued by ETS
+\item Score: 112/120
+\end{innerlist}
+
+\blankline
+
+
+\textbf{Industrial Engineer Information Processing}
+	\hfill \textbf{June 2004}
+\begin{innerlist}
+\item Issued by Human Resources Development Service of Korea
+\item License no. 04202132384P
+\end{innerlist}
+
+%\section{Technical Skills}
+%%
+%Extensive software experience in embedded, networking and information technology. Further experiences in implementing machine learning algorithms using GPU computing.
+%
+%\blankline
+%
+%\textbf{Programming} C, C++, Java, C\#, Python, Perl, PHP, SQL, and others.
+%
+%\blankline
+%
+%\textbf{Mathematical tools} \textsc{Matlab}, Octave, R, and others.
+%
+%\blankline
+%
+%\textbf{Embedded software}
+%\begin{innerlist}
+%\item experiences with IBM PowerPC, ARM7 and other microprocessors.
+%\item experiences with special-purpose ASICs from Broadcom, Teknovus, Samsung and TI.
+%\item capable of porting Linux to embedded systems.
+%\end{innerlist}
+%
+%\blankline
+%
+%\textbf{Networking software}
+%\begin{innerlist}
+%\item experiences of implementing network protocols by IETF and IEEE.
+%\item experiences of using various network diagnosis tools.
+%\end{innerlist}
+%
+%\blankline
+%
+%\textbf{Client and web software}
+%\begin{innerlist}
+%\item Java and MS technologies for Windows-based client applications.
+%\item experiences of developing web applications using HTML, Javascript, PHP and ASP.
+%\item experiences of linking web applications and database systems such as MySQL, Oracle and MS-SQL.
+%\end{innerlist}
+%
+%\blankline
+%
+%
+%\textbf{Applications}: \LaTeX{}, Microsoft Office, and other common productivity packages.
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%

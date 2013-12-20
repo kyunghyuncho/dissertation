@@ -1,0 +1,336 @@
+% Use document class "aletter.cls" (for letters):
+\documentclass[11pt, oneside]{essay}
+
+% ISO 8859-1 character encoding is assumed
+\usepackage[finnish, english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{natbib}
+\usepackage{color}
+\usepackage{amsmath, amssymb}
+
+\newcommand{\tred}[1]{\textcolor{red}{#1}}
+
+\title{Research Plan}
+\author{KyungHyun Cho}
+
+\begin{document}
+
+\maketitle
+
+\section{Background: Deep Learning for Artificial
+Intelligence}
+
+Deep learning has gained its popularity recently as a way of
+learning complex and large probabilistic models \citep[see,
+e.g.,][]{Bengio2009a}.  Especially, deep neural networks
+such as a deep belief network (DBN) \citep{Hinton2006} and a
+deep Boltzmann machine (DBM) \citep{Salakhutdinov2009a} have
+been applied to various machine learning tasks with
+impressive improvements over conventional approaches such as
+support vector machines (SVM) and \emph{k}-nearest neighbors
+(kNN).  Examples include, but are not limited to,  
+handwritten digit classification
+\citep{Hinton2006,Salakhutdinov2009a}, semantic hashing
+for document clustering
+\citep{Hinton2006,Salakhutdinov2009s}, natural image
+classification
+\citep{Krizhevsky2009,Krizhevsky2010,Coates2010,Ranzato2010,Ranzato2010a}, and 
+speech/phone recognition \citep{Mohamed2010}.
+
+A learning algorithm for Boltzmann machine (BM) and its variants
+has been introduced already in 1985 by \citet{Ackley1985}.
+However, training Boltzmann machines was considered to be
+difficult due to its stochastic nature and the computational
+difficulty until recently. Although contrastive divergence
+(CD) learning proposed by \citet{Hinton2002} was considered
+a break-through that enabled learning a special-case of BM,
+called restricted Boltzmann machines (RBM), it is still
+generally accepted that learning even RBM is a difficult
+task \citep[see, e.g.,][for examples of poor training
+results of RBMs]{Schulz2010,Fischer2010,Desjardins2009}.
+
+%Despite the difficulty in learning, more and more
+%publications are made each year and introduce better
+%learning methods and different variants of deep models that
+%out-perform many other conventional machine learning models.
+
+Improving the learning algorithms for BMs and RBMs and
+proposing better deep models have been
+an area of active research in the recent years, evidenced by
+the increasing number of scientific publications.
+For instance, \citet{Lee2009} proposed building a
+convolutional deep belief network (cDBN) with a generative
+probabilistic pooling mechanism for hierarchical sparse
+representation of data. More recently, the use of
+rectified linear units instead of binary hidden neurons has
+been proposed by \citet{Nair2010} and was extended to deeper
+models such as deep sparse rectifier neural network
+\citep{Glorot2011} which is highly inspired by the actual
+mechanism of biological neurons. Also, \citet{Courville2011}
+proposed adding a slab unit to each hidden neuron to expand
+the representational power of RBMs to learn continuous data.
+Their experiments show that the proposed spike-and-slab RBMs
+outperform conventional forms of RBMs.
+
+\section{Research Plan}
+
+Main causes of the difficulties of training RBM which is a
+basic building block for constructing deep generative models
+are the bias introduced by the approximate gradient learning
+such as CD learning, the difficulty of choosing the right
+learning hyper-parameters such as learning rates, and the
+lack of invariance of the learning rules to the
+representation of data.
+
+Based on an advanced Markov-Chain Monte-Carlo sampling
+method called parallel tempering (PT), it is expected that
+learning BMs can overcome the problem of the approximate
+learning methods. With Gibbs sampling used in the learning
+algorithms replaced with PT sampling, BMs can learn better
+generative models without false probabilistic modes which
+are inevitable when the approximate learning method such as
+CD learning is used.
+
+A problem of choosing appropriate learning parameters while
+learning is that in most cases it is computationally
+infeasible to estimate the objective function of learning.
+In other words, it is not possible to determine whether the
+trained model by the chosen hyper-parameters is good or not.
+It is, however, possible to estimate it with minimal
+computational cost while learning by adapting the idea of
+simple importance sampling. Based on this estimated cost,
+any hyper-parameter including a learning rate can be chosen
+on-the-fly.
+
+A closer observation into the update rules of BMs and RBMs
+suggested that learning by the conventional update rules is
+easily distracted depending on the representation of data
+sets. Based on this observation, it is anticipated that a
+new set of update rules that takes geometrical property of
+the parameter space into account can be designed. It can be
+considered a more efficient alternative to using the
+second-order statistics directly.
+
+Once these methods are investigated and tested on a simple
+RBM with various data sets including MNIST handwritten
+digits \citep{Lecun1998} and Caltech 101 Silhouettes
+\citep{Marlin2010}. More research on extending the
+new learning algorithms to continuous data sets, for
+instance NORB stereo-version objection recognition
+\citep{Lecun2004} and CIFAR-10 natural image classification
+\citep{Krizhevsky2009} must be
+conducted.
+
+Applying the learning methods to RBM is only a beginning, as
+they must be able to work also for deeper, more complex
+models such as DBN and DBM.  The very first step is, then, to
+investigate the existing deep models carefully, both 
+theoretically and empirically. 
+
+Theoretical analysis requires me to mathematically
+investigate the learning and inference algorithms of the
+deep models, especially focusing on the conventional
+algorithms. On the other hand, I will implement the existing
+deep models and test them with various benchmark and real
+data sets to confirm what have been found by the theoretical
+analysis.  At the end of this stage, it is expected that
+ difficulties and their root causes in learning deep models will
+be determined.
+
+It is 
+expected that the new learning algorithms proposed for RBMs
+can be applied to more complex, deeper models with
+modifications that address the determined difficulties.
+However, there will be many research issues on designing and
+modifying learning algorithms due to the high complexity of
+the deep architectures.
+
+Furthermore, the existing deep models might turn out to be
+inappropriate or sub-optimal for learning wide ranges of
+data sets. In this case, new, better deep models must be
+proposed that can overcome problems of the existing ones,
+together with suitable learning algorithms.
+
+With the newly proposed architectures and learning
+algorithms, extensive experiments are required to validate
+them. Both carefully crafted synthetic data sets,
+benchmark data sets, and real-world data sets are to be
+tested on. Especially, the validation using the benchmark
+data sets are important, as they indicate the least
+usefulness and performance of the proposed models and
+algorithms.
+
+Finally, new applications of the proposed methods will be
+sought. Deep learning so far has mainly concentrated on
+rather simple benchmark problems, and
+unfortunately, this limitation of the experimental focus has
+hindered researchers from other fields to adopt deep models
+in their research. Thus, it is important for me as a
+researcher in deep learning to make a sample case for applying
+deep learning to other applications such as bioinformatics,
+neuroinformatics, and time-series analysis.
+
+%\subsubsection{Expected Research Outcome}
+%
+%Personally, the doctoral research will result in a number of
+%publications both in conferences in journals. Mainly, they
+%will cover the theoretical and experimental finding of yet
+%unknown properties of deep models, the proposals of new
+%models and improved learning algorithms, and the applications
+%of the newly proposed models. Also, the newly proposed
+%models and learning algorithms will be made publicly
+%available and promote the adaptation of deep learning by
+%researchers from various fields. 
+%
+%In the aspect of deep learning, it will potentially replace
+%and/or augment many conventional models used in various
+%fields. For instance, principal component analysis (PCA)
+%which is used frequently for dimensionality reduction can be
+%replaced by deep auto-encoder \citep{Hinton2006}. Deep
+%models can be used as learning better priors for
+%conventional shallow probabilistic models such as
+%independent component analysis (ICA) and factor analysis
+%(FA). 
+%
+%Ultimately, the research will enable both academic
+%researchers from other fields and professionals from various
+%industries to easily use deep learning for their need, such
+%as how FastICA \citep{Hyvarinen1999} enabled the wide-use of
+%independent component analysis (ICA) in research fields
+%ranging from neuroscience, image processing to climate
+%studies.
+
+\subsection{Research Schedule}
+
+\subsubsection{First Two Years: Sep. 2011 - May. 2012}
+
+\textbf{Research goals} It is expected that the improved
+learning algorithms proposed in the conferences and the
+thesis with their application to more general deep models
+will be weaved into a journal publication. The paper will
+include the improved learning methods such as the parallel
+tempering learning \citep{Cho2010}, the enhanced gradient,
+the adaptive learning rate \citep{Cho2011a}, and their
+extensions to continuous data \citep{Cho2011b} that have
+already been reported through conference proceedings as well
+as more theoretical explanation and experiments. Also, the
+application of the proposed algorithms to deep models will
+be included. The possible target journal is the Journal of
+Machine Learning Research where many seminal papers on deep
+learning have been published. I, with the instructors,
+expect to submit the paper by Dec. 2011.
+
+While preparing and submitting the journal paper, I will
+conduct more experiments from May 2011 to Dec. 2011 on deep
+Boltzmann machines (DBM) and convolutional DBMs in order to
+find root causes of difficulties in learning those models
+that prevent them from being widely used. Once those causes
+are determined, mathematically solid solutions including a
+change to the model architecture and the learning algorithms
+will be designed. It will lead to a number of papers in
+peer-reviewed conferences by the summer of 2012.  The Neural
+Information Processing Systems Foundation (NIPS) 2011, the
+International Conference on Machine Learning (ICML) 2012,
+the International Conference on Artificial Intelligence and
+Statistics (AISTATS) 2012 are main target conferences for
+reporting the proposed learning algorithms and experimental
+results.
+
+Deep learning requires heavy computation that usually takes
+from several hours to several weeks. Advanced computing
+capability is, thus, of extreme importance. While I will be
+conducting the main research on deep learning, it will be
+necessary for me to implement the experiment code into GPU
+computing and cluster-based super-computers. Implementing
+and optimizing the code for those special-purpose computing
+systems require extensive workload and time, but it is
+certain that research will gain huge momentum from using
+them. Once it is implemented and tested internally in the
+department and the group, it will be possible to make the
+implementation publicly available through the Internet
+during the spring of year 2012.
+
+\textbf{Study goals} The doctoral programme requires the
+student to complete 60 credits worth courses that are divided
+into three categories which are scientific principles,
+research field, and supplementary field. I plan to finish
+all required courses during the first three academic
+semesters (Sep. 2011 - Dec. 2012) in order to build up the
+fundamental knowledge in machine learning and dedicate
+himself to the research afterward. 
+
+\subsubsection{Later Years: Jun. 2012 - 2015}
+
+\textbf{Jun. 2012 - Nov. 2013} In order to follow recent
+research trend in deep learning, I will make two visits to
+research institutes abroad. The visits will serve two
+purposes; (1) widening my theoretical research by exchanging
+ideas on learning algorithms with other researchers, and (2)
+learning application tasks in which conventional machine
+learning models are not satisfactory. Please, refer to the
+attached mobility plan and invitation letters for the
+destinations and the detailed descriptions.
+
+\textbf{Dec. 2013 - May. 2014} As deep learning has been
+highly successful in computer vision and image analysis
+tasks, I will concentrate on specializing various deep
+models and learning algorithms for those tasks. It will
+require implementing and investigating convolutional deep
+neural networks and BMs with more general hidden variables,
+for example, spike-and-slab variables.
+
+Along the continuing research real data sets will be
+gathered in order to test newly proposed architectures and
+learning algorithms. ZenRobotics,
+Finland\footnote{http://www.zenrobotics.com/} is a
+technology company where I worked for half a year as a
+student researcher working on computer vision system in
+robotics. It will be possible for me to obtain real data
+sets that are actually used in practice to experiment the
+deep models and their learning algorithms.
+
+\textbf{Jun. 2014 - 2015} Based on research already done,
+the dissertation and journal papers that will report the new
+learning algorithms and applications will be prepared. The
+topic for the dissertation will be \emph{learning algorithms
+and applications of deep probabilistic models}. The
+dissertation defense is expected to take place between Dec.
+2014 to May. 2015, which will depend on the outcome from
+earlier years of the doctoral research.
+
+Future research direction will be also sought meanwhile in
+order to further my research continuously after doctoral
+degree.
+
+\section{Financial plan}
+
+Scholarship from Finnish Doctoral Programme of Computational Science
+(FICS) will be the top priority for funding my doctoral
+study, as it does not only cover the basic living expense,
+but possible research activities including the support for
+attending conferences and visiting research institutes
+abroad. As my doctoral research requires heavy collaboration
+with world-renowned institutes abroad, FICS is an ideal
+graduate school that can financially and academically
+support me. 
+
+Additionally to living and research expense from FICS, it is
+expected for me to apply for extra funding from other
+organizations such as Wihuri foundations for advanced
+computing equipments and other research-related expense,
+such as workstations equipped with latest graphical
+processing units that can significantly reduce the time
+required for running experiments. Also, I am ready for any
+funding possibilities that may help increase research
+efficiency.
+
+\small
+\bibliographystyle{research_plan}
+\bibliography{research_plan}
+
+
+
+
+
+\end{document}

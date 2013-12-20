@@ -1,0 +1,26 @@
+Title: Learning Algorithms and Applications of Deep Probabilistic Models
+
+Deep learning has gained its popularity recently as a way of learning complex and large probabilistic models. Especially, deep neural networks such as a deep belief network (DBN) and a deep Boltzmann machine (DBM) have been applied to various machine learning tasks with impressive improvements over conventional approaches such as support vector machines (SVM) and k-nearest neighbors (kNN).  The tasks range from handwritten digit classification, semantic hashing for document clustering, natural image classification, to speech/phone recognition.
+
+Although a learning algorithm for Boltzmann machine (BM) which is an essential part of deep learning was already proposed by Ackley et. al. in 1985, it is generally known that learning BM is difficult. The problems include easily diverging nature, difficulty in choosing appropriate learning hyper-parameters, and high computational complexity. In 2000s, new approximate learning methods such as contrastive divergence (CD) learning that try to address those problems have been proposed, and they were shown to work well in practice.
+
+Unfortunately, my research so far has revealed that this is not always the case. Even when CD learning, one of the most popular learning methods, is used, training Boltzmann machines easily resulted in undesirable models. The in-depth investigation so far has identified some root causes for this behavior, and they include the inefficiency of sampling methods and the lack of invariance property of the conventional gradient update rule.
+
+Parallel tempering (PT) learning is a learning method that replaces a simple Gibbs sampling method that is mainly used for many conventional BM learning methods such as CD learning and persistent CD learning. PT learning maintains multiple sampling chains with different temperatures and encourages mixing of samples from different modes of probability distribution, and it provides highly efficient sampling over Gibbs sampling. With my instructors, I was able to show that PT learning improves learning performance of restricted Boltzmann machines (RBM) which is a structurally-restricted version of BM. 
+
+The enhanced gradient is a new set of update rules that are invariant to the representation of data samples, unlike the conventional gradient. It was designed by myself and my instructors recently and was experimented on RBM successfully. Both learning speed and stability improved significantly over the conventional update rule. 
+
+Additionally, one of the most significant difficulties in learning deep models is how to choose the appropriate learning hyper-parameters such as learning rate. Since it is computationally infeasible to compute the normalizing constant and check the predictive capability of the trained deep models, the choice of learning hyper-parameters as well as checking the model's performance are not easy. However, I was able to again devise a mechanism that uses locally estimated likelihood of model to choose learning hyper-parameters on-the-fly, and it turned out to work well with RBM.
+
+All three proposed methods, however, have only been applied to RBM which is considered to be a basic building block for deep models. Hence, it is crucial for me to apply them to deeper, more complex models in order to see if deep learning can truly enjoy the improvements from the proposed methods.
+
+Deep models are inevitably expected to have more complicated difficulties than RBM has. For instance, the inference of laten variables which can be done exactly in case of RBM cannot be performed, but only be approximated due to multiple layers of latent variables. Also, the current architectures of the deep models including DBM might not be optimal for real-world data, and then, new architectures will necessarily be proposed.
+
+Finally, more realistic applications of deep learning must be sought. Research on deep learning so far has mainly focused on well-known machine learning tasks such as classification and dimensionality reduction. However, it is expected that more realistic and dynamic data-related tasks can be better handled with deep learning, and the search for those new applications will be conducted.
+
+
+Keywords: Deep Learning, Boltzmann Machine, Restricted Boltzmann Machine, Deep Boltzmann Machine, Parallel Tempering, Enhanced Gradient
+
+
+
+
