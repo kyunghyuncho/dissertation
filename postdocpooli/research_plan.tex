@@ -20,7 +20,7 @@
 \newcommand{\out}{\mathbf{y}}
 \newcommand{\gauss}{\mathbf{G_N}}
 \newcommand{\eye}{\mathbf{I}}
-\newcommand{\softmax}{\phi}
+\newcommand{\softmax}{\text{softmax}}
 \newcommand{\targ}{\mathbf{t}}
 \newcommand{\metric}{\mathbf{G}}
 \newcommand{\sample}{\mathbf{z}}
@@ -111,8 +111,7 @@
 \subsection{Statistical Machine Translation}
 
 
-\section{Neural Networks: Language Modeling to Statistical
-Machine Translation}
+\section{Neural Networks in Statistical Machine Translation}
 
 In this section, I briefly describe how neural networks may be
 applied to the task of statistical machine translation (SMT) by
@@ -132,10 +131,11 @@ conducted.
 Translation}
 
 A statistical machine translation (SMT) system may be described
-in a single equation:
-\begin{align*}
+in the following, single equation:
+\begin{align}
+    \label{eq:smt_fund}
     \vt^* = \argmax_{\vt} p(\vt \mid \vs),
-\end{align*}
+\end{align}
 where $\vs$ and $\vt$ are respectively the source and target
 sentences, and $\vt^*$ is the most likely target sentence which
 corresponds to the correct translated sentence under the SMT
@@ -144,10 +144,8 @@ inverse-translation probability and a language modeling using
 Bayes' rule such that
 \begin{align}
     \label{eq:smt}
-    \vt^* =& \argmax_{\vt} p(\vt \mid \vs) 
-    \nonumber
-    \\
-    =& \argmax_{\vt} p(\vs \mid \vt) p(\vt),
+    \vt^* = \argmax_{\vt} p(\vt \mid \vs) 
+    = \argmax_{\vt} p(\vs \mid \vt) p(\vt),
 \end{align}
 where $p(\vs \mid \vt)$ is the inverse-translation probability
 and $p(\vt)$ is the language model of the target language
@@ -156,14 +154,14 @@ and $p(\vt)$ is the language model of the target language
 In this probabilistic framework, the task of SMT is broken down
 into two parts; (1) inference and (2) learning. 
 
-Inference corresponds to the actual task of \textit{translating} a
+\textit{Inference} corresponds to the actual task of \textit{translating} a
 given sentence $\vs$ into a foreign sentence $\vt^*$. The best
 target sentence $\vt^*$ can be found by search for a pair
 $\left(\vs, \vt\right)$ that gives the highest
 \textit{probability} $p(\vt \mid \vs)$ given by the model in
 Eq.~\eqref{eq:smt}.
 
-Learning is used to actually \textit{learn} $p(\vt \mid \vs)$
+\textit{Learning} is used to \textit{estimate} $p(\vt \mid \vs)$
 from data.  Often, one uses separate models for the
 inverse-translation model $p(\vs \mid \vt)$ and the language
 model $p(\vt)$ and combines them as a log-linear model:
@@ -178,25 +176,168 @@ In this case, learning may be decomposed into learning the
 inverse-translation model, learning the language model and
 learning their weights.
 
-The inverse-translation model is conventionally implemented by a
-phrase-based approach \citep[see, e.g.,][]{Koehn2003,Marcu2002}.
-In the phrase-based approach, the inverse-translation probability
-is decomposed into the probabilities of short phrases:
-\begin{align*}
-    p(\vs \mid \vt) = \prod_{i=1}^{I} \phi(s_i \mid t_i) d(a_i -
+This approach based on the log-linear model in
+Eq.~\eqref{eq:loglinear} opens the possibility of integrating
+more features that are neither the inverse-translation model nor
+the language model. Given a pair of source and target sentences,
+one may use any other model or mechanism to compute a
+\textit{feature} that may be integrated into the log-linear
+model. Mathematically, this corresponds to generalizing $p(\vt
+\mid \vs)$ in Eq.~\eqref{eq:loglinear} into
+\begin{align}
+\label{eq:loglinear_general}
+    p(\vt \mid \vs) \propto \exp\left\{  
+    \sum_{m=1}^M \omega_m f_m(\vs, \vt)
+    \right\}, 
+\end{align}
+where $f_m$ and $\omega_m$ are the $m$-th feature function and
+its corresponding weight, respectively. The $M$ features include
+the inverse-translation model and the language modeling as well
+as any other user-defined features.
+
+In the remainder of this section, I introduce a number of
+recently proposed approachs for modeling the
+inverse-translation model and the language model.
+
+\subsection{Neural Networks for Inverse-Translation Model}
+
+The inverse-translation model in Eq.~\eqref{eq:loglinear} is
+conventionally implemented by a phrase-based approach \citep[see,
+e.g.,][]{Koehn2003,Marcu2002}.  In the
+phrase-based approach, the inverse-translation
+probability is decomposed into the probabilities
+of short phrases:
+\begin{align}
+\label{eq:phrase_decomp}
+    p(\vs \mid \vt) = \prod_{i=1}^{I} \phi(\vs_i \mid \vt_i) d(a_i -
     b_i -1),
-\end{align*}
-where $phi(s_i \mid t_i)$ and $d(a_i - b_i - 1)$ are the phrase
+\end{align}
+where $phi(\vs_i \mid \vt_i)$ and $d(a_i - b_i - 1)$ are the phrase
 translation probability and the reordering weight based on the
 start and the end of the $i$-th phrase of the source sentence
-$s_i$. Here, it is assumed that the sentence is decomposed into
+$\vs_i$. Here, it is assumed that the sentence is decomposed into
 $I$ phrases. Learning this model, thus, consists of (1) learning
 the phrase translation model and (2) deciding/learning the
-reordering model.
+reordering model.  
+
+Traditionally it is usual to implement the phrase translation
+model with a phrase pair table. The phrase pair table contains a
+list of all possible pairs of source and target phrases from data
+and their corresponding (smoothed) frequencies \citep[see,
+e.g.,][]{Koehn2003,Koehn2010}. 
+
+Neural networks, however, can be used to replace this
+frequency-based table. In the remainder of this section, I
+describe two approaches to the inverse-translation model based on
+neural networks.
+
+\subsubsection{Feedforward Neural Networks}
+
+In the phrase-based translation, it is often the case that most
+of the phrases, both source and target, are quite short (often,
+        less than $8$ words). Hence, it is possible to directly
+model the mapping from a source phrase to the corresponding
+target phrase assuming the maximum number of words per phrase.
+Learning this mapping corredponds to modeling the phrase
+translation probability $p(\vs_i \mid \vt_i)$ which is equivalent to
+a single term $\phi(s_i \mid t_i)$ in
+Eq.~\eqref{eq:phrase_decomp}.
+
+In \citep{Schwenk2012,Son2012}, an approach of learning the phrase
+pair table directly using a feedforward neural network was
+proposed and discussed in detail. \citet{Schwenk2012} assumes that
+each phrase consists of at most seven words and models the phrase
+translation probability by
+\begin{align}
+\label{eq:fftm}
+p(\vs_i \mid \vt_i) = \prod_{j=1}^M p(s_i^j \mid \vt_i) 
+                     = \prod_{j=1}^M \softmax\left( \mW_j^\top
+                             \phi \left( \sum_{k=1}^M \mU_k^\top
+                                 \mC^\top t_i^k  \right) \right),
+\end{align}
+where $\mW_j$ is the projection matrix for the $j$-th word of the
+source phrase $\vs_i$, and $\mU_k$ are the projection
+matrix for the embedding of the $k$-th word of the target phrase
+$\vt_i$. The embedding of each target word is defined as a row of
+the common embedding matrix $\mC$. $\phi$ is an element-wise
+nonlinear function used for computing the hidden representation
+of the target phrase. Each word $s_i^j$ or $t_i^j$ is represented
+as a one-hot vector.
+
+One important advantage of this inverse-translation model based
+on feedforward neural networks (FFTM) in Eq.~\eqref{eq:fftm} is
+that this model naturally generalizes to an unseen pair of source
+and target phrases. In the case of the table-based phrase
+translation model, one has to opt for heuristics such as
+smoothing techniques to be able to cope with those pairs that
+have \textit{zero} probability according to data. However, the
+FFTM which first projects the input phrase into a continuous
+space embedding automatically interpolates/extrapolates to unseen
+pairs.
+
+
+\subsubsection{Bilingual Word Embeddings}
+
+It should be noticed from the previous section on the
+inverse-translation model based on feedforward neural networks
+(FFTM) as well as the language modeling based on neural networks
+which will be discussed later in this section, that most neural
+networks-based approaches learn a continuous-space word embedding
+($\mC$ in Eq.~\eqref{eq:fftm}). The embedding maps each word,
+often represented by a one-hot vector, to a fixed-length
+vector (a row of $\mC$) in a contiuous space.  In this case,
+one can readily utilize the word embeddings (regardless of how
+they were learned) of source and target languages to
+estimate the probability of a pair of phrases. 
+
+\citet{Zou2013} proposed to learn the word embeddings of two
+languages (Chinese and English) by regularizing the linearly
+transformed embeddings of those languages $\mA_{c\to e} \mC_c$
+and $\mA{e\to c} \mC_e$ to be close to each other. The
+regularization term, called the translation equivalence
+objective, is defined as
+\begin{align}
+\label{eq:TEO}
+\left\| \mC_e - \mA_{c \to e} \mC_c \right\|^2_{\text{F}} + 
+\lambda \left\| \mC_c - \mA_{e \to c} \mC_e \right\|^2_{\text{F}},
+\end{align}
+where $\lambda$ is a constant that balances the two terms.
+
+Once the \textit{compatible} word embeddings are learned by, for
+instance, training FFTM in Eq.~\eqref{eq:fftm} together with the
+above regularization term in Eq.~\eqref{eq:TEO}, \citet{Zou2013}
+proposed to compute the embedding of a phrase by averaging the
+embeddings of the words in the phrase. Then, the phrase
+translation probability, or score, is defined by the distance
+between the embeddings of source and target phrases:
+\begin{align*}
+p(\vs_i \mid \vt_i) \propto \angle\left( \vc_s, \vc_t
+        \right),
+\end{align*}
+where $\vc_s$ and $\vc_t$ are respectively the embeddings of the
+source and target phrases, and the function $\angle()$
+computes the cosine distance between those embeddings.
+
+As was the case with the FFTM, this approach of learning
+bilingual word embeddings can generalize to unseen pairs of
+phrases, unlike the table-based inverse-translation model.
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Neural Networks for Language Modeling}
 
 There are rather diverse approaches to learning the language
 model. The most naive approach, called $n$-gram language model,
-assumes a $n$-th order Markov property and decomposes the
+assumes $n^{\text{th}}$-order Markov property and decomposes the
 language model $p(\vt)$ into
 \begin{align}
     \label{eq:ngram}
@@ -209,9 +350,10 @@ number of occurences of the $n$-gram.
 
 This $n$-gram approach is a \textit{discrete}-space approach in
 the sense that the $n$-gram model can be effectively represented
-by a table with a finite number of entries. Unfortunately, this
-approach is limited by the fact that as $n$ increase, the number
-of unseen $n$-grams increases, which affects the overall
+by a table with a finite number $O(k^n)$ of entries, where there
+are $k$ distinct words/symbols. Unfortunately, this approach is
+limited by the fact that as $n$ increase, the number of unseen
+$n$-grams increases exponentially, which affects the overall
 performance of SMT system relying on this language model badly. 
 
 Alternatively, one may resort to a continuous-space language
@@ -221,14 +363,12 @@ Eq.~\eqref{eq:ngram} with, for instance, a neural network
 then be able to interpolate and extrapolate to generalize to
 unseen $n$-grams. Furthermore, one can use a neural network that
 does not require the assumption of Markov property, such as
-recurrent neural networks (RNN) \citep{Rumelhart1986}. 
+recurrent neural networks (RNN) \citep{Rumelhart1986,Mikolov2010}. 
 
-In the next subsection, I describe a number of approaches to
+In this section I describe a number of approaches to
 language modeling based on neural networks. This approach based
 on neural networks is important, as it will constitute a basis on
 which my research goal will be conducted. 
-
-\subsection{Neural Networks for Language Modeling}
 
 \subsubsection{Feedforward Neural Network}
 
@@ -243,17 +383,18 @@ of the next word $t_l$.
 
 Mathematically, the $n$-gram model using a feedforward neural
 network can be written as, for instance, 
-\begin{align*}
-    p(t_l =t \mid t_{l-n}, \dots, t_{l-1}) = \text{softmax}
+\begin{align}
+\label{eq:fflm}
+    p(t_l =t \mid t_{l-n}, \dots, t_{l-1}) = \softmax
     \left( \mW^\top \tanh\left(\sum_{i=1}^n \mC^\top t_{l-i} +
     \vb\right) +\vc
     \right),
-\end{align*}
+\end{align}
 where $\mC$ is the word embedding matrix shared by all $n$
 previous words. $\vb$ and $\vc$ are bias vectors, and $\mW$ is
-the weight parameter.
-
-\tred{TODO}
+the weight parameter. Each word $t_l$ is represented by a
+so-called one-hot vector of which a single element corresponding
+to the word is set to $1$ while all other elements are $0$.
 
 \subsubsection{Recurrent Neural Networks}
 
@@ -290,23 +431,150 @@ which is an unfolded expression of the RNN given in
 Eqs.~\eqref{eq:dynamical_system_trans}--\eqref{eq:dynamical_system_out}
 \citep{Mikolov2010}.
 
-\tred{TODO}
+The transition model in Eq.~\eqref{eq:dynamical_system_trans} is
+often implemented as
+\begin{align}
+\label{eq:rnn_simple_trans}
+f_h(\vx_t, \vh_{t-1}) = \tanh\left( \mC^\top \vx_t + \mU^\top
+        \vh_{t-1}\right),
+\end{align}
+where $\mC$ and $\mU$ are the word embedding matrix (as in
+Eq.~\eqref{eq:fflm}). 
 
 
-\subsection{Neural Networks for Statistical Machine Translation}
 
-The language models based on neural networks, both feedforward
-and recurrent, have been found to improve the overal translation
-performance \tred{\citep{??,??,??}}. However, in the overall
-framework of statistical machine translation (SMT), the language
-model $p(\vt)$ constitutes only a small part (See
-Eq.~\eqref{eq:smt}). Effectively, the probability computed by the
-language model is just a single term in the score of a candiate,
-target sentence (See Eq.~\eqref{eq:loglinear}). 
 
-The widely used phrase-based translation system, for instance,
-rather puts more emphasis on building a phrase translation table,
-estimating phrase translation probabilities
+\section{Statistical Machine Translation based Purely on Neural Networks}
+
+The methods based on neural networks discussed in the previous
+section have been found to improve the overall translation
+performance. Those approaches, however, constitute only a certain
+part of a large statistical machine translation (SMT) system. For
+instance, the language model $p(\vt)$ is effectively a single
+term in the generalized log-linear model used to score a pair of
+source and target sentences in Eq.~\eqref{eq:loglinear_general}.
+Also, the inverse-translation models $p(\vs_i \mid \vt_i)$ are
+often used to only rescore/rerank the list of candidate phrase
+pairs, which again corresponds to another term in the generalized
+log-linear model.
+
+A large part of the SMT system that has not yet been addressed by
+neural networks is how to \textit{generate} a target sentence
+from, for instance, the generalized log-linear model. 
+
+In this section, I describe a potential approach to implementing
+SMT system purely based on a neural network that can directly
+generate multiple, correct target sentences. This approach will
+be the main theme of my research during the post-doctoral years
+at the University of Montreal.
+
+\subsection{Generative Model of a Language}
+
+Here let me first loosely define a generative model
+$\mathcal{M}_t$ that \textit{generates} a language $L_t=\left\{
+\vs_1, \vs_2, \dots \right\}$ which is a set of all possible,
+grammatically correct sentences. Then, the model $\mathcal{M}_t$
+is defined by a set of
+discrete \textit{concepts} $C = \left\{ c_1, c_2, ... \right\}$,
+the prior distribution $p(c_i)$ and 
+a set of the corresponding stochastic processes $P=\left\{
+\mathcal{LP}^t_{c_1}, \mathcal{LP}^t_{c_2}, \dots \right\}$.
+
+The model $\mathcal{M}_t$ generates the language $L_t$ by
+\begin{enumerate}
+\item Pick a concept $c$ from $C$ with a probability $p(c)$.
+\item Sample a sentence $\vs$ from $\mathcal{LP}^t_c$, i.e., $\vs \sim
+\mathcal{LP}^t_c$.
+\end{enumerate}
+
+The concepts in this generative model are \textit{independent} of
+an actual language. Linguistic features of the language such as
+grammatic structures and vocabularies are encoded in the
+conditional stochastic processes. In other words, the concepts
+may be shared by multiple languages, while the stochastic
+processes that actually generate sentences cannot be.
+
+In this perspective of languages, the task of statistical machine
+translation (SMT) corresponds to, first, infer the posterior
+distribution of the concept given a source sentence
+$p_{\mathcal{M}_s} (c \mid \vs)$, sample a concept $\hat{c}$ from
+the posterior distribution and generate a corresponding target
+sentence from $\mathcal{LP}^t_{c}$ of the target model
+$\mathcal{M}_t$. 
+
+The inference step corresponds to \textit{encoding} a given
+source sentence into a concept. The sampling step
+\textit{decodes} from the encoded concept a sentence in the
+target language. This encoder-decoder perspective makes it easy
+for us to design a neural network that can replace the whole
+SMT system, which will be described in more detail in the
+remainder of this section.
+
+\subsection{Encoder-Decoder Approach using Neural Operators}
+
+Here I propose a neural network architecture based on the
+generative model of languages. The proposed architecture consists
+of an \textit{encoder} and a \textit{decoder} that respectively
+infers the most likely concept of a source sentence and generates
+a target sentence given the inferred concept.
+
+Let me first define a set of operators that will be used to
+construct the proposed neural network architecture
+\citep[see, e.g.,][]{Pascanu2013}. 
+
+First, a \textit{plus} operator $\oplus: \RR^d \times \RR^d \to
+\RR^d$ is defined. The plus operator accepts two fixed-length
+vectors that represent an arbitrary embedding $\vh$ and a word
+embedding $\vt$, respectily, and returns the embedding $\vh'$
+that summarizes both $\vh$ and $\vt$. Secondly, I define an
+\textit{emit} operator $\lhd: \RR^d \times \RR^d \to \RR^d$ that
+outputs stochastically the \textit{first} word of a sentence
+given the summary of what have been emitted so far $\vh$ and the
+concept encoded by a fixed-length vector $\vz$.
+
+A neural network can be designed to mimic the inference-sampling
+procedure of the SMT system using the generative models
+$\mathcal{M}_s$ and $\mathcal{M}_t$ of source and target
+languages. 
+
+The inference/encoding step is then implemented as
+\begin{align}
+\label{eq:encoder}
+\vz = (\dots ((\vzero \oplus s_1) \oplus s_2) \oplus s_3) \oplus \dots
+\oplus s_L),
+\end{align}
+where $s_l$ is the $l$-th word of a source sentence $\vs$. The
+fixed-length vector $\vz$ which encodes the source sentence then
+can be considered a vector representation of the most likely
+concept.
+
+Given the concept encoded by $\vz$, a target sentence $\vt$ can
+be generated recursively by, at each timestep,
+\begin{align}
+\label{eq:decoder}
+t_l = \lhd \left(\vh_l, \vz\right), \\
+\vh_{l+1} = \vh_l \oplus, t_l,
+\end{align}
+where $\vh_0$ is initialized to zeros ($\vzero$). Each step of
+this recursion emits a single word and tracks what words have
+been emitted so far.
+
+Each operator is implemented by a deep neural network (DNN) which is
+known to be able to capture highly nonlinear mapping between the
+input and output \citep{Rumelhart1986}. This way of implementing
+the plus and emit operators as DNNs results in a deep recurrent
+neural network which was proposed recently by myself together
+with co-authors in \citep{Pascanu2013}.
+
+
+\subsection{Challenges}
+
+
+
+
+
+
+
 
 
 
