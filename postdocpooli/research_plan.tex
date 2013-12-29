@@ -51,6 +51,7 @@
 \newcommand{\vm}[0]{\vect{m}}
 \newcommand{\vu}[0]{\vect{u}}
 \newcommand{\vt}[0]{\vect{t}}
+\newcommand{\vz}[0]{\vect{z}}
 \newcommand{\vL}[0]{\vect{L}}
 \newcommand{\mW}[0]{\matr{W}}
 \newcommand{\mG}[0]{\matr{G}}
@@ -104,28 +105,14 @@
 
 
 
-\section{Background}
-
-\subsection{Deep Learning}
-
-\subsection{Statistical Machine Translation}
-
-
 \section{Neural Networks in Statistical Machine Translation}
 
-In this section, I briefly describe how neural networks may be
-applied to the task of statistical machine translation (SMT) by
-first starting with a probabilistic framework behind SMT. Then, I
+In this section, I describe how neural networks may be applied to
+the task of statistical machine translation (SMT) by first
+starting with a probabilistic framework behind SMT. Then, I
 introduce some earlier works that have applied neural networks to
 the task of language modeling which is an important component of
 the SMT system.
-
-At the end of this section, I propose and discuss a novel
-approach that attempts to replace the whole existing SMT
-framework with a new framework based purely on neural networks.
-This approach is the basis on which research during my
-post-doctoral years at the University of Montreal will be
-conducted.
 
 \subsection{Probabilistic Framework behind Statistical Machine
 Translation}
@@ -462,10 +449,10 @@ A large part of the SMT system that has not yet been addressed by
 neural networks is how to \textit{generate} a target sentence
 from, for instance, the generalized log-linear model. 
 
-In this section, I describe a potential approach to implementing
-SMT system purely based on a neural network that can directly
+In this section, I describe a novel approach to implementing SMT
+system purely based on a neural network that can directly
 generate multiple, correct target sentences. This approach will
-be the main theme of my research during the post-doctoral years
+be the main topic of my research during the post-doctoral years
 at the University of Montreal.
 
 \subsection{Generative Model of a Language}
@@ -512,11 +499,12 @@ remainder of this section.
 
 \subsection{Encoder-Decoder Approach using Neural Operators}
 
-Here I propose a neural network architecture based on the
-generative model of languages. The proposed architecture consists
-of an \textit{encoder} and a \textit{decoder} that respectively
-infers the most likely concept of a source sentence and generates
-a target sentence given the inferred concept.
+Here I propose a neural network architecture that performs both
+\textit{inference} and \textit{generation} in the generative
+model of languages described above.  The proposed architecture
+consists of an \textit{encoder} and a \textit{decoder} that
+respectively infers the most likely concept of a source sentence
+and generates a target sentence given the inferred concept.
 
 Let me first define a set of operators that will be used to
 construct the proposed neural network architecture
@@ -532,10 +520,10 @@ outputs stochastically the \textit{first} word of a sentence
 given the summary of what have been emitted so far $\vh$ and the
 concept encoded by a fixed-length vector $\vz$.
 
-A neural network can be designed to mimic the inference-sampling
-procedure of the SMT system using the generative models
-$\mathcal{M}_s$ and $\mathcal{M}_t$ of source and target
-languages. 
+A neural network can be designed to mimic the
+inference-generation procedure of the SMT system using the
+generative models $\mathcal{M}_s$ and $\mathcal{M}_t$ of source
+and target languages. 
 
 The inference/encoding step is then implemented as
 \begin{align}
@@ -549,25 +537,41 @@ can be considered a vector representation of the most likely
 concept.
 
 Given the concept encoded by $\vz$, a target sentence $\vt$ can
-be generated recursively by, at each timestep,
+be generated/sampled recursively by, at each timestep,
 \begin{align}
 \label{eq:decoder}
-t_l = \lhd \left(\vh_l, \vz\right), \\
-\vh_{l+1} = \vh_l \oplus, t_l,
+t_l = \lhd \left(\vh_l, \vz\right), \nonumber\\
+\vh_{l+1} = \vh_l \oplus t_l,
 \end{align}
 where $\vh_0$ is initialized to zeros ($\vzero$). Each step of
 this recursion emits a single word and tracks what words have
 been emitted so far.
 
-Each operator is implemented by a deep neural network (DNN) which is
-known to be able to capture highly nonlinear mapping between the
-input and output \citep{Rumelhart1986}. This way of implementing
-the plus and emit operators as DNNs results in a deep recurrent
-neural network which was proposed recently by myself together
-with co-authors in \citep{Pascanu2013}.
+Each operator is implemented by a deep neural network (DNN) which
+is known to be able to capture highly nonlinear mapping between
+the input and output \citep{Rumelhart1986}. This way of
+implementing the plus and emit operators as DNNs results in a
+deep recurrent neural network which was proposed recently by
+myself together with co-authors in \citep{Pascanu2013}.
+
+The main advantage of this approach is that one can readily
+translate a given sentence in one language to the other in a
+single sweep. The encoder will read all symbols sequentially from
+the begging to the end to summarize the sentence, and the decoder
+will generate sequentially a list of symbols that corresponds to
+the summary encoded by the encoder. In short, this approach
+implements the whole SMT system in a single neural network
+without any combinatorial search which may become exponentially
+expensive due to a large search space (a space of all possible
+sentences in a target language).
 
 
-\subsection{Challenges}
+\subsection{Challenges in Encoder-Decoder Approach for
+Machine Translation}
+
+This approach of having a single neural network that implements
+the encoder and the decoder is ideal once the neural network is
+well trained from data. 
 
 
 
