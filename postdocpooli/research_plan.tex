@@ -8,6 +8,8 @@
 \usepackage{natbib}
 \usepackage{color}
 \usepackage{amsmath, amssymb}
+\usepackage{graphicx} % more modern
+\usepackage[nottoc,numbib]{tocbibind}
 
 % shortcuts for math
 \newcommand{\hess}{\mathbf{H}}
@@ -92,20 +94,283 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-\title{Deep Learing for Statistical Machine Translation}
-\author{KyungHyun Cho}
+\title{Deep Learning for Statistical Machine Translation}
+\author{Kyunghyun Cho\thanks{Department of Information and
+    Computer Science, School of Science, Aalto University,
+             Finland}}
 
 \begin{document}
 
+\vspace{20mm}
+
 \maketitle
 
-\section{Introduction}
+\tableofcontents
+
+\vfill
+
+\newpage
+
+\section{Research Plan: Goals, Hosting Institution and Schedule}
+
+Lately deep neural networks have shown remarkable
+performances in various machine learning tasks. They
+include\footnote{For a more comprehensive list, see, for
+instance, \citep{Bengio2013pami}.}, but are not
+limited to, speech recognition \citep[see,
+e.g.,][]{Hinton2012sp,Dahl2012} and large-scale object
+recognition \citep[see, e.g.,][]{Krizhevsky2012,Hinton2012}
+as well as natural language processing \citep[see,
+e.g.,][]{Socher2011}. In these cases, deep neural networks
+were able to outperform the conventional models and
+algorithms significantly. The whole field, thanks to the recent
+surge of its popularity, has come to be called \textit{deep
+    learning}.\footnote{MIT Technological Review selected deep
+learning whose main focus is on deep neural networks as one of the ten breakthrough technologies in
+2013:
+http://www.technologyreview.com/featuredstory/513696/deep-learning/
+}
+
+Based on these advances in academic research, deep neural
+networks have rapidly found their way into commercial use
+through companies such as Google, Microsoft and Apple.  For
+instance, Google Goggles\footnote{
+http://www.google.fi/mobile/goggles/} uses a deep belief
+network in
+production.\footnote{See the invited talk \textit{Machine
+Learning in Google Goggles} by Hartmut Neven at the
+International Conference on Machine Learning 2011:
+http://techtalks.tv/talks/machine-learning-in-google-goggles/54457/}
+Microsoft has replaced the existing speech recognition
+algorithm based on Gaussian mixtures with one based on deep
+neural networks \citep{Deng2013}. Furthermore, the voice
+assistance feature of Apple's iPhone, called Siri, as well
+as Google's Street View are also known to utilize deep
+neural networks.\footnote{See the article \textit{Scientists
+See Promise in Deep-Learning Programs} by John Markoff
+featured in the New York Times on 23 November 2012: \\
+http://www.nytimes.com/2012/11/24/science/scientists-see-advances-in-deep-learning-a-part-of-artificial-intelligence.html
+}
+
+One important lesson from these recent breakthroughs and rapid
+adoptions of deep learning by the industry is that all components
+of a deep learning, or machine learning, system should be tuned
+jointly to optimize for the overall performance of the system. In
+object recognition, for instance, it has been usual, before the
+breakthrough made by deep learning, to build a system that
+consists of separate stages of feature extraction and
+classification/recognition. Often, the feature extraction was
+done by engineering a set of features using the domain knowledge
+of each task, without directly optimizing the final recognition
+performance. Only then with the extracted features, the
+recognizer was trained to maximize the recognition performance.
+On the other hand, the recently introduced deep neural networks,
+which outperformed most of the conventional approaches for
+object recognition, combines both the stages in a single
+architecture and jointly optimizes them together to maximize
+the final performance.
+
+Until now, the application that has benefited most from adopting
+the approach of deep learning has been the task of object/speech
+recognition. Recently, however, more and more applications are
+emerging and being found to benefit from employing deep neural
+networks. Deep neural networks have been applied to, for
+instance, bioinformatics \citep[see, e.g.,][]{Lena2012}, human
+gesture recognition \citep[see, e.g.,][]{Cho2014} and language
+modeling \citep[see, e.g.,][]{Mikolov2010,Bengio2003}.
+
+In my post-doctoral research years, I aim to further push the
+boundary of deep learning by proposing and studying a novel
+approach to solving the task of statistical machine translation
+(SMT) using deep neural networks. The conventional phrase-based
+SMT system \citep{Koehn2003,Marcu2002} consists of multiple
+stages that are often hand-engineered and separately tuned, just
+like the conventional object recognition system used to have at
+least two separate stages of feature extraction and recognition.
+\textbf{The goal of my post-doctoral research is to replace
+this conventional SMT system with a single model built with
+advanced neural networks, where the whole system is jointly
+tuned to maximize the final translation performance}.
+
+In the remainder of this section, I will first justify the choice
+of the Machine Learning Lab at the University of Montreal as an
+ideal place for conducting research on applying deep learning to
+the task of statistical machine translation. Then, a detailed
+schedule of my post-doctoral years will be given.
+
+After this section, I will describe some background materials on
+statistical machine translation (SMT) and how neural networks so
+far have been applied to the existing SMT systems in
+Sec.~\ref{sec:smt}. Based on this description, a novel approach to
+the SMT system based \textit{purely} on deep neural networks will
+be proposed in Sec.~\ref{sec:new_approach}.  Benefits from
+implementing this novel approach will be discussed, and
+potential challenges that need to be addressed during my
+post-doctoral research period will be described.
+
+\subsection{Machine Learning Lab at University of Montreal}
+
+Here let me briefly explain why the Machine Learning Lab
+(Laboratoire d'Informatique des Syst\`emes Adaptifs, LISA) at the
+University Montreal is an ideal place to conduct my research on
+applying deep learning to statistical machine translation (SMT).
+
+The LISA lab is the leading research lab led by Prof. Yoshua
+Bengio who is one of the leading researchers in the field of
+\textit{deep learning}. He has started his research on neural
+networks already from 1980s and has continued working on deep
+neural networks ever since. The LISA lab was one of three
+research groups who proposed the method of layer-wise pretraining
+for deep neural networks in 2006 and 2007 \citep{Bengio2007nips},
+which led to the so-called second neural network renaissance
+\citep{Schmidhuber2011}.
+
+As far as statistical machine translation (SMT) is concerned, Prof.
+Bengio is one of the pioneers who proposed to use a neural
+network to learn the language model (See Sec.~\ref{sec:nnlm}). In
+2003, Prof. Bengio proposed the first language modeling techinque
+based on feedforward neural network \citep{Bengio2003} and in
+2006 showed that it is possible to improve the existing speech
+recognition system by using this approach \citep{Bengio2006},
+together with Prof.  Holger Schwenk whose lab I am
+planning to make a visit to during my post-doctoral
+period.
+
+There are a number of active researchers in the LISA lab who have
+internationally-renowned expertise in building and training
+sophisticated neural networks, especially recurrent neural
+networks which will be the crucial component of the novel
+approach I am planning to pursue (See
+Sec.~\ref{sec:autoencoder}). Razvan Pascanu, M.Sc. has recently
+shown that it is possible to train a deep recurrent neural
+network to model long-term dependencies in long temporal
+sequences \citep{Pascanu2013}. Also, Caglar Gulcehre, M.Sc. who
+has deep knowledge on the difficulties of optimization problems
+in machine learning \citep{Gulcehre2013a} began
+collaborating with Pascanu and me on recurrent neural networks
+recently with already some successful publication
+\citep{Pascanu2013}. Prof. Bengio has also been active in
+research on recurrent neural networks \citep[see,
+e.g.,][]{Bengio2013rec}, where recurrent
+neural networks have been his main research topic
+already from early 1990s \citep[see,
+e.g.,][]{Bengio1994}.
+
+The LISA lab is actively collaborating with external researchers.
+The external collaborators\footnote{The list of external
+collaborators as well as the members of the LISA lab may be
+found at http://lisa.iro.umontreal.ca/who\_en.html.}
+include, for instance, Prof. Hal Daume III of the
+University of Maryland who is the internationally
+renowned expert on statistical natural language
+processing which is at the core of statistical machine
+translation. Dr. L\'eon Bottou of Microsoft Research has
+worked on applying advanced machine learning techniques
+to natural language processing.  Collaborations with
+these external researchers will be invaluable to my
+post-doctoral research.
+
+
+\subsection{Schedule}
+
+I plan to conduct my post-doctoral research at the Machine
+Learning Lab (LISA), University of Montreal to last two years
+starting from April, 2014 after the planned defense of my Ph.D.
+dissertation early March, 2015. 
+
+\textbf{Apr., 2014--Dec. 2014}: During the three quarters of the first
+year I will concentrate on exploring various neural network
+architectures to assess the feasibility of each design for the
+task of statistical machine translation (SMT). The work will mainly
+focus on using recurrent neural networks, but will not entirely
+be restricted to them. During this period I will focus more on
+developing novel architectures as well as designing a novel
+learning algorithm, which will make experiments run on a rather
+limited set of data such as the news commentary corpus from the
+Workshop on Machine Translation.
+
+I plan to report on findings from implementing these novel
+architectures to a number of conferences related to machine
+learning and natural language processing such as the
+international conference on machine learning (ICML), advances in
+neural information processing (NIPS) and the annual meeting of
+the association for computational linguistics (ACL). By attending
+these conferences and reporting my own work, potential for future
+collaboration, possibly continuing even after the post-doctoral
+period, will greatly increase.
+
+\textbf{Jan. 2015--Dec. 2015}: In 2015 I plan to implement the
+fully functional neural network that will replace the existing
+SMT system. In order to train this fully functional SMT system
+based on neural networks it is important to train the neural
+network with large datasets such as Europarl \citep{Koehn2005}
+and MultiUN \citep{Eisele2010} corpora. The scalability will
+inevitably become a big issue when training these large neural
+networks with even larger training corpora, which will be the
+central research theme of this period.
+
+Solving the issue of scalability will require work in both the
+design of the system as well as learning algorithms. Especially,
+I will focus my effort on building a scalable, parallel learning
+algorithm for recurrent neural networks that may be used to
+efficiently train the whole, proposed SMT system. 
+
+Again, research findings from this period will be reported to the
+research community, both deep learning and natural language
+processing, through a number of conference. Unlike the previous
+period, most of the findings will, however, be reported to
+conferences more focused on natural language processing and
+statistical machine translation during this period. Those
+conferences include ACL, the conference of the European chapter
+of the association for computational linguistics (EACL), the
+international conference on computational linguistics (COLING)
+and empirical methods in natural language processing (EMNLP). 
+
+\textbf{Jan. 2016--Mar. 2016}: I will mainly concentrate on
+making the underlying code of the implemented SMT system public.
+This will allow not only researchers but also practitioners in
+statistical machine translation and natural language processing
+to have access to the latest technology. Also, I will start
+collaborating with researchers who have expertise in
+non-Indo-European languages such as Finnish and Korean to extend
+the novel SMT system to machine translation based on sub-word
+units such as morphemes \citep[see, e.g.,][]{Creutz2007}.
+
+\subsection{Outline}
+
+In the remainder of this document, I describe in detail
+statistical machine translation (SMT) and how neural networks
+have been applied to the conventional SMT system in
+Sec.~\ref{sec:smt}. Specifically, in Sec.~\ref{sec:smt-basic},
+the basic principles behind SMT are introduced, where a
+general framework on SMT is divided into the
+inverse-translation model and the language model. 
+Sec.~\ref{sec:nntm}--\ref{sec:nnlm} introduce earlier works on
+using neural networks for these two components of the SMT system. 
+
+In Sec.~\ref{sec:new_approach}, I propose and introduce a novel
+approach to building a SMT system using deep neural networks.  I
+begin by giving out a generative view of natural languages in
+Sec.~\ref{sec:genlm} and continue on to introducing the concepts
+of encoding and decoding from this generative perspective. The
+novel architecture based on this generative perspective is
+proposed and described in Sec.~\ref{sec:autoencoder}. The last
+section~\ref{sec:challenges} lists challenges that need to be
+addressed in order to implement the proposed SMT system, and they
+will be the central problems during my post-doctoral period.
+
+
+
+
+
+
 
 
 
 
 
 \section{Neural Networks in Statistical Machine Translation}
+\label{sec:smt}
 
 In this section, I describe how neural networks may be applied to
 the task of statistical machine translation (SMT) by first
@@ -116,6 +381,7 @@ the SMT system.
 
 \subsection{Probabilistic Framework behind Statistical Machine
 Translation}
+\label{sec:smt-basic}
 
 A statistical machine translation (SMT) system may be described
 in the following, single equation:
@@ -187,6 +453,7 @@ recently proposed approachs for modeling the
 inverse-translation model and the language model.
 
 \subsection{Neural Networks for Inverse-Translation Model}
+\label{sec:nntm}
 
 The inverse-translation model in Eq.~\eqref{eq:loglinear} is
 conventionally implemented by a phrase-based approach \citep[see,
@@ -264,6 +531,7 @@ pairs.
 
 
 \subsubsection{Bilingual Word Embeddings}
+\label{sec:biembed}
 
 It should be noticed from the previous section on the
 inverse-translation model based on feedforward neural networks
@@ -280,7 +548,7 @@ estimate the probability of a pair of phrases.
 \citet{Zou2013} proposed to learn the word embeddings of two
 languages (Chinese and English) by regularizing the linearly
 transformed embeddings of those languages $\mA_{c\to e} \mC_c$
-and $\mA{e\to c} \mC_e$ to be close to each other. The
+and $\mA_{e\to c} \mC_e$ to be close to each other. The
 regularization term, called the translation equivalence
 objective, is defined as
 \begin{align}
@@ -302,7 +570,7 @@ p(\vs_i \mid \vt_i) \propto \angle\left( \vc_s, \vc_t
         \right),
 \end{align*}
 where $\vc_s$ and $\vc_t$ are respectively the embeddings of the
-source and target phrases, and the function $\angle()$
+source and target phrases, and the function $\angle(\cdot,\cdot)$
 computes the cosine distance between those embeddings.
 
 As was the case with the FFTM, this approach of learning
@@ -321,6 +589,7 @@ phrases, unlike the table-based inverse-translation model.
 
 
 \subsection{Neural Networks for Language Modeling}
+\label{sec:nnlm}
 
 There are rather diverse approaches to learning the language
 model. The most naive approach, called $n$-gram language model,
@@ -432,6 +701,7 @@ Eq.~\eqref{eq:fflm}).
 
 
 \section{Statistical Machine Translation based Purely on Neural Networks}
+\label{sec:new_approach}
 
 The methods based on neural networks discussed in the previous
 section have been found to improve the overall translation
@@ -443,19 +713,23 @@ source and target sentences in Eq.~\eqref{eq:loglinear_general}.
 Also, the inverse-translation models $p(\vs_i \mid \vt_i)$ are
 often used to only rescore/rerank the list of candidate phrase
 pairs, which again corresponds to another term in the generalized
-log-linear model.
+log-linear model.  A large part of the SMT system, that
+especially involves
+\textit{generating} a target sentence, still has not benefited
+much from nor utilized neural networks. 
 
-A large part of the SMT system that has not yet been addressed by
-neural networks is how to \textit{generate} a target sentence
-from, for instance, the generalized log-linear model. 
-
-In this section, I describe a novel approach to implementing SMT
-system purely based on a neural network that can directly
-generate multiple, correct target sentences. This approach will
-be the main topic of my research during the post-doctoral years
-at the University of Montreal.
+Based on these observations that (1) replacing certain components
+of the SMT system with neural networks improves the overall
+translation performance and that (2) still a large part of the
+SMT system does not employ neural networks, in this section, I
+propose a novel approach to implementing SMT system purely based
+on a neural network that can directly generate multiple, correct
+target sentences after understanding the source sentence. This
+approach will be the main topic of my research during the
+post-doctoral years at the University of Montreal.
 
 \subsection{Generative Model of a Language}
+\label{sec:genlm}
 
 Here let me first loosely define a generative model
 $\mathcal{M}_t$ that \textit{generates} a language $L_t=\left\{
@@ -498,6 +772,7 @@ SMT system, which will be described in more detail in the
 remainder of this section.
 
 \subsection{Encoder-Decoder Approach using Neural Operators}
+\label{sec:autoencoder}
 
 Here I propose a neural network architecture that performs both
 \textit{inference} and \textit{generation} in the generative
@@ -552,26 +827,137 @@ is known to be able to capture highly nonlinear mapping between
 the input and output \citep{Rumelhart1986}. This way of
 implementing the plus and emit operators as DNNs results in a
 deep recurrent neural network which was proposed recently by
-myself together with co-authors in \citep{Pascanu2013}.
+myself together with co-authors in \citep{Pascanu2013}. See
+Fig.~\ref{fig:autoencoder} for an illustration of this type of
+neural network.
 
-The main advantage of this approach is that one can readily
-translate a given sentence in one language to the other in a
-single sweep. The encoder will read all symbols sequentially from
-the begging to the end to summarize the sentence, and the decoder
-will generate sequentially a list of symbols that corresponds to
-the summary encoded by the encoder. In short, this approach
-implements the whole SMT system in a single neural network
-without any combinatorial search which may become exponentially
-expensive due to a large search space (a space of all possible
-sentences in a target language).
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{autoencoder.pdf}
+\label{fig:autoencoder}
+\caption{An illustration of a neural network that implements the
+    encoder and the decoder of a generative model of a language.}
+\end{figure}
+
+The main advantage of building this type of a neural network  is
+that one can readily translate a given sentence in one language
+to the other in a single sweep. The encoder will read all symbols
+sequentially from the begging to the end to summarize the
+sentence, and the decoder will generate sequentially a list of
+symbols that corresponds to the summary encoded by the encoder.
+This approach implements the whole SMT system in a single neural
+network without any combinatorial search which may become
+exponentially expensive due to a large search space (a space of
+all possible sentences in a target language).
+
+There are a number of additional advantages from this approach of
+replacing the whole SMT system with a single neural network.
+First, it becomes more intuitive to extend the system for
+multi-lingual translation system. One can simultaneously train
+multiple encoders and decoders for more than two languages, while
+constraining the summaries of the encoders to be compatible with
+each other, which may be implemented similarly to the bilingual
+word embeddings descrbied in Sec.~\ref{sec:biembed}. 
+
+Second, the whole system is tuned jointly to optimize for the end
+goal of the SMT system which is to maximize the translation
+performance. Each component of the conventional SMT system such
+as the language model, the inverse-translation model and the
+phrase pair table is often tuned separately with its own
+objective which is usually not directly related to the
+translation performance of the overall SMT system. However, in
+this new, proposed approach, the whole system and its
+constituents (namely, the encoder and the decoder) are all
+together tuned to maximize the actual objective of the system.
+
+Lastly, the proposed approach based purely on neural networks
+requires only minimal domain knowledge. Although the name,
+\textit{statistical} machine translation, suggests that
+the convenitonal system also focuses more on learning
+from data, the conventional SMT system still relies on
+domain knowledge about source and target languages
+pretty heavily. For instance, the reordering score
+$d(a_i -b_i -1)$ from the inverse-translation model in
+Eq.~\eqref{eq:phrase_decomp} requires a human designer
+to decide on how much and/or what kind of reordering
+makes more sense between the target and source
+sentences. The proposed system based on neural networks, in
+essence, does not require any domain knowledge, though it may be
+possible to design a better neural architecture by considering
+domain knowledge.
 
 
 \subsection{Challenges in Encoder-Decoder Approach for
 Machine Translation}
+\label{sec:challenges}
 
-This approach of having a single neural network that implements
-the encoder and the decoder is ideal once the neural network is
-well trained from data. 
+Although the proposed, novel approach has many advantages over
+the conventional statistical machine translation (SMT) system,
+many challenges lie ahead before fully implementing the new
+system. It will be my main research goal next two years in
+the University of Montreal to address these challenges.
+
+First of all, more alternative designs of a neural network must
+be investigated. The design proposed earlier in this section is
+just one possible design and should not be considered the only
+possible design. For instance, a recursive neural network
+proposed by \citet{Socher2011} may be used as the encoder instead
+\citep{Kalchbrenner2012}. Furthermore, it is possible to combine
+undirected graphical models, such as Boltzmann machines
+\citep{Ackley1985} or neural autoregressive density estimator
+\citep[NADE,][]{Larochelle2011}, with the decoder based on
+recurrent neural networks. This may improve the generative
+performance of the decoder \citep[see, e.g.,][]{Bengio2013rec}.
+This exploration of alternative architectures will be one of the
+most important research theme during my post-doctoral years.
+      
+Secondly, it is not clear if the neural network that
+implements the whole SMT system will be easy to train. Until
+recently it has been believed by many that it was considered
+almost impossible to train a neural
+network, not even mentioning how large it is \citep[see,
+e.g.,][]{Bengio2009a}. Only recently when it has been found that
+deep neural networks can be easily trained by carefully designing
+a network \citep[see,
+e.g.,][]{Hinton2012sp,Goodfellow2013,Gulcehre2013} and training
+the network with recently proposed learning algorithms \citep[see,
+e.g.,][]{Martens2012,Hinton2012,Amari1998}. Especially, it has
+been long known that training
+a recurrent neural network (which is the
+main type of networks used in the new approach) is
+often more difficult than training a non-recurrent,
+feedforward neural network \citep[see,
+e.g.,][]{Bengio1994,Sutskever2011,hochreiter1997long}. Therefore,
+the foremost challenge to be addressed will be to evaluate
+the existing learning algorithms for the novel neural network
+architecture and if necessary, to design a new learning
+algorithm that will facilitate training it.
+
+The third challenge is the scalability. Considering the highly
+complex structure of a language as well as probably even more
+complicated relationships among multiple languages, it is clear
+that the neural network that implements the proposed approach
+must be much larger than ones that have been used, for instance,
+for recognizing a fixed set of objects from a still images
+\citep[see, e.g.,][]{Krizhevsky2012,Le2012}, though those
+neural networks are already large taking multiple gigabytes
+of memory only for storing the parameters and more than a
+week to train them. For instance, one of the standard datasets
+used for training the SMT systems, called Europarl
+\citep{Koehn2005}, includes 21 European languages and around 60
+million word occurrences for each langauage. Each language has
+more than 50 thousands unique words. Considering that this is
+just a single dataset among many others that may need to be used
+later, it is not difficult to understand that the scalability
+will be an important issue to be addressed.
+
+As this approach is very new in the sense that there has been
+essentially no prior work, there will be many challenges that
+cannot be expected nor forecastable at the moment. Those
+challenges, however difficult they are, will, in addition to the
+three challenges discussed here, constitute good research
+problems that should and need to be solved during my
+post-doctoral years at the University of Montreal.
 
 
 
@@ -582,13 +968,6 @@ well trained from data.
 
 
 
-\section{Research Plan}
-
-\subsection{Goals}
-
-\subsection{Hosting Institute: Machine Learning Lab at University of Montreal}
-
-\subsection{Timeline}
 
 
 
@@ -596,7 +975,10 @@ well trained from data.
 
 
 
-\small
+
+
+
+%\small
 \bibliographystyle{research_plan}
 \bibliography{research_plan}
 

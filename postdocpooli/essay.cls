@@ -26,14 +26,14 @@
 % We want this command to operate outside the document scope, hence it's not cleared here.
 %\global\let\course\relax
 
-% Custom title
-\renewcommand{\maketitle}{
-  \begin{flushright}
-    \@author~ 
-    \today
-  \end{flushright}
-
-  \begin{center}
-    \textbf{\Large{\@title}}
-  \end{center}
-}
+%% Custom title
+%\renewcommand{\maketitle}{
+%  \begin{flushright}
+%    \@author~ 
+%    \today
+%  \end{flushright}
+%
+%  \begin{center}
+%    \textbf{\Large{\@title}}
+%  \end{center}
+%}
