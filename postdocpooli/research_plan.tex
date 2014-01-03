@@ -218,7 +218,7 @@ applying deep learning to statistical machine translation (SMT).
 The LISA lab is the leading research lab led by Prof. Yoshua
 Bengio who is one of the leading researchers in the field of
 \textit{deep learning}. He has started his research on neural
-networks already from 1980s and has continued working on deep
+networks already from 1980's and has continued working on deep
 neural networks ever since. The LISA lab was one of three
 research groups who proposed the method of layer-wise pretraining
 for deep neural networks in 2006 and 2007 \citep{Bengio2007nips},
@@ -228,7 +228,7 @@ which led to the so-called second neural network renaissance
 As far as statistical machine translation (SMT) is concerned, Prof.
 Bengio is one of the pioneers who proposed to use a neural
 network to learn the language model (See Sec.~\ref{sec:nnlm}). In
-2003, Prof. Bengio proposed the first language modeling techinque
+2003, Prof. Bengio proposed the first language modeling technique
 based on feedforward neural network \citep{Bengio2003} and in
 2006 showed that it is possible to improve the existing speech
 recognition system by using this approach \citep{Bengio2006},
@@ -253,7 +253,7 @@ recently with already some successful publication
 research on recurrent neural networks \citep[see,
 e.g.,][]{Bengio2013rec}, where recurrent
 neural networks have been his main research topic
-already from early 1990s \citep[see,
+already from early 1990's \citep[see,
 e.g.,][]{Bengio1994}.
 
 The LISA lab is actively collaborating with external researchers.
@@ -276,7 +276,7 @@ post-doctoral research.
 I plan to conduct my post-doctoral research at the Machine
 Learning Lab (LISA), University of Montreal to last two years
 starting from April, 2014 after the planned defense of my Ph.D.
-dissertation early March, 2015. 
+Dissertation early March, 2015. 
 
 \textbf{Apr., 2014--Dec. 2014}: During the three quarters of the first
 year I will concentrate on exploring various neural network
@@ -449,30 +449,30 @@ the inverse-translation model and the language modeling as well
 as any other user-defined features.
 
 In the remainder of this section, I introduce a number of
-recently proposed approachs for modeling the
+recently proposed approaches for modeling the
 inverse-translation model and the language model.
 
 \subsection{Neural Networks for Inverse-Translation Model}
 \label{sec:nntm}
 
-The inverse-translation model in Eq.~\eqref{eq:loglinear} is
-conventionally implemented by a phrase-based approach \citep[see,
-e.g.,][]{Koehn2003,Marcu2002}.  In the
-phrase-based approach, the inverse-translation
-probability is decomposed into the probabilities
-of short phrases:
+The inverse-translation model in Eq.~\eqref{eq:loglinear} is conventionally
+implemented by a phrase-based approach \citep[see,
+e.g.,][]{Koehn2003,Marcu2002}.  In the phrase-based approach, the
+inverse-translation probability is decomposed into the
+probabilities of short phrases:
 \begin{align}
 \label{eq:phrase_decomp}
-    p(\vs \mid \vt) = \prod_{i=1}^{I} \phi(\vs_i \mid \vt_i) d(a_i -
+    p(\vs \mid \vt) = \frac{1}{Z(\vt)} \prod_{i=1}^{I} \phi(\vs_i \mid \vt_i) d(a_i -
     b_i -1),
 \end{align}
-where $phi(\vs_i \mid \vt_i)$ and $d(a_i - b_i - 1)$ are the phrase
-translation probability and the reordering weight based on the
-start and the end of the $i$-th phrase of the source sentence
-$\vs_i$. Here, it is assumed that the sentence is decomposed into
-$I$ phrases. Learning this model, thus, consists of (1) learning
-the phrase translation model and (2) deciding/learning the
-reordering model.  
+where $phi(\vs_i \mid \vt_i)$ and $d(a_i - b_i - 1)$ are the
+phrase translation probability and the reordering weight based on
+the start and the end of the $i$-th phrase of the source sentence
+$\vs_i$. $Z(\vt)$ is a normalization constant that makes the
+probabilities sum up to one. Here, it is assumed that the
+sentence is decomposed into $I$ phrases. Learning this model,
+thus, consists of (1) learning the phrase translation model and
+(2) deciding/learning the reordering model.  
 
 Traditionally it is usual to implement the phrase translation
 model with a phrase pair table. The phrase pair table contains a
@@ -492,7 +492,7 @@ of the phrases, both source and target, are quite short (often,
         less than $8$ words). Hence, it is possible to directly
 model the mapping from a source phrase to the corresponding
 target phrase assuming the maximum number of words per phrase.
-Learning this mapping corredponds to modeling the phrase
+Learning this mapping corresponds to modeling the phrase
 translation probability $p(\vs_i \mid \vt_i)$ which is equivalent to
 a single term $\phi(s_i \mid t_i)$ in
 Eq.~\eqref{eq:phrase_decomp}.
@@ -540,7 +540,7 @@ which will be discussed later in this section, that most neural
 networks-based approaches learn a continuous-space word embedding
 ($\mC$ in Eq.~\eqref{eq:fftm}). The embedding maps each word,
 often represented by a one-hot vector, to a fixed-length
-vector (a row of $\mC$) in a contiuous space.  In this case,
+vector (a row of $\mC$) in a continuous space.  In this case,
 one can readily utilize the word embeddings (regardless of how
 they were learned) of source and target languages to
 estimate the probability of a pair of phrases. 
@@ -602,7 +602,7 @@ language model $p(\vt)$ into
 where each $t_l$ corresponds to the $l$-th word in a sentence
 $\vt$. Then, each $n$-gram probability $p(t_l \mid t_{l-n},
 \dots, t_{l-1})$ can be learned from data by simply counting the
-number of occurences of the $n$-gram. 
+number of occurrences of the $n$-gram. 
 
 This $n$-gram approach is a \textit{discrete}-space approach in
 the sense that the $n$-gram model can be effectively represented
@@ -788,7 +788,7 @@ construct the proposed neural network architecture
 First, a \textit{plus} operator $\oplus: \RR^d \times \RR^d \to
 \RR^d$ is defined. The plus operator accepts two fixed-length
 vectors that represent an arbitrary embedding $\vh$ and a word
-embedding $\vt$, respectily, and returns the embedding $\vh'$
+embedding $\vt$, respectively, and returns the embedding $\vh'$
 that summarizes both $\vh$ and $\vt$. Secondly, I define an
 \textit{emit} operator $\lhd: \RR^d \times \RR^d \to \RR^d$ that
 outputs stochastically the \textit{first} word of a sentence
@@ -831,6 +831,7 @@ myself together with co-authors in \citep{Pascanu2013}. See
 Fig.~\ref{fig:autoencoder} for an illustration of this type of
 neural network.
 
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{autoencoder.pdf}
@@ -839,10 +840,22 @@ neural network.
     encoder and the decoder of a generative model of a language.}
 \end{figure}
 
+An important difference of the proposed neural network from the
+inference and generation procedures the generative model in
+Sec.~\ref{sec:genlm} is that the encoded concept $\vz$ is
+\textit{not} stochastic. While the exact probabilistic treatment
+would have required that the concept be sampled from the inferred
+posterior distribution $p(\vz \mid \vs)$, the neural network
+approach directly maps from the source sentence $\vs$ to the
+generation probability $p(\vt\mid \vs)$
+\textit{deterministically}. This means that the neural network is
+trained to effectively marginalize out the concept $\vz$ by
+learning $p(\vt \mid \vs)$ directly.
+
 The main advantage of building this type of a neural network  is
 that one can readily translate a given sentence in one language
 to the other in a single sweep. The encoder will read all symbols
-sequentially from the begging to the end to summarize the
+sequentially from the beginning to the end to summarize the
 sentence, and the decoder will generate sequentially a list of
 symbols that corresponds to the summary encoded by the encoder.
 This approach implements the whole SMT system in a single neural
@@ -857,7 +870,7 @@ multi-lingual translation system. One can simultaneously train
 multiple encoders and decoders for more than two languages, while
 constraining the summaries of the encoders to be compatible with
 each other, which may be implemented similarly to the bilingual
-word embeddings descrbied in Sec.~\ref{sec:biembed}. 
+word embeddings described in Sec.~\ref{sec:biembed}. 
 
 Second, the whole system is tuned jointly to optimize for the end
 goal of the SMT system which is to maximize the translation
@@ -873,7 +886,7 @@ together tuned to maximize the actual objective of the system.
 Lastly, the proposed approach based purely on neural networks
 requires only minimal domain knowledge. Although the name,
 \textit{statistical} machine translation, suggests that
-the convenitonal system also focuses more on learning
+the conventional system also focuses more on learning
 from data, the conventional SMT system still relies on
 domain knowledge about source and target languages
 pretty heavily. For instance, the reordering score
@@ -945,7 +958,7 @@ of memory only for storing the parameters and more than a
 week to train them. For instance, one of the standard datasets
 used for training the SMT systems, called Europarl
 \citep{Koehn2005}, includes 21 European languages and around 60
-million word occurrences for each langauage. Each language has
+million word occurrences for each language. Each language has
 more than 50 thousands unique words. Considering that this is
 just a single dataset among many others that may need to be used
 later, it is not difficult to understand that the scalability
