@@ -145,7 +145,7 @@ Microsoft has replaced the existing speech recognition
 algorithm based on Gaussian mixtures with one based on deep
 neural networks \citep{Deng2013}. Furthermore, the voice
 assistance feature of Apple's iPhone, called Siri, as well
-as Google's Street View are also known to utilize deep
+as Google Street View are also known to utilize deep
 neural networks.\footnote{See the article \textit{Scientists
 See Promise in Deep-Learning Programs} by John Markoff
 featured in the New York Times on 23 November 2012: \\
@@ -478,8 +478,9 @@ Traditionally it is usual to implement the phrase translation
 model with a phrase pair table. The phrase pair table contains a
 list of all possible pairs of source and target phrases from data
 and their corresponding (smoothed) frequencies \citep[see,
-e.g.,][]{Koehn2003,Koehn2010}. \tred{TODO: cite the approach that
-    uses a linear predictor to replace the table lookup! \citep{Carpuat2007}}
+e.g.,][]{Koehn2003,Koehn2010}. 
+%\tred{TODO: cite the approach that
+%    uses a linear predictor to replace the table lookup! \citep{Carpuat2007}}
 
 Neural networks, however, can be used to replace this
 frequency-based table. In the remainder of this section, I
@@ -498,7 +499,7 @@ translation probability $p(\vs_i \mid \vt_i)$ which is equivalent to
 a single term $\phi(s_i \mid t_i)$ in
 Eq.~\eqref{eq:phrase_decomp}.
 
-In \citep{Schwenk2012,Son2012}, an approach of learning the phrase
+In \citep{Schwenk2012,Son2012,Carpuat2007}, an approach of learning the phrase
 pair table directly using a feedforward neural network was
 proposed and discussed in detail. \citet{Schwenk2012} assumes that
 each phrase consists of at most seven words and models the phrase
