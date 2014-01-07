@@ -229,7 +229,7 @@ As far as statistical machine translation (SMT) is concerned, Prof.
 Bengio is one of the pioneers who proposed to use a neural
 network to learn the language model (See Sec.~\ref{sec:nnlm}). In
 2003, Prof. Bengio proposed the first language modeling technique
-based on feedforward neural network \citep{Bengio2003} and in
+based on a feedforward neural network \citep{Bengio2003} and in
 2006 showed that it is possible to improve the existing speech
 recognition system by using this approach \citep{Bengio2006},
 together with Prof.  Holger Schwenk whose lab I am
@@ -275,7 +275,7 @@ One big advantage of conducting my research at the LISA Lab is
 that the LISA Lab has a large amount of readily accessible
 computing resources and a well-established software
 infrastructure.  At the LISA Lab I will be able to use multiple
-nation-wide, state-wide and university-wide cluster systems which
+nation-wide, province-wide and university-wide cluster systems which
 have hundreds of general-purpose graphical processing units.
 This will be invaluable to my research which will require an extreme
 level of computing power.  Furthermore, the LISA Lab has made
@@ -290,11 +290,11 @@ research during the post-doctoral years at the LISA Lab.
 \subsection{Schedule}
 
 I plan to conduct my post-doctoral research at the Machine
-Learning Lab (LISA), University of Montreal to last two years
+Learning Lab (LISA), University of Montreal over the course of two years
 starting from April, 2014 after the planned defense of my Ph.D.
-Dissertation early March, 2015. 
+Dissertation in early March, 2014. 
 
-\textbf{Apr., 2014--Dec. 2014}: During the three quarters of the first
+\textbf{April, 2014--December 2014}: During the first three quarters of the first
 year I will concentrate on exploring various neural network
 architectures to assess the feasibility of each design for the
 task of statistical machine translation (SMT). The work will mainly
@@ -308,14 +308,14 @@ Workshop on Machine Translation.
 I plan to report on findings from implementing these novel
 architectures to a number of conferences related to machine
 learning and natural language processing such as the
-international conference on machine learning (ICML), advances in
-neural information processing (NIPS) and the annual meeting of
-the association for computational linguistics (ACL). By attending
+International Conference on Machine Learning (ICML), Advances in
+Neural Information Processing (NIPS) and the Annual Meeting of
+the Association for Computational Linguistics (ACL). By attending
 these conferences and reporting my own work, potential for future
 collaboration, possibly continuing even after the post-doctoral
 period, will greatly increase.
 
-\textbf{Jan. 2015--Dec. 2015}: In 2015 I plan to implement the
+\textbf{January 2015--December 2015}: In 2015 I plan to implement the
 fully functional neural network that will replace the existing
 SMT system. In order to train this fully functional SMT system
 based on neural networks it is important to train the neural
@@ -333,16 +333,17 @@ efficiently train the whole, proposed SMT system.
 
 Again, research findings from this period will be reported to the
 research community, both deep learning and natural language
-processing, through a number of conference. Unlike the previous
+processing, through a number of conferences. Unlike the previous
 period, most of the findings will, however, be reported to
 conferences more focused on natural language processing and
 statistical machine translation during this period. Those
-conferences include ACL, the conference of the European chapter
-of the association for computational linguistics (EACL), the
-international conference on computational linguistics (COLING)
-and empirical methods in natural language processing (EMNLP). 
+conferences include ACL, the Conference of the European Chapter
+of the Association for Computational Linguistics (EACL), the
+International Conference on Computational Linguistics (COLING)
+and the ACL Conference on Empirical Methods in Natural Language
+Processing (EMNLP). 
 
-\textbf{Jan. 2016--Mar. 2016}: I will mainly concentrate on
+\textbf{January 2016--March 2016}: I will mainly concentrate on
 making the underlying code of the implemented SMT system public.
 This will allow not only researchers but also practitioners in
 statistical machine translation and natural language processing
@@ -439,7 +440,7 @@ model $p(\vt)$ and combines them as a log-linear model:
     p(\vt \mid \vs) \propto \exp\left\{ \omega_0 \log p(\vs \mid
     \vt) + \omega_1 \log p(\vt) \right\}, 
 \end{align}
-where $\omega_0$ and $\omega_1$ are the weights for the
+where $\omega_0$ and $\omega_1$ are the coefficients for the
 inverse-translation model and the language model, respectively.
 In this case, learning may be decomposed into learning the
 inverse-translation model, learning the language model and
@@ -465,7 +466,7 @@ the inverse-translation model and the language modeling as well
 as any other user-defined features.
 
 In the remainder of this section, I introduce a number of
-recently proposed approaches for modeling the
+recently proposed approaches for building the
 inverse-translation model and the language model.
 
 \subsection{Neural Networks for Inverse-Translation Model}
@@ -481,7 +482,7 @@ probabilities of short phrases:
     p(\vs \mid \vt) = \frac{1}{Z(\vt)} \prod_{i=1}^{I} \phi(\vs_i \mid \vt_i) d(a_i -
     b_i -1),
 \end{align}
-where $phi(\vs_i \mid \vt_i)$ and $d(a_i - b_i - 1)$ are the
+where $\phi(\vs_i \mid \vt_i)$ and $d(a_i - b_i - 1)$ are the
 phrase translation probability and the reordering weight based on
 the start and the end of the $i$-th phrase of the source sentence
 $\vs_i$. $Z(\vt)$ is a normalization constant that makes the
@@ -490,7 +491,7 @@ sentence is decomposed into $I$ phrases. Learning this model,
 thus, consists of (1) learning the phrase translation model and
 (2) deciding/learning the reordering model.  
 
-Traditionally it is usual to implement the phrase translation
+Traditionally one implements the phrase translation
 model with a phrase pair table. The phrase pair table contains a
 list of all possible pairs of source and target phrases from data
 and their corresponding (smoothed) frequencies \citep[see,
@@ -537,15 +538,16 @@ of the target phrase. Each word $s_i^j$ or $t_i^j$ is represented
 as a one-hot vector.
 
 One important advantage of this inverse-translation model based
-on feedforward neural networks (FFTM) in Eq.~\eqref{eq:fftm} is
-that this model naturally generalizes to an unseen pair of source
-and target phrases. In the case of the table-based phrase
-translation model, one has to opt for heuristics such as
-smoothing techniques to be able to cope with those pairs that
-have \textit{zero} probability according to data. However, the
-FFTM which first projects the input phrase into a continuous
-space embedding automatically interpolates/extrapolates to unseen
-pairs.
+on feedforward neural networks in Eq.~\eqref{eq:fftm} is that
+this model naturally generalizes to an unseen pair of source and
+target phrases. The translation model based on this approach is
+often called a feedforward translation model (FFTM). In the case
+of the table-based phrase translation model, one has to opt for
+heuristics such as smoothing techniques to be able to cope with
+those pairs that have \textit{zero} probability according to
+data. However, the FFTM which first projects the input phrase
+into a continuous space embedding automatically
+interpolates/extrapolates to unseen pairs.
 
 
 \subsubsection{Bilingual Word Embeddings}
@@ -577,7 +579,7 @@ objective, is defined as
 where $\lambda$ is a constant that balances the two terms.
 
 Once the \textit{compatible} word embeddings are learned by, for
-instance, training FFTM in Eq.~\eqref{eq:fftm} together with the
+instance, training an FFTM in Eq.~\eqref{eq:fftm} together with the
 above regularization term in Eq.~\eqref{eq:TEO}, \citet{Zou2013}
 proposed to compute the embedding of a phrase by averaging the
 embeddings of the words in the phrase. Then, the phrase
@@ -610,8 +612,8 @@ phrases, unlike the table-based inverse-translation model.
 \label{sec:nnlm}
 
 There are rather diverse approaches to learning the language
-model. The most naive approach, called $n$-gram language model,
-assumes $n^{\text{th}}$-order Markov property and decomposes the
+model. The most naive approach, called an $n$-gram language model,
+assumes an $n^{\text{th}}$-order Markov property and decomposes the
 language model $p(\vt)$ into
 \begin{align}
     \label{eq:ngram}
@@ -626,7 +628,7 @@ This $n$-gram approach is a \textit{discrete}-space approach in
 the sense that the $n$-gram model can be effectively represented
 by a table with a finite number $O(k^n)$ of entries, where there
 are $k$ distinct words/symbols. Unfortunately, this approach is
-limited by the fact that as $n$ increase, the number of unseen
+limited by the fact that as $n$ increases, the number of unseen
 $n$-grams increases exponentially, which affects the overall
 performance of SMT system relying on this language model badly. 
 
@@ -853,9 +855,9 @@ neural network.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{autoencoder.pdf}
-\label{fig:autoencoder}
 \caption{An illustration of a neural network that implements the
     encoder and the decoder of a generative model of a language.}
+\label{fig:autoencoder}
 \end{figure}
 
 An important difference of the proposed neural network from the
@@ -918,14 +920,14 @@ possible to design a better neural architecture by considering
 domain knowledge.
 
 
-\subsection{Challenges in Encoder-Decoder Approach for
+\subsection{Challenges in the Encoder-Decoder Approach to
 Machine Translation}
 \label{sec:challenges}
 
 Although the proposed, novel approach has many advantages over
 the conventional statistical machine translation (SMT) system,
 many challenges lie ahead before fully implementing the new
-system. It will be my main research goal next two years in
+system. It will be my main research goal the next two years in
 the University of Montreal to address these challenges.
 
 First of all, more alternative designs of a neural network must
@@ -947,7 +949,7 @@ implements the whole SMT system will be easy to train. Until
 recently it has been believed by many that it was considered
 almost impossible to train a neural
 network, not even mentioning how large it is \citep[see,
-e.g.,][]{Bengio2009a}. Only recently when it has been found that
+e.g.,][]{Bengio2009a}. Only recently it has been found that
 deep neural networks can be easily trained by carefully designing
 a network \citep[see,
 e.g.,][]{Hinton2012sp,Goodfellow2013,Gulcehre2013} and training
