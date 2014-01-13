@@ -138,7 +138,7 @@
 % The title of the thesis
 %\title{Deep Neural Networks: \\
 %Basic Principles and Recent Advances}
-\title{Foundations and Advances in Deep Learning}
+\title{Foundations and Advances \\in Deep Learning}
 
 \begin{document}
 
@@ -154,11 +154,11 @@
 % If you write this somewhere else than in Helsinki, use the optional location.
 \begin{preface}[Espoo]
     This work has been carried out in the Department of
-    Information and Computer Science at Aalto University School
-    of Science under the supervision of Prof. Juha Karhunen, Dr.
-    Tapani Raiko and Dr. Alexander Ilin while being fully funded
-    by the Finnish Doctoral Programme in Computational Sciences
-    (FICS).
+    Information and Computer Science at the Aalto University
+    School of Science under the supervision of Prof. Juha
+    Karhunen, Dr.  Tapani Raiko and Dr. Alexander Ilin while
+    being fully funded by the Finnish Doctoral Programme in
+    Computational Sciences (FICS). 
 
 \end{preface}
 
@@ -350,19 +350,18 @@ benefit from using a large, deep neural network.
 Although the recent surge of popularity stems from the
 introduction of layer-wise pretraining proposed in 2006 by
 \citet{Hinton2006,Bengio2007nips,Ranzato2007}, research on
-artificial neural networks began as
-early as 1958 when \citet{Rosenblatt1958} proposed a
-perceptron learning algorithm. Since then, various kinds of
-artificial neural networks have been proposed. They include,
-but are not limited to Hopfield networks
-\citep{Hopfield1982}, self-organizing maps
-\citep{Kohonen1982}, neural networks for principal component
-analysis \citep{Oja1982}, Boltzmann machines
-\citep{Ackley1985}, multilayer perceptrons
+artificial neural networks began as early as 1958 when
+\citet{Rosenblatt1958} presented the first perceptron
+learning algorithm. Since then, various kinds of artificial
+neural networks have been proposed. They include, but are
+not limited to Hopfield networks \citep{Hopfield1982},
+self-organizing maps \citep{Kohonen1982}, neural networks
+for principal component analysis \citep{Oja1982}, Boltzmann
+machines \citep{Ackley1985}, multilayer perceptrons
 \citep{Rumelhart1986}, radial-basis function networks
-\citep{Broomhead1988}, autoencoders \citep{Baldi1989}, sigmoid
-belief networks \citep{Neal1992} and support vector machines
-\citep{Cortes1995}.
+\citep{Broomhead1988}, autoencoders \citep{Baldi1989},
+sigmoid belief networks \citep{Neal1992} and support vector
+machines \citep{Cortes1995}.
 
 These types of artificial neural networks are interesting
 not only on their own, but by connections among themselves
@@ -379,31 +378,30 @@ PCA.  PCA can be further generalized to nonlinear PCA
 through, for instance, an autoencoder with multiple
 nonlinear hidden layers \citep{Kramer1991,Oja1991}. 
 
-Due to the recent popularity of deep learning, two of the
-most widely studied artificial neural networks these days
-are autoencoders and Boltzmann machines.  An autoencoder
-with a single hidden layer as well as a structurally
-restricted version of the Boltzmann machine, called a
-restricted Boltzmann machine, have become popular due to
-their application in layer-wise pretraining of deep
-multilayer perceptrons. 
+Due to the recent popularity of deep learning, two of
+the most widely studied artificial neural networks are
+autoencoders and Boltzmann machines.  An autoencoder with a
+single hidden layer as well as a structurally restricted
+version of the Boltzmann machine, called a restricted
+Boltzmann machine, have become popular due to their
+application in layer-wise pretraining of deep multilayer
+perceptrons. 
 
-Thus, this thesis starts from some of the earlier
-ideas in the artificial neural networks and arrive at those
-two currently popular models. In due course, the author will
-try to explain how various types of artificial neural
-networks are related to each other, ultimately leading to
-autoencoders and Boltzmann machines. Furthermore, this
-thesis will include underlying methods and concepts that
-have led to those two models' popularity, which
-include, for instance, layer-wise pretraining and manifold
-learning. Whenever it is possible, informal mathematical
-justification for each model or method is provided
-alongside.
+Thus, this thesis starts from some of the earlier ideas in
+the artificial neural networks and arrives at those two
+currently popular models. In due course, the author will
+explain how various types of artificial neural networks are
+related to each other, ultimately leading to autoencoders
+and Boltzmann machines. Furthermore, this thesis will
+include underlying methods and concepts that have led to
+those two models' popularity, which include, for instance,
+layer-wise pretraining and manifold learning.  Whenever it
+is possible, informal mathematical justification for each
+model or method is provided alongside.
 
 Since the main focus of this thesis is on \textit{general}
-principles of deep neural networks, the thesis tries to
-avoid describing any method that is specific to a certain
+principles of deep neural networks, the thesis 
+avoids describing any method that is specific to a certain
 task. In other words, the explanations as well as the models
 in this thesis assume no prior knowledge about data, except
 that each sample is independent and identically distributed
@@ -430,7 +428,7 @@ Section~\ref{sec:contrib}.
 \subsection{Shallow Neural Networks}
 
 In Chapter~\ref{chapter:simple_neural_networks}, the author
-tries to give a background on neural networks that are
+gives a background on neural networks that are
 considered shallow. By shallow neural networks we refer, in
 the case of supervised models, to those neural networks that
 have only input and output units, although many often
@@ -586,8 +584,8 @@ and the Boltzmann machine found earlier by other
 researchers. The close equivalence between the restricted
 Boltzmann machine and the autoencoder with a single hidden
 layer is described in Section~\ref{sec:rbm_aenc}. In due
-course, a \textbf{Gaussian-Bernoulli restricted
-Boltzmann machine} is discussed with its \textbf{modified
+course, a Gaussian-Bernoulli restricted
+Boltzmann machine is discussed with its \textbf{modified
 energy function} proposed in \citepub{Cho2011icann}. A
 deep belief network is subsequently discussed as a
 composite model of a restricted Boltzmann machine and a
@@ -689,7 +687,7 @@ network is highly restricted, the existence of the
 intractable normalization constant requires using a
 sophisticated sampling-based estimation method to evaluate
 Boltzmann machines. In Section~\ref{sec:eval_bm}, the author
-tries to point out some of the recent advances in evaluating
+points out some of the recent advances in evaluating
 Boltzmann machines.
 
 The chapter ends by presenting recently proposed solutions
@@ -2563,7 +2561,7 @@ machine}) proposed by
 \citet{Cortes1995} is one of the most widely used neural
 network models. The SVM is based on two important ideas
 which are the maximum-margin principle and kernel methods.
-We briefly describe these principles and try to find the
+We briefly describe these principles and find the
 connection to the MLP here.  For more details on SVMs, the
 readers are referred to \citep{Scholkopf2001}.
 
@@ -5130,11 +5128,10 @@ was able to learn and generate an arbitrary sequence of text
 once the network was trained this way.
 
 Now, let us unfold the described recurrent neural network in
-time, starting from $t = 0$, assuming that the
-activations of the input and hidden units are fixed to zero
-initially. We will try to construct a deep
-multilayer perceptron (MLP) from the unfolded recurrent
-neural network.
+time, starting from $t = 0$, assuming that the activations
+of the input and hidden units are fixed to zero initially.
+We will construct a deep multilayer perceptron (MLP) from
+the unfolded recurrent neural network.
 
 If we denote the input, output and hidden layers of the
 recurrent neural network at time $t$ by $\vx^{\qt{t}}$,
@@ -6642,20 +6639,23 @@ pretraining algorithms later in Section~\ref{sec:dbm_pre}.
 There have been other approaches to avoid this difficulty.
 \citet{Montavon2012} suggested that a shifting
 transformation that centers each unit, described briefly in
-Section~\ref{sec:enhanced_grad}, helps training a
-DBM directly from a set of randomly initialized parameters
-at least when the size of the DBM is relatively small.  On
-top of the shifting transformation, \citet{Desjardins2013}
+Section~\ref{sec:enhanced_grad}, helps training a DBM
+directly from a set of randomly initialized parameters at
+least when the size of the DBM is relatively small.  On top
+of the shifting transformation, \citet{Desjardins2013}
 proposed a metric-free natural gradient method that utilizes
 the idea of natural gradient together with the subsampled
-Hessian algorithm. 
+Hessian algorithm. Instead of maximing the log-likelihood,
+or its variational lower-bound, \citep{Goodfellow2013a}
+proposed a learning algorithm that maximizes the
+multi-prediction objective function.
 
 
 
 \section{Boltzmann Machines and Autoencoders}
 \label{sec:bm_aenc}
 
-In this section, we try to describe the connections between
+In this section, we describe the connections between
 the Boltzmann machines and the autoencoders which we have
 discussed earlier in Section~\ref{sec:linear_autoencoder}
 and Section~\ref{sec:autoencoders}.
@@ -8059,9 +8059,9 @@ using pretraining diminishes.
 \subsection{Deep Boltzmann Machine}
 \label{sec:dbm_pre}
 
-In the paper where a deep
-Boltzmann machine was proposed, \citet{Salakhutdinov2009a} noticed that it is difficult
-to estimate the parameters well. Hence, they proposed a
+In the paper where the deep Boltzmann machine was proposed,
+\citet{Salakhutdinov2009a} noticed that it is difficult to
+estimate the parameters well. Hence, they proposed a
 layer-wise pretraining scheme for deep Boltzmann machines
 that facilitates estimating its parameters
 \citep{Salakhutdinov2012nc}. The proposed layer-wise
@@ -8447,11 +8447,12 @@ in \citepub{Cho2013icannA}.
 Lately deep neural networks have shown remarkable
 performances in various machine learning tasks. They
 include\footnote{For a more comprehensive list, see, for
-instance, \citep{Bengio2013pami}.  }, but are not
-limited to, speech recognition \citep[see,
+instance, \citep{Bengio2013pami}.  }, but are not limited
+to, speech recognition \citep[see,
 e.g.,][]{Hinton2012sp,Dahl2012} and large-scale object
-recognition \citep[see, e.g.,][]{Krizhevsky2012,Hinton2012}
-as well as natural language processing \citep[see,
+recognition \citep[see,
+e.g.,][]{Goodfellow2013,Krizhevsky2012,Hinton2012} as well
+as natural language processing \citep[see,
 e.g.,][]{Socher2011}. In these cases, deep neural networks
 were able to outperform the conventional models and
 algorithms significantly.
@@ -8475,7 +8476,16 @@ neural networks.\footnote{See the article \textit{Scientists
 See Promise in Deep-Learning Programs} by John Markoff
 featured in the New York Times on 23 November 2012: \\
 http://www.nytimes.com/2012/11/24/science/scientists-see-advances-in-deep-learning-a-part-of-artificial-intelligence.html
+} More recently, Google reported that a deep convolutional
+neural network is able to achieve the performance comparable
+to that of human operators on recognizing multi-digit
+numbers from Google Street View images\footnote{
+See the article \textit{How Google Cracked House Number
+Identification in Street View} from the MIT Technology
+Review:
+\\http://www.technologyreview.com/view/523326/how-google-cracked-house-number-identification-in-street-view/
 }
+\citep{Goodfellow2013}.
 
 These recent successes of deep neural networks in both
 academic research and commercial applications may be
@@ -8718,7 +8728,7 @@ Chapter~\ref{chap:bm}). To the author's current knowledge,
 there is no such neural network at the moment.\footnote{
 A few recent works are showing some promising directions using
 stochastic neural networks \citet[see,
-e.g.,][]{Bengio2013gsn,Tang2013}.  } It is, hence, left for
+e.g.,][]{Bengio2013gsn,Tang2013}.} It is, hence, left for
 future research to build such a neural network that combines these
 two very different characteristics.
 
