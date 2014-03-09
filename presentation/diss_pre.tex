@@ -168,18 +168,29 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \begin{frame}{Is Learning Optimization?}
 
+    \centering
+    \includegraphics[width=0.5\textwidth]{cost_both.pdf}
+
     \begin{minipage}{0.48\textwidth}
     \emph{Yes}
-
-    Learning minimizes a cost function $\CC$ with respect to
-    $\MM$ given a data distribution $p_D$
-
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
     \emph{No}
+    \end{minipage}
 
-    $\CC$ is \emph{not} available, but $\tilde{\CC}$ based
+    %\vspace{1mm}
+
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
+    $\MM$ given a data distribution $p_D$
+
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+    $\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
     on the samples from $p_D$.
 
     \end{minipage}
