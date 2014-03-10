@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="machinelearning.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,8 +23,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="383.26738"
-     inkscape:cy="686.14896"
+     inkscape:cx="363.61994"
+     inkscape:cy="708.47132"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -65,6 +65,45 @@
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
          id="path3840" />
     </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lendl"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lendl">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="stroke:#ff0000;stroke-width:1.0pt;fill:#ff0000;fill-rule:evenodd"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6810" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1LendC"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1LendC">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="stroke:#0000ff;stroke-width:1.0pt;fill:#0000ff;fill-rule:evenodd"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6903" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1LendR"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1LendR">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="stroke:#0000ff;stroke-width:1.0pt;fill:#0000ff;fill-rule:evenodd"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6906" />
+    </marker>
   </defs>
   <metadata
      id="metadata7">
@@ -74,7 +113,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -174,13 +213,13 @@
        inkscape:connector-curvature="0"
        id="path3834"
        d="m 305,307.36218 c 0,0 -8.02927,29.35535 0,40 7.30675,9.68678 35,10 35,10"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+       style="stroke-linejoin:miter;marker-end:url(#Arrow1Lendl);stroke-opacity:1;stroke:#ff0000;stroke-linecap:butt;stroke-width:1px;fill:none" />
     <text
        sodipodi:linespacing="125%"
        id="text4466"
        y="382.36218"
        x="260"
-       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          y="382.36218"
          x="260"
@@ -239,16 +278,16 @@
        inkscape:connector-curvature="0"
        id="path4499"
        d="m 470,312.36218 c 0,0 -8.60207,14.66044 -15,20 -8.58373,7.16378 -30,15 -30,15"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+       style="stroke-linejoin:miter;marker-end:url(#Arrow1LendR);stroke-opacity:1;stroke:#0000ff;stroke-linecap:butt;stroke-width:1px;fill:none" />
     <path
        sodipodi:nodetypes="caac"
        inkscape:connector-curvature="0"
        id="path4687"
        d="m 425,357.36218 c 0,0 19.97477,6.50747 30,5 7.3707,-1.10831 16.48298,-3.42838 20,-10 6.3404,-11.84714 -5,-40 -5,-40"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+       style="stroke-linejoin:miter;marker-end:url(#Arrow1LendC);stroke-opacity:1;stroke:#0000ff;stroke-linecap:butt;stroke-width:1px;fill:none" />
     <text
        xml:space="preserve"
-       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
        x="434"
        y="382.36218"
        id="text4972"
@@ -262,7 +301,7 @@
        id="text4466-9"
        y="327.36218"
        x="445"
-       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:17px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          y="327.36218"
          x="445"

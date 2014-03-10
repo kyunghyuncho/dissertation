@@ -86,6 +86,7 @@
     \ensuremath{\scriptscriptstyle e}}}{\nabla}}}
 \newcommand{\enhnabla}[0]{\nabla_{\hspace{-0.5mm}e}\,}
 \newcommand{\tred}[1]{\textcolor{red}{#1}}
+\newcommand{\tblue}[1]{\textcolor{blue}{#1}}
 \newcommand{\dd}[1]{\text{d}{#1}}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -104,7 +105,7 @@
 \institute[ICS]{Department of Information and Computer Science\\
 Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
-\aaltofootertext{Thesis Presentation}{\today}{\arabic{page}/\pageref{LastPage}\ }
+\aaltofootertext{Foundations and Advances in Deep Learning}{\today}{\arabic{page}/\pageref{LastPage}\ }
 
 \date{\today}
 
@@ -116,17 +117,155 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Machine Learning in a Single Image}
+\begin{frame}{Machine Learning is\dots}
     \centering
     \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
 
     \vspace{4mm}
     \raggedright
     \begin{enumerate}
-        \item Let the model $\MM$ \textit{learn} the data $D$
-        \item Let the model $\MM$ \textit{infer} unknown
+        \item Let the model $\MM$ \tred{\textit{learn}} the data $D$
+        \item Let the model $\MM$ \tblue{\textit{infer}} unknown
             quantities
     \end{enumerate}
+\end{frame}
+
+\begin{frame}{Challenges}
+    \centering
+    \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
+
+    \vspace{4mm}
+    \raggedright
+    \begin{enumerate}
+        \item \tred{Learning} is \emph{not} trivial 
+        \item \tred{Learning} and \tblue{inference} are \emph{not} separate
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Is Learning Optimization?}
+
+    \centering
+    \includegraphics[width=0.5\textwidth]{cost_true.pdf}
+
+    \begin{minipage}{0.48\textwidth}
+        \textbf{\emph{Yes}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+    %\emph{No}
+    \end{minipage}
+
+    %\vspace{1mm}
+
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
+    $\MM$ given a data distribution $p_D$
+
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+    %    \vspace{0pt}
+    %$\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
+    %on the samples from $p_D$.
+
+    \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Is Learning Optimization?}
+
+    \centering
+    \includegraphics[width=0.5\textwidth]{cost_both.pdf}
+
+    \begin{minipage}{0.48\textwidth}
+        \textbf{\emph{Yes}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \textbf{\emph{No}}
+    \end{minipage}
+
+    %\vspace{1mm}
+
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
+    $\MM$ given a data distribution $p_D$
+
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+    $\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
+    on the samples from $p_D$.
+
+    \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Vicious Cycle or Virtuous Cycle?}
+
+    %\begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{vicious_cycle.pdf}
+    %\end{minipage}
+    %\hfill
+    %\begin{minipage}{0.48\textwidth}
+    %    \tred{\emph{Learning}} which changes $\TT$ requires
+    %    \tblue{\emph{inferences}} based on $\TT$. 
+    %\end{minipage}
+
+    \vfill
+    \raggedright
+    Example: MLE for feedforward neural networks
+    \begin{align*}
+        {\color{red} \min_{\TT} \CC(\TT)} \approx 
+        {\color{red} \min_{\TT} \tilde{\CC}(\TT)} =
+        {\color{red} \min_{\TT} -\frac{1}{N}\sum_{\left(\vx,t\right) \in D}
+        \log {\color{blue}p(y=t \mid \vx, \TT)}}
+    \end{align*}
+
+\end{frame}
+
+\begin{frame}{Why is DNN learning considered \emph{more}
+    difficult?}
+    \begin{itemize}
+        \item Learning/Optimization 
+            \begin{itemize}
+                \item No access to $\CC$, but only to $\tilde{\CC}$
+                \item High-dimensional
+                \item Non-convex with multiple local minima
+                \item Often, intractable to compute (even $\tilde{\CC}$)
+            \end{itemize}
+        \item Inference
+            \begin{itemize}
+                \item Often, no analytical expression
+                \item Often, intractable to compute
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Why is DNN Learning Considered Difficult?}
+
+    \begin{itemize}
+        \item Non-convex Optimization with potentially
+            \emph{a lot of} local solutions
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Avoiding the Learning/Optimization Difficulty}
+    \begin{itemize}
+        \item Better Optimization Method (General)
+        \item Investigating the \emph{structure} of a
+            model/problem (Model specific)
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+    \alert{TODO}
 \end{frame}
 
 \begin{frame}{Deep Neural Networks: Inspired from Human}
@@ -164,63 +303,6 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
          \textit{Multi-layered} Processing
      \end{minipage}
 
-\end{frame}
-
-\begin{frame}{Is Learning Optimization?}
-
-    \centering
-    \includegraphics[width=0.5\textwidth]{cost_both.pdf}
-
-    \begin{minipage}{0.48\textwidth}
-    \emph{Yes}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-    \emph{No}
-    \end{minipage}
-
-    %\vspace{1mm}
-
-    \begin{minipage}[t]{0.48\textwidth}
-        \vspace{0pt}
-    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
-    $\MM$ given a data distribution $p_D$
-
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.48\textwidth}
-        \vspace{0pt}
-    $\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
-    on the samples from $p_D$.
-
-    \end{minipage}
-
-\end{frame}
-
-\begin{frame}{Learning + Inference}
-
-\end{frame}
-
-\begin{frame}{Why is DNN Learning Considered Difficult?}
-
-    \begin{itemize}
-        \item Non-convex Optimization with potentially
-            \emph{a lot of} local solutions
-    \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Avoiding the Learning/Optimization Difficulty}
-    \begin{itemize}
-        \item Better Optimization Method (General)
-        \item Investigating the \emph{structure} of a
-            model/problem (Model specific)
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}{}
-    \alert{TODO}
 \end{frame}
 
 
