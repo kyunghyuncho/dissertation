@@ -1,4 +1,5 @@
-\documentclass[first=dgreen,second=purple,logo=yellowexc]{aaltoslides}
+%\documentclass[first=dgreen,second=purple,logo=yellowexc]{aaltoslides}
+\documentclass{beamer}
 %\documentclass{aaltoslides} % DEFAULT
 %\documentclass[first=purple,second=lgreen,logo=redque,normaltitle,nofoot]{aaltoslides} % SOME OPTION EXAMPLES
 
@@ -8,6 +9,14 @@
 \usepackage{amssymb,amsmath}
 \usepackage{url}
 \usepackage{lastpage}
+\setbeamercovered{transparent}
+
+\usepackage[SCI]{aaltologo}
+
+
+\usepackage{scrextend}
+\changefontsizes{10pt}
+
 
 \newcommand{\bmx}[0]{\begin{bmatrix}}
 \newcommand{\emx}[0]{\end{bmatrix}}
@@ -99,25 +108,53 @@
 \newcommand{\dbmptruslanrbm}{DBM$^\text{S\&H}_\text{RBM}$}
 \newcommand{\dbmptruslanfvbm}{DBM$^\text{S\&H}_\text{FVBM}$}
 
-\title{Learning and Inference in Deep, Unsupervised Neural Networks}
+\title{Learning and Inference in \\ Deep, Unsupervised Neural Networks}
 
 \author[K. Cho]{Kyunghyun Cho}
 \institute[ICS]{Department of Information and Computer Science\\
 Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
-\aaltofootertext{Foundations and Advances in Deep Learning}{\today}{\arabic{page}/\pageref{LastPage}\ }
+%\aaltofootertext{Foundations and Advances in Deep Learning}{\today}{\arabic{page}/\pageref{LastPage}\ }
 
-\date{\today}
+\date{21 March 2014}
 
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\aaltotitleframe
+\frame{\titlepage}
+%\aaltotitleframe
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Machine Learning is\dots}
+\begin{frame}
+    \raggedright
+    This work was done under the supervision of Prof. Juha
+    Karhunen, Prof. Tapani Raiko and Dr. Alexander Ilin at
+    the Deep Learning and Bayesian Modeling Group,
+    Department of Information and Computer Science, Aalto
+    University School of Science between mid 2009 and early 2014.
+
+    \vspace{10mm}
+    \raggedleft
+    \AaltoLogoSmall{0.5}{!}{aaltoRed}
+
+\end{frame}
+
+\begin{frame}
+    \tableofcontents[ 
+    currentsubsection, 
+    %hideothersubsections, 
+    sectionstyle=show, 
+    subsectionstyle=show,
+    ] 
+\end{frame}
+
+\section{Introduction}
+
+\subsection{Machine Learning}
+
+\begin{frame}{Machine Learning in a Single Slide}
     \centering
     \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
 
@@ -130,7 +167,86 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Challenges}
+\begin{frame}{Examples}
+    \centering
+    \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
+
+    \vspace{3mm}
+    \begin{center}
+    { \small
+    \begin{tabular}{l | l}
+        Data & Query \\
+        \hline
+        \hline
+        Movie Ratings & 
+        Will a user $X$ like a movie $Y$? \\
+        Tagged Images &
+        Is a cat in this image?  \\
+        Transcribed Speech &
+        What is this person saying?  \\
+        Parallel Corpora &
+        What is ``moi'' in English?  
+    \end{tabular}
+    }
+\end{center}
+\end{frame}
+
+\subsection{Deep Learning}
+
+\begin{frame}{Deep Learning in a Single Slide}
+
+    \vfill
+
+     \centering
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \includegraphics[width=0.9\columnwidth]{studying.pdf}
+     \end{minipage}
+     \hfill
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \includegraphics[width=0.9\columnwidth]{neuron.pdf}
+     \end{minipage}
+     \hfill
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \includegraphics[width=0.9\columnwidth]{visual_pathway.pdf}
+         \\
+         \raggedleft {\tiny (Van Essen\&Gallant, 1994)}
+     \end{minipage}
+
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \small
+         \textit{Learn} massive data
+     \end{minipage}
+     \hfill
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \small
+         \textit{simple functions}
+     \end{minipage}
+     \hfill
+     \begin{minipage}{0.32\textwidth}
+         \centering
+         \small
+         \textit{Multi-layered} 
+     \end{minipage}
+
+     \vspace{3mm}
+    \centering
+    \includegraphics[width=0.8\textwidth]{alex_imagenet}
+    \\
+    \raggedleft {\tiny (Krizhevsky et al., 2012)}
+
+    \vfill
+
+
+\end{frame}
+
+\subsection{Challenges}
+
+\begin{frame}{Challenges in Machine Learning}
     \centering
     \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
 
@@ -228,82 +344,290 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \end{frame}
 
-\begin{frame}{Why is DNN learning considered \emph{more}
-    difficult?}
+\begin{frame}{What gets worse with \emph{deep} learning?}
     \begin{itemize}
         \item Learning/Optimization 
             \begin{itemize}
                 \item No access to $\CC$, but only to $\tilde{\CC}$
-                \item High-dimensional
-                \item Non-convex with multiple local minima
-                \item Often, intractable to compute (even $\tilde{\CC}$)
+                \item Highly entangled inference and learning
+                \item \textbf{High-dimensional}
+                \item \textbf{Non-convex with a lot of local (apparent) minima}
+                \item \textbf{Often, intractable to compute
+                    even $\tilde{\CC}$}
             \end{itemize}
+    \end{itemize}
+
+    \begin{itemize}
         \item Inference
             \begin{itemize}
-                \item Often, no analytical expression
-                \item Often, intractable to compute
+                \item \textbf{No analytical expression}, often
+                \item \textbf{Intractable to compute}, often
             \end{itemize}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Why is DNN Learning Considered Difficult?}
-
-    \begin{itemize}
-        \item Non-convex Optimization with potentially
-            \emph{a lot of} local solutions
-    \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Avoiding the Learning/Optimization Difficulty}
-    \begin{itemize}
-        \item Better Optimization Method (General)
-        \item Investigating the \emph{structure} of a
-            model/problem (Model specific)
-    \end{itemize}
-\end{frame}
-
+\section{Deep, Unsupervised Neural Networks}
 
 \begin{frame}{}
+    \begin{center}
+    Deep, Unsupervised Neural Networks \\
+    Boltzmann Machines and Autoencoders
+\end{center}
+
+{\scriptsize
+\begin{enumerate}
+    \item[\textbf{I}] Enhanced
+Gradient for Training Restricted Boltzmann Machines
+
+    \item[\textbf{II}] Enhanced Gradient and Adaptive
+        Learning Rate for Training Restricted Boltzmann
+        Machines
+
+\item[\textbf{III}] 
+Parallel Tempering is Efficient for Learning Restricted Boltzmann Machines
+
+\item[\textbf{VII}] A Two-Stage Pretraining Algorithm for
+Deep Boltzmann Machines
+
+\item[\textbf{VIII}] Simple Sparsification Improves Sparse Denoising Autoencoders
+in Denoising Highly Corrupted Images
+\end{enumerate}
+}
+
+\end{frame}
+
+\subsection{Restricted Boltzmann Machines}
+
+\begin{frame}{Boltzmann Machines}
+
+    \begin{minipage}{0.33\textwidth}
+        \begin{minipage}{\columnwidth}
+            \centering
+            \includegraphics[width=0.99\columnwidth]{boltzmann.pdf}
+        \end{minipage}
+        
+        \vspace{3mm}
+
+        \begin{minipage}{\columnwidth}
+            \small 
+            \begin{itemize}
+                \item If $\mV=\mzero$ and $\mU=\mzero$, restricted Boltzmann
+                    machine (RBM)
+                \item If $\mU=\mzero$ and layered $\vh$, deep Boltzmann
+                    machine (DBM)
+            \end{itemize} 
+        \end{minipage}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.65\textwidth}
+        \small
+        \begin{enumerate}
+            \item Negative energy over $\vx$ and $\vh$:
+                \begin{align*}
+                -E(\vx, \vh &\mid \TT) = \vb^\top \vx +
+                \vc^\top \vh + \\
+                &
+                \vx^\top \mW \vh + \frac{1}{2} \vx^\top \mU \vx +
+                \frac{1}{2} \vh^\top \mV \vh
+            \end{align*}
+            \item Probability over $\vx$ and
+                $\vh$:
+                \begin{align*}
+                p(\vx, \vh \mid \TT) = \frac{1}{Z(\TT)} \exp \left\{
+                -E\left(\vx , \vh \mid \TT\right)
+                \right\}
+            \end{align*}
+            \item Learn $p(\vx)$ by minimizing
+                \begin{align*}
+                    -\LL(\TT) =& -\E_{\vx \in D} \left[ \log
+                    \frac{1}{Z(\TT)} \sum_{\vh}
+                    e^{-E\left( \vx, \vh \mid \TT\right)}
+    \right]
+            \end{align*}
+            with stochastic gradient descent
+        \end{enumerate}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Learning: Observations}
+    \begin{minipage}{0.59\textwidth}
+        \begin{center}
+            \includegraphics[width=\textwidth]{transf.pdf}
+        \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \small 
+        \begin{itemize}
+            \item Invariant to bit-flipping transformation
+            \item $2^{p+q}$ descent directions 
+            \item leading to (potentially all) different solutions
+            \item Which direction?
+            \item How to tractably decide?
+        \end{itemize}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Learning: Enhanced Gradient}
+    \begin{minipage}{0.35\textwidth}
+        \begin{minipage}{\columnwidth}
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{enhgrad.png}
+            \end{center}
+        \end{minipage}
+
+        \vspace{2mm}
+
+        \begin{minipage}{\columnwidth}
+            \scriptsize
+            \begin{center}
+                Covariance of Weight Updates
+            \end{center}
+        \end{minipage}
+        \\
+        \begin{minipage}{0.49\columnwidth}
+            \begin{minipage}{\columnwidth}
+                \begin{center}
+                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{norm_grad_cov.pdf}
+                \end{center}
+            \end{minipage}
+            \begin{minipage}{\columnwidth}
+                \begin{center}
+                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{enh_grad_cov.pdf}
+                \end{center}
+            \end{minipage}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\columnwidth}
+            \begin{minipage}{\columnwidth}
+                \begin{center}
+                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{norm_grad_cov_later.pdf}
+                \end{center}
+            \end{minipage}
+            \begin{minipage}{\columnwidth}
+                \begin{center}
+                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{enh_grad_cov_later.pdf}
+                \end{center}
+            \end{minipage}
+        \end{minipage}
+        \\
+        \begin{minipage}{0.49\columnwidth}
+            \scriptsize
+            \begin{center}
+                Conventional
+            \end{center}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\columnwidth}
+            \scriptsize
+            \begin{center}
+                Enhanced
+            \end{center}
+        \end{minipage}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.64\textwidth}
+        \small 
+        \begin{itemize}
+            \item Importance weight of each direction $\nabla_{\vf} \LL$
+                \begin{align*}
+                    \prod_{k=1}^{n_v+n_h} \qexp{x_k}_\tdf^{f_k}
+                    \left( 1 - \qexp{x_k}_\tdf
+                    \right)^{1-f_k} 
+                \end{align*}
+
+            \item Weighted sum of all possible updates 
+            \begin{align*}
+                \enhnabla w_{ij} &= \cov_\td\left(x_i, h_j\right)
+                - \cov_\tf\left(x_i, h_j\right)
+                \\
+                \enhnabla b_i &= \left<x_i\right>_\td - \left<x_i\right>_\tf
+                - \sum_j \qexp{ h_j }_\tdf
+                \enhnabla w_{ij}
+                \\
+                \enhnabla c_j &= \left<h_j\right>_\td - \left<h_j\right>_\tf
+                - \sum_i \qexp{ x_i }_\tdf
+                \enhnabla w_{ij}
+            \end{align*}
+        \end{itemize}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Learning vs. Inference}
+    Boltzmann machine \tred{learning} requires
+    \tblue{inference}.
+    \begin{align*}
+        {\color{red} \enhnabla w_{ij}} &= {\color{black}\cov_\td\left(x_i,
+        h_j\right)}
+        - {\color{blue}\cov_\tf\left(x_i, h_j\right)}
+    \end{align*}
+
+    \begin{itemize}
+        \item \emph{What is the covariance between $x_i$ and $h_j$ with the
+    current $\TT$?} 
+    \begin{itemize}
+        \item NP-Hard problem even in the case of RBMs {\small (Long\&Servedio, 2010)}
+        \item Monte Carlo approximation with persistent MCMC
+            \[
+            {\color{blue}\cov_\tf\left(x_i, h_j\right)}
+            \approx
+            \left(\frac{1}{N} \sum_{n=1}^N x_i^{(n)}
+            h_j^{(n)}\right) - 
+            \left( 
+            \frac{1}{N} \sum_{n=1}^N x_i^{(n)} 
+            \right)
+            \left(\frac{1}{N}
+            \sum_{n=1}^N h_j^{(n)}
+            \right)
+            \]
+        \item Gibbs sampling
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Learning vs. Inference: Vicious Cycle}
+
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{vicious_cycle_bm.pdf}
+    \end{center}
+
+    \raggedright
+    Failed \tblue{inference} (sampling) breaks
+            \tred{learning} 
+
+    \raggedleft
+            $\to$ \emph{Good MCMC sampler is
+            needed!}
+
+\end{frame}
+
+\begin{frame}{Inference: Parallel Tempering}
+    \tred{TODO}
+\end{frame}
+
+\subsection{Deep Boltzmann Machines}
+
+\begin{frame}{Deep Boltzmann Machines}
     \alert{TODO}
 \end{frame}
 
-\begin{frame}{Deep Neural Networks: Inspired from Human}
-
-     \centering
-     \begin{minipage}{0.37\textwidth}
-         \centering
-         \includegraphics[width=0.9\columnwidth]{studying.pdf}
-
-         \small
-         \textit{Learn} from massive data
-     \end{minipage}
-
-     \vspace{3mm}
-     \begin{minipage}{0.37\textwidth}
-         \centering
-         \includegraphics[width=0.9\columnwidth]{neuron.pdf}
-     \end{minipage}
-     \hfill
-     \begin{minipage}{0.37\textwidth}
-         \centering
-         \includegraphics[width=0.9\columnwidth]{visual_pathway.pdf}
-         \\
-         \raggedleft {\tiny (Van Essen\&Gallant, 1994)}
-     \end{minipage}
-     \begin{minipage}{0.37\textwidth}
-         \centering
-         \small
-         A network of \textit{simple functions}
-     \end{minipage}
-     \hfill
-     \begin{minipage}{0.4\textwidth}
-         \centering
-         \small
-         \textit{Multi-layered} Processing
-     \end{minipage}
-
+\begin{frame}{Learning: Two-Stage Pretraining Algorithm}
+    \alert{TODO}
 \end{frame}
+
+\subsection{Deep Autoencoders}
+
+\begin{frame}{Inference: Explicit Sparsification via Shrinkage}
+    \alert{TODO}
+\end{frame}
+
+
+\section{Discussion}
+
+\begin{frame}{Thank you}
+    \alert{TODO}
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
