@@ -15,7 +15,7 @@
 
 
 \usepackage{scrextend}
-\changefontsizes{10pt}
+\changefontsizes{9pt}
 
 
 \newcommand{\bmx}[0]{\begin{bmatrix}}
@@ -46,6 +46,7 @@
 \newcommand{\vw}[0]{\vect{w}}
 \newcommand{\vL}[0]{\vect{L}}
 \newcommand{\vp}[0]{\vect{p}}
+\newcommand{\vz}[0]{\vect{z}}
 \newcommand{\mW}[0]{\matr{W}}
 \newcommand{\mG}[0]{\matr{G}}
 \newcommand{\mX}[0]{\matr{X}}
@@ -139,6 +140,17 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \raggedleft
     \AaltoLogoSmall{0.5}{!}{aaltoRed}
 
+\end{frame}
+
+\begin{frame}
+\centering
+\emph{Boltzmann machines? I remember working on them in 80s and
+    90s..}
+
+\vspace{2.5mm}
+\begin{flushright}
+-- Anonymous, 2011 \\ {\small \emph{paraphrased}}
+    \end{flushright}
 \end{frame}
 
 \begin{frame}
@@ -258,65 +270,25 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Is Learning Optimization?}
+\begin{frame}{Learning Difficulties}
 
     \centering
-    \includegraphics[width=0.5\textwidth]{cost_true.pdf}
-
     \begin{minipage}{0.48\textwidth}
-        \textbf{\emph{Yes}}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-    %\emph{No}
-    \end{minipage}
-
-    %\vspace{1mm}
-
-    \begin{minipage}[t]{0.48\textwidth}
-        \vspace{0pt}
-    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
-    $\MM$ given a data distribution $p_D$
-
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.48\textwidth}
-    %    \vspace{0pt}
-    %$\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
-    %on the samples from $p_D$.
-
-    \end{minipage}
-
-\end{frame}
-
-\begin{frame}{Is Learning Optimization?}
-
     \centering
-    \includegraphics[width=0.5\textwidth]{cost_both.pdf}
-
-    \begin{minipage}{0.48\textwidth}
-        \textbf{\emph{Yes}}
+    \includegraphics[width=\columnwidth]{cost_true.pdf}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
-        \textbf{\emph{No}}
+    \centering
+    \includegraphics[width=\columnwidth]{cost_both.pdf}
     \end{minipage}
 
-    %\vspace{1mm}
-
-    \begin{minipage}[t]{0.48\textwidth}
-        \vspace{0pt}
-    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
-    $\MM$ given a data distribution $p_D$
-
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.48\textwidth}
-        \vspace{0pt}
-    $\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
-    on the samples from $p_D$.
-
-    \end{minipage}
+    \vspace{2mm}
+    \begin{itemize}
+    \item True cost $\color{blue}{\CC}$ is \emph{not} available: Only empirical cost $\color{red}\tilde{\CC}$ available
+    \item Often, non-convex optimization with many local/apparent minima
+    \item Impractical to compute either $\color{blue}\CC$ or $\color{red}\tilde{\CC}$, as $\left| D \right|\to\infty$
+    \end{itemize}
 
 \end{frame}
 
@@ -346,22 +318,22 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \begin{frame}{What gets worse with \emph{deep} learning?}
     \begin{itemize}
-        \item Learning/Optimization 
+        \item \tred{Learning}
             \begin{itemize}
                 \item No access to $\CC$, but only to $\tilde{\CC}$
                 \item Highly entangled inference and learning
                 \item \textbf{High-dimensional}
                 \item \textbf{Non-convex with a lot of local (apparent) minima}
-                \item \textbf{Often, intractable to compute
-                    even $\tilde{\CC}$}
+                \item \textbf{Intractable to compute even $\tilde{\CC}$}, because $\left| D \right| \to \infty$
             \end{itemize}
     \end{itemize}
 
     \begin{itemize}
-        \item Inference
+        \item \tblue{Inference}
             \begin{itemize}
                 \item \textbf{No analytical expression}, often
                 \item \textbf{Intractable to compute}, often
+                \item Difficult to analyze and understand
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -410,6 +382,7 @@ in Denoising Highly Corrupted Images
 
         \begin{minipage}{\columnwidth}
             \small 
+            Popular variants:
             \begin{itemize}
                 \item If $\mV=\mzero$ and $\mU=\mzero$, restricted Boltzmann
                     machine (RBM)
@@ -437,9 +410,9 @@ in Denoising Highly Corrupted Images
                 -E\left(\vx , \vh \mid \TT\right)
                 \right\}
             \end{align*}
-            \item Learn $p(\vx)$ by minimizing
+            \item Learn $p(\vx)$ by maximizing
                 \begin{align*}
-                    -\LL(\TT) =& -\E_{\vx \in D} \left[ \log
+                    \LL(\TT) =& \E_{\vx \in D} \left[ \log
                     \frac{1}{Z(\TT)} \sum_{\vh}
                     e^{-E\left( \vx, \vh \mid \TT\right)}
     \right]
@@ -529,7 +502,7 @@ in Denoising Highly Corrupted Images
     \begin{minipage}{0.64\textwidth}
         \small 
         \begin{itemize}
-            \item Importance weight of each direction $\nabla_{\vf} \LL$
+            \item Importance/weight of each direction $\nabla_{\vf} \LL$
                 \begin{align*}
                     \prod_{k=1}^{n_v+n_h} \qexp{x_k}_\tdf^{f_k}
                     \left( 1 - \qexp{x_k}_\tdf
@@ -554,13 +527,15 @@ in Denoising Highly Corrupted Images
 \end{frame}
 
 \begin{frame}{Learning vs. Inference}
-    Boltzmann machine \tred{learning} requires
+\begin{itemize}
+    \item Boltzmann machine \tred{learning} requires
     \tblue{inference}.
     \begin{align*}
         {\color{red} \enhnabla w_{ij}} &= {\color{black}\cov_\td\left(x_i,
         h_j\right)}
         - {\color{blue}\cov_\tf\left(x_i, h_j\right)}
     \end{align*}
+    \end{itemize}
 
     \begin{itemize}
         \item \emph{What is the covariance between $x_i$ and $h_j$ with the
@@ -601,157 +576,351 @@ in Denoising Highly Corrupted Images
 
 \end{frame}
 
-\begin{frame}{Inference: Parallel Tempering}
-    \tred{TODO}
+\begin{frame}{Inference: Better MCMC Sampler}
+\begin{minipage}{0.49\textwidth}
+\centering
+\scriptsize
+Gibbs sampling
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\scriptsize
+Parallel Tempering
+\end{minipage}
+\\
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=.9\textwidth]{bad_inference_bm.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=.9\textwidth]{parallel_tempering.pdf}
+\end{minipage}
+
+\begin{itemize}
+\item MCMC with a \emph{local} jump cannot easily escape an isolated mode
+\end{itemize}
+
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{pt.pdf}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\bf Parallel Tempering}
+\begin{itemize}
+\item Parallel chains between $\color{red}P_0$ and $\color{blue}P_{\infty}$
+\item Jump via tempered chains
+\item Better exploration of the state space
+\end{itemize}
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{From an RBM to a \emph{deeper} neural
+network..}
+
+\begin{minipage}{0.4\textwidth}
+\centering
+Deep Belief Network
+\\
+{ \small
+    (Pretrained MLP)
+}
+\end{minipage}
+\begin{minipage}{0.59\textwidth}
+\centering
+\includegraphics[width=0.9\columnwidth]{mlp_pretrain.pdf}
+\end{minipage}
+
+\vfill
+\hrulefill
+\vfill
+
+\begin{minipage}{0.4\textwidth}
+\centering
+{\bf
+Deep Boltzmann Machine
+}
+\end{minipage}
+\begin{minipage}{0.59\textwidth}
+\centering
+\includegraphics[width=0.4\columnwidth]{dbm.pdf}
+\end{minipage}
+
+ 
+
+
 \end{frame}
 
 \subsection{Deep Boltzmann Machines}
 
 \begin{frame}{Deep Boltzmann Machines}
-    \alert{TODO}
+\begin{minipage}{\textwidth}
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=\columnwidth]{dbm.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.7\textwidth}
+\begin{itemize}
+\item \emph{Undirected} Hierarchical Model
+\item Negative Energy
+\end{itemize}
+
+\vspace{-8mm}
+\begin{align*}
+    -E&(\vx, \vh \mid \TT) = \\
+    &\vb^\top \vx +
+    \vc_{\qlay{1}}^\top \vh_{\qlay{1}}
+    + \vx^\top \mW \vh_{\qlay{1}} \\
+    &+\sum_{l=2}^L \left(
+    \vc_{\qlay{l}}^\top
+    \vh_{\qlay{l}} + \vh_{\qlay{l-1}}^\top \mU_{\qlay{l-1}}
+    \vh_{\qlay{l}} \right)
+\end{align*}
+\end{minipage}
+\end{minipage}
+
+\vspace{4mm}
+\begin{minipage}{\textwidth}
+\begin{itemize}
+\item The further away a layer from $\vx$, the more abstract
+concept the layer learns
+\item Hierarchical representation with both bottom-up and
+top-down signals
+\end{itemize}
+\end{minipage}
 \end{frame}
 
-\begin{frame}{Learning: Two-Stage Pretraining Algorithm}
-    \alert{TODO}
+\begin{frame}{Learning: Depressing Observation}
+
+\textbf{Observation}: Lack of Structures in Deeper Hidden Layers
+
+\vspace{4mm}
+Which direction does learning move toward? -- matching
+\tblue{data} and \tred{model} statistics
+\begin{align*}
+    \frac{\partial \LL(\TT)}{\partial u^{\qlay{l}}_{ij}} \propto
+    \textcolor{blue}{\left< h^{\qlay{l}}_i h^{\qlay{l+1}}_j
+    \right>_{p\left(\vh \mid \vv,
+    \TT\right)p_D\left(\vv\right) } }
+    -
+    \textcolor{red}{\left< h^{\qlay{l}}_i h^{\qlay{l+1}}_j
+    \right>_{p\left(\vv, \vh \mid \TT\right)}}
+\end{align*}
+
+\vspace{4mm}
+What happens if \tblue{$p(\vh \mid \vv, \TT)$} does not
+have \textit{any} structure?
+\begin{itemize}
+    \item Learning will \textit{not} utilize deeper layers easily
+    \item Especially severe at the intial stage of
+        learning
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Learning: Hierarchical structure \emph{borrowed} from DBN}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{two_stage.pdf}
+\end{center}
+
+\begin{itemize}
+\item[Stage 1] Recursively train a stack of RBMs to get
+$\color{blue}Q\left(\vh_-\mid\vx\right)$
+\item[Stage 2] Train a large RBM $\iff$ Maximize the variational
+lower-bound of DBM
+        {
+        \small
+        \begin{align*}
+            \E_{D(\vv)} \left[ \log p(\vv^{(n)} \mid \TT) \right]
+            \geq 
+            \textcolor{red}{\E_{D(\vv){\color{blue}Q(\vh_-)}} \left[ \log \sum_{\vh_+} e^{\left\{ -E
+            (\vv^{(n)}, \vh_-, \vh_+)\right\}} \right]}
+            + \HH({\color{blue}Q}) \textcolor{red}{- \log Z(\TT)}
+        \end{align*}
+        }
+\end{itemize}
 \end{frame}
 
 \subsection{Deep Autoencoders}
 
-\begin{frame}{Inference: Explicit Sparsification via Shrinkage}
-    \alert{TODO}
+\begin{frame}
+\centering
+{\bf Q}: Have I worked on anything other than Boltzmann machines?
+\end{frame}
+
+\begin{frame}{Unsupervised Learning: Encoder-Decoder Perspective}
+
+\begin{minipage}{0.67\textwidth}
+\begin{itemize}
+\item Sparse coding:
+\begin{itemize}
+\item[Encoder] $\vh = \argmin_{\vh} \| \vx - \mW^\top \vh \| + \lambda \Omega(\vh)$
+\item[Decoder] $\vx = \mW^\top \vh$
+\end{itemize}
+\item Probabilistic PCA:
+\begin{itemize}
+\item[Encoder] $
+    \E \left[ \vh \right] = (\mW^\top
+    \mW + \sigma^2
+    \mI)^{-1} \mW^\top \vx$
+\item[Decoder] $\E \left[ \vx\right] = \mW^\top \vh$
+\end{itemize}
+\item RBM:
+\begin{itemize}
+\item[Encoder] $\E\left[\vh\right] = \sigma(\mW \vx + \vc)$
+\item[Decoder] $\E\left[\vx\right] = \sigma(\mW^\top \vh + \vb)$
+\end{itemize}
+\item DBM:
+\begin{itemize}
+\item[Encoder] $\vmu^{\qlay{l}} \leftarrow \sigma(\mU_{\qlay{l}}^\top \vmu^{\qlay{l+1}} + 
+        \mU_{\qlay{l-1}} \vmu^{\qlay{l-1}}+ \vc^{\qlay{l}})$, \\
+        $\E\left[\vh^{\qlay{l}}\right] \approx \vmu^{\qlay{l}}$
+\item[Decoder] $\E\left[\vx\right] = \sigma(\mW^\top \vh^{\qlay{1}} + \vb)$
+\end{itemize}
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.32\textwidth}
+%\centering
+\includegraphics[width=\columnwidth]{encode_decode.pdf}
+\end{minipage}
+\hfill
+
+
+
+
+\end{frame}
+
+\begin{frame}{Denoising Autoencoder: Explicit Sparsification}
+\begin{minipage}[t!]{0.55\textwidth}
+    Sparse Denoising Autoencoder
+{ \small
+    \begin{itemize}
+        \item Encoder $\vh = f(\vx): \PP \to \QQ$
+        \item Decoder $\tilde{\vx} = g(\vh): \QQ \to \PP$
+    \end{itemize}
+}
+
+    \centering
+    \includegraphics[width=0.9\columnwidth]{./sdae.pdf}
+
+    \vspace{2mm}
+    \begin{flushleft}
+{
+            \small
+            $
+            \PP = \left\{ \vx \in \RR^p \left| \exists \vx^{(n)}
+            \in D, \| \vx - \vx^{(n)} \|_2^2 \leq \epsilon
+            \right. \right\}
+            $
+
+            $ 
+            \QQ \approx \left\{\vh = f(\vx) \left|
+            \vx \in \PP, \left\| \E_{\vx \in \PP}\left[ h_j \right] - \rho \right\|_2^2 = 0
+             \right.\right\}
+             $
+}
+    \end{flushleft}
+    \vfill
+\end{minipage}
+\hfill
+\begin{minipage}[t!]{0.44\textwidth}
+\vskip 0pt
+    What do we do with $\vx \notin \PP$?
+
+    \centering
+    \includegraphics[width=0.55\columnwidth,angle=330,origin=c]{./sparsification.pdf}
+
+    \begin{enumerate}
+    \itemsep 0em
+    \item Encode: $\vh = f(\vx)$
+    \item \tred{Sparsify}: $\tilde{\vh} = \color{red}R(\vh)$
+    \item Decode: $\tilde{\vx} = g(\tilde{\vh})$
+    \end{enumerate}
+    \vfill
+
+\end{minipage}
+
 \end{frame}
 
 
 \section{Discussion}
 
-\begin{frame}{Thank you}
-    \alert{TODO}
+\begin{frame}{And beyond..}
+\begin{itemize}
+\item Theoretical understanding beyond universal approximator properties
+\item Deep learning for long sequences
+\item Deep learning for $p \gg n$ and $n \to 1$
+\item New models that tackles learning and inference directly
+\end{itemize}
 \end{frame}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Is Learning Optimization?}
 
-%\begin{frame}{Title Page}
+%    \centering
+%    \includegraphics[width=0.5\textwidth]{cost_true.pdf}
 
-%\begin{itemize}
-%\item The largest difference to normal Beamer slides is that the title page is produced with a special command \texttt{\textbackslash aaltotitleframe}; this command should be used as it is. \alert{Don't put it in a frame environment!!!} See \texttt{example.tex}.
-%\item By default, \texttt{aaltoslides} uses a title page similar to the one in the Aalto Powerpoint templates
-%\item A more traditional looking title page can be selected with the option: \texttt{normaltitle}
-%\end{itemize}
+%    \begin{minipage}{0.48\textwidth}
+%        \textbf{\emph{Yes}}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}{0.48\textwidth}
+%    %\emph{No}
+%    \end{minipage}
 
-%\end{frame}
+%    %\vspace{1mm}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    \begin{minipage}[t]{0.48\textwidth}
+%        \vspace{0pt}
+%    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
+%    $\MM$ given a data distribution $p_D$
 
-%\begin{frame}{Aalto Colors}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[t]{0.48\textwidth}
+%    %    \vspace{0pt}
+%    %$\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
+%    %on the samples from $p_D$.
 
-%\begin{itemize}
-
-%\item Colors are defined with options: \texttt{first=$\star$} and \texttt{second=$\star$} where $\star$ is one of the following:\\
-%{\color{aaltoyellow}yellow}, 
-%{\color{aaltored}red}, 
-%{\color{aaltoblue}blue}, 
-%{\color{aaltogray}gray}, 
-%{\color{aaltolgreen}lgreen}, 
-%{\color{aaltodgreen}dgreen}, 
-%{\color{aaltocyan}cyan}, 
-%{\color{aaltopurple}purple}, 
-%{\color{aaltomagenta}magenta}, or
-%{\color{aaltoorange}orange}
-
-%\item The first color is the primary color (titles, the footer bar, \ldots) and the second color is used in alerted texts and examples
-
-%\item Default colors are: {\color{aaltoblue}blue} and {\color{aaltored}red}
-
-%\item Colors can be used also with the command: \texttt{\textbackslash color\{aalto}$\star$\texttt{\}}. For example, 
-%\texttt{\{\textbackslash color\{aaltocyan\}some text\}} 
-%gives {\color{aaltocyan}some text}
-
-%\item The rules for choosing colors from the Aalto color circle are not checked (two adjacent colors should not be used)
-
-%\end{itemize}
+%    \end{minipage}
 
 %\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Is Learning Optimization?}
 
-%\begin{frame}{Logo}
+%    \centering
+%    \includegraphics[width=0.5\textwidth]{cost_both.pdf}
 
-%\begin{itemize}
-%\item \texttt{aaltoslides} supports all variations of the logo:\\[0.2cm]
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_y1.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_y2.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_y3.pdf} \\[0.2cm]
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_r1.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_r2.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_r3.pdf} \\[0.2cm]
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_b1.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_b2.pdf} \hspace{10pt}
-%\includegraphics[width=3cm]{Aalto_EN_ScienceandTech_13_RGB_b3.pdf} \\
-%\item The logo is selected with the option: \texttt{logo=$\star\circ$} where $\star$ is {\color{aaltoyellow}yellow}, {\color{aaltored}red}, or {\color{aaltoblue}blue}, and $\circ$ is either exc, quo, or que for !, ", or ?, respectively; For example, \texttt{logo=yellowquo}
-%\item The title page uses a larger variation of the selected logo
-%\item By default, the logo is \texttt{logo=redexc}
-%\item All logos can be removed with the option: \texttt{nologo}
-%\end{itemize}
+%    \begin{minipage}{0.48\textwidth}
+%        \textbf{\emph{Yes}}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}{0.48\textwidth}
+%        \textbf{\emph{No}}
+%    \end{minipage}
 
-%\end{frame}
+%    %\vspace{1mm}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    \begin{minipage}[t]{0.48\textwidth}
+%        \vspace{0pt}
+%    Learning minimizes a cost function $\color{blue}{\CC}$ with respect to
+%    $\MM$ given a data distribution $p_D$
 
-%\begin{frame}{Footer}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[t]{0.48\textwidth}
+%        \vspace{0pt}
+%    $\color{blue}{\CC}$ is \emph{not} available, but $\color{red}{\tilde{\CC}}$ based
+%    on the samples from $p_D$.
 
-%\begin{itemize}
-
-%\item By default, the slides have a footer with a logo on the left and an optional three row text\footnote{The first row is highlighted with black by default. To remove this, simply change the color of the first argument of  \texttt{\textbackslash aaltofootertext\{\}\{\}\{\}} with \texttt{\textbackslash color\{aaltogray\}}} on the right
-%\item The footer text is set up with the command: \texttt{\textbackslash aaltofootertext\{\}\{\}\{\}}
-%\item The footer can be removed with the option: \texttt{nofoot}
-
-%\end{itemize}
+%    \end{minipage}
 
 %\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\begin{frame}{Lengths}
-
-%\begin{itemize}
-%\item \texttt{aaltoslides} defines the following lengths: 
-%\texttt{\textbackslash aaltofooterplace}, 
-%\texttt{\textbackslash aaltofooterruleheight}, 
-%\texttt{\textbackslash aaltofooterrulewidth}, 
-%\texttt{\textbackslash aaltotitleboxplace},  
-%\texttt{\textbackslash aaltotitleboxheight}, 
-%\texttt{\textbackslash aaltotitleboxwidth}, 
-%\texttt{\textbackslash aaltotitlesep}, 
-%\texttt{\textbackslash aaltotitleentrysep}, 
-%\texttt{\textbackslash largelogoheight}, and
-%\texttt{\textbackslash smalllogoheight} 
-%\item The appearance of the slides can be changed by modifying the lengths with \texttt{\textbackslash setlength} or \texttt{\textbackslash addtolength}
-%\end{itemize}
-
-%\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%\begin{frame}{Some Examples}
-
-%\begin{itemize}
-%\item Normal text
-%\item \alert{Alerted text}
-%\end{itemize}
-
-%\begin{block}{Block 1}
-%Text
-%\end{block}
-
-%\begin{example}
-%Text
-%\end{example}
-
-%\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
