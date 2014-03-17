@@ -1,5 +1,5 @@
 # Name of thesis (without postfix)
-dname=diss_pre
+dname=diss_pre_new
 
 #all: $(name).pdf $(name).ps
 all: $(name).pdf 
