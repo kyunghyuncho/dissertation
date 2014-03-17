@@ -22,9 +22,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8919583"
-     inkscape:cx="396.82289"
-     inkscape:cy="729.19967"
+     inkscape:zoom="4.0898467"
+     inkscape:cx="368.80973"
+     inkscape:cy="741.8008"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -618,5 +618,29 @@
        d="m 387,303.36218 12,31"
        id="path6437"
        inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.86023426000000036px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="324.99371"
+       y="322.33856"
+       id="text9749"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99998301,1.000017)"><tspan
+         sodipodi:role="line"
+         id="tspan9751"
+         x="324.99371"
+         y="322.33856">(1)</tspan></text>
+    <text
+       transform="scale(0.99998301,1.000017)"
+       sodipodi:linespacing="125%"
+       id="text9753"
+       y="294.33899"
+       x="424.99524"
+       style="font-size:6.86023426000000036px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="294.33899"
+         x="424.99524"
+         id="tspan9755"
+         sodipodi:role="line">(2)</tspan></text>
   </g>
 </svg>

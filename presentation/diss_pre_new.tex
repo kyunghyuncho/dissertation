@@ -15,7 +15,7 @@
 
 
 \usepackage{scrextend}
-\changefontsizes{9pt}
+\changefontsizes{10pt}
 
 
 \newcommand{\bmx}[0]{\begin{bmatrix}}
@@ -251,7 +251,7 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \centering
     \includegraphics[width=0.8\textwidth]{alex_imagenet}
     \\
-    \raggedleft {\tiny (Krizhevsky et al., 2012)}
+    \raggedleft {\scriptsize (Krizhevsky et al., 2012)}
 
     \vfill
 
@@ -267,22 +267,55 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
     \vspace{-24mm}
     \begin{center}
-    \includegraphics[width=0.9\textwidth]{pipeline1.pdf}
+    \includegraphics[width=0.8\textwidth]{pipeline1.pdf}
     \end{center}
 
 \end{frame}
 
-\begin{frame}{Deep Learning: Full Approach}
+\begin{frame}{Deep Learning (1)}
     \raggedright
     \begin{enumerate}
-        \item Jointly \tred{learning} \emph{everything}
+        \item Jointly \tred{learn} \emph{everything}
         \item \tblue{Inference}
     \end{enumerate}
 
     \vspace{-24mm}
     \begin{center}
-    \includegraphics[width=0.9\textwidth]{pipeline3.pdf}
+    \includegraphics[width=0.8\textwidth]{pipeline3.pdf}
     \end{center}
+
+\end{frame}
+
+\begin{frame}{Deep Learning (2): Learning Representation}
+    \raggedright
+    \begin{enumerate}
+    \itemsep 0em
+        \item[1a.] Feature engineering
+        \item[1b.] Feature/Representation \tred{learning}
+        \item[2.] \tred{Learning}
+        \item[3.] \tblue{Inference}
+    \end{enumerate}
+
+    \vspace{-28mm}
+    \begin{center}
+    \includegraphics[width=0.8\textwidth]{pipeline2.pdf}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+
+\centering
+\includegraphics[width=0.75\textwidth]{mit_breakthrough_deepl.png}
+
+\begin{itemize}
+\itemsep 0em
+\item  Object Detection {\scriptsize (Krizhevsky et al., 2012; Hinton et al.,
+        2012)} 
+\item Speech Recognition {\scriptsize (Hinton et al., 2012; Dahl et al., 2012; Deng
+        et al., 2013)} 
+\item Natural language processing {\scriptsize (Socher et al., 2011)} 
+\end{itemize}
 
 \end{frame}
 
