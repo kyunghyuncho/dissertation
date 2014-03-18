@@ -128,29 +128,19 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-    \raggedright
-    This work was done under the supervision of Prof. Juha
-    Karhunen, Prof. Tapani Raiko and Dr. Alexander Ilin at
-    the Deep Learning and Bayesian Modeling Group,
-    Department of Information and Computer Science, Aalto
-    University School of Science between mid 2009 and early 2014.
-
-    \vspace{10mm}
-    \raggedleft
-    \AaltoLogoSmall{0.5}{!}{aaltoRed}
-
-\end{frame}
-
-\begin{frame}
-\centering
-\emph{Boltzmann machines? I remember working on them in 80s and 90s..}
-
-\vspace{2.5mm}
-\begin{flushright}
--- Anonymous, 2011 \\ {\small \emph{paraphrased}}
-    \end{flushright}
-\end{frame}
+%\begin{frame}
+%    \raggedright
+%    This work was done under the supervision of Prof. Juha
+%    Karhunen, Prof. Tapani Raiko and Dr. Alexander Ilin at
+%    the Deep Learning and Bayesian Modeling Group,
+%    Department of Information and Computer Science, Aalto
+%    University School of Science between mid 2009 and early 2014.
+%
+%    \vspace{10mm}
+%    \raggedleft
+%    \AaltoLogoSmall{0.5}{!}{aaltoRed}
+%
+%\end{frame}
 
 \begin{frame}
     \tableofcontents[ 
@@ -161,9 +151,7 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     ] 
 \end{frame}
 
-\section{Introduction}
-
-\subsection{Machine Learning}
+\section{Machine Learning \& Perception}
 
 \begin{frame}{Machine Learning}
     \centering
@@ -178,39 +166,89 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Examples}
+\begin{frame}{Machine Learning \& Perception}
+    \vfill
+
+    \centering
+    \begin{minipage}{0.33\textwidth}
+        \includegraphics[width=\columnwidth]{machinelearning.pdf}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.65\textwidth}
+        \raggedright
+        \emph{Perception} is the organization, identification, and
+        interpretation of \emph{sensory information} in order to
+        represent and \emph{understand the environment}.
+        
+        \raggedleft
+        {\scriptsize --Wikipedia}
+    \end{minipage}
+
+    \vspace{10mm}
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{farabet_pami_img1.pdf}
+    \end{minipage}
+    \hfill
+    $\to$
+    \hfill
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{farabet_pami_img2.pdf}
+    \end{minipage}
+    \centering
+    \vspace{1mm}
+    \includegraphics[width=0.8\textwidth]{farabet_pami_img_legend.pdf}
+    \vspace{-3mm}
+    \begin{flushright}
+        \scriptsize (Farabet et al., 2013)
+    \end{flushright}
+
+    \vfill
+\end{frame}
+
+\begin{frame}{Machine Learning \& Perception: Examples}
     \centering
     \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
 
-    \vspace{3mm}
+    \vspace{2mm}
     \begin{center}
     { \small
-    \begin{tabular}{l | l}
-        Data & Query \\
+    \begin{tabular}{l | l | l}
+        \bf Data & \bf Sensory Information & \bf Query\\
         \hline
         \hline
         Labeled Images &
-        Is a cat in this image?  \\
+        An image &
+        Is a cat in the image? \\
         Transcribed Speech &
+        A speech segment &
         What is this person saying?  \\
         Paraphrases &
+        A pair of sentences &
         Is this sentence a paraphrase? \\
         Movie Ratings & 
+        Ratings of $Y$ and by $X$ & 
         Will a user $X$ like a movie $Y$? \\
         Parallel Corpora &
+        A Finnish sentence &
         What is ``moi'' in English?  
     \end{tabular}
     }
 \end{center}
 \end{frame}
 
-\subsection{Deep Learning}
+\section{Deep Learning: Born Again}
 
 \begin{frame}
-\begin{itemize}
-\item[] What is \emph{deep learning}? 
-       \item[]  And, how is it different from \emph{usual} machine learning?
-         \end{itemize}
+    \centering
+
+    A human possesses \emph{the} best machinery for perception,
+    called a \emph{\bf brain}.
+
+    \vspace{2em}
+    But, how does our brain do it?
+
 \end{frame}
 
 \begin{frame}{Deep Learning: Motivated from Human Learning}
@@ -263,7 +301,133 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \end{frame}
 
-\begin{frame}{Conventional Machine Learning}
+\begin{frame}
+\centering
+\emph{Boltzmann machines? I remember working on them in 80s and 90s..}
+
+\vspace{2.5mm}
+\begin{flushright}
+-- Anonymous Interviewer, 2011 \\ {\small \emph{paraphrased}}
+    \end{flushright}
+\end{frame}
+
+\begin{frame}{Deep Learning: Old Technology}
+
+\begin{enumerate}
+\item[1958] Rosenblatt proposed perceptrons 
+\item[1982] Hopfield network, SOM {\scriptsize (Kohonen, 1982)}, Neural PCA {\scriptsize (Oja, 1982)}
+\item[1985] Boltzmann machines {\scriptsize (Ackley et al., 1985)}
+\item[1986] Multilayer perceptrons and backpropagation {\scriptsize (Rumelhart et al., 1986)}
+\item[1988] RBF networks {\scriptsize (Broomhead\&Lowe, 1988)}
+\item[1989] Autoencoders {\scriptsize (Baldi\&Hornik, 1989)}, Convolutional network {\scriptsize (LeCun, 1989)}
+\item[1992] Sigmoid belief network {\scriptsize (Neal, 1992)}
+\item[1993] Sparse coding {\scriptsize (Field, 1993)}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+
+\centering
+\includegraphics[width=0.80\textwidth]{bet-by-2000.jpg}
+
+\end{frame}
+
+\begin{frame}
+
+\centering
+\includegraphics[width=0.85\textwidth]{mit_breakthrough_deepl.png}
+
+%{\small
+%\begin{itemize}
+%\itemsep 0em
+%\item  Object Detection {\scriptsize (Krizhevsky et al., 2012; Ciresan et al., 2012; Goodfellow et al., 2013)} 
+%\item Speech Recognition {\scriptsize (Hinton et al., 2012; Dahl et al., 2012; Deng
+%        et al., 2013)} 
+%\item Natural language processing {\scriptsize (Socher et al., 2011; Mikolov et al., 2010)} 
+%\item Transfer learning {\scriptsize (Mesnil et al., 2012)}
+%\end{itemize}
+%}
+
+\end{frame}
+
+\subsection{What's all this fuss about deep learning?}
+
+\begin{frame}
+    \centering 
+    Why all this fuss about deep learning now?
+\end{frame}
+
+\begin{frame}{ImageNet: ILSVRC 2012 -- Classification Task}
+
+    {\bf Top Rankers}
+    {\small
+    \begin{enumerate}
+        \item {\bf SuperVision: Deep Convolutional Neural Network
+            {\scriptsize (Krizhevsky et al.)}}
+        \item ISI: SIFT, CSIFT, LBP, GIST + FV + Linear
+            classifier {\scriptsize (Gunji et al.)}
+        \item OXFORD\_VGG: SIFT + others + FV + SVM
+            {\scriptsize (Simonyan et al.)}
+        \item XRCE/INRIA: SIFT + others + FV + PQ + SVM
+            {\scriptsize (Perronin et al.)}
+        \item University of Amsterdam: Color desc. + SVM
+            {\scriptsize (van de Sande et al.)}
+    \end{enumerate}
+    }
+
+    \centering
+    \includegraphics[width=0.8\textwidth]{krizhevsky.png}
+    \\
+    \raggedleft {\scriptsize (Krizhevsky et al., 2012)}
+
+\end{frame}
+
+\begin{frame}{ImageNet: ILSVRC 2013 -- Classification Task}
+
+    {\small
+    \begin{enumerate}
+        \item[1] {\bf Clarifi: Deep Convolutional Neural Networks
+            {\scriptsize (Zeiler)}}
+        \item[\dots] \emph{10+} teams using CNN
+        \item[$\circ$] MIL: Local image descriptors + FV + linear
+            classifier {\small (Hidaka et al.)}
+        \item[\dots] About 3 teams using CNN
+        \item[$\circ$] QuantumLeap: 15 features + RVM {\small
+            (Shu\&Shu)}
+    \end{enumerate}
+    }
+
+    \centering
+    \includegraphics[width=0.75\textwidth]{overfeat.png}
+
+    \vspace{-7mm}
+    \raggedleft {\scriptsize (Sermanet et al., 2013)}
+
+\end{frame}
+
+\begin{frame}{You're already using \emph{deep learning}!}
+
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.9\columnwidth]{siri.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.9\columnwidth]{googlevoice.jpg}
+    \end{minipage}
+
+\end{frame}
+
+\section{Machine Learning vs. Deep Learning}
+
+\begin{frame}
+\centering How do you tell deep learning from
+\emph{not-so-deep} machine learning?
+\end{frame}
+
+\begin{frame}{Not-So-Deep Machine Learning}
     \raggedright
     \begin{enumerate}
         \item Feature engineering $\leftarrow$ {\bf \emph{not learned!}}
@@ -276,23 +440,12 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \includegraphics[width=0.8\textwidth]{pipeline1.pdf}
     \end{center}
 
-\end{frame}
-
-\begin{frame}{Deep Learning (1)}
-    \raggedright
-    \begin{enumerate}
-        \item Jointly \tred{learn} \emph{everything}
-        \item \tblue{Inference}
-    \end{enumerate}
-
-    \vspace{-24mm}
-    \begin{center}
-    \includegraphics[width=0.8\textwidth]{pipeline3.pdf}
-    \end{center}
+    \emph{Separation between domain knowledge and general
+    machine learning}
 
 \end{frame}
 
-\begin{frame}{Deep Learning (2): Learning Representation}
+\begin{frame}{Unsupervised Learning of Representation}
     \raggedright
     \begin{enumerate}
     \itemsep 0em
@@ -309,647 +462,66 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \end{frame}
 
-\subsection{Deep Learning: Born Again}
-
-\begin{frame}{Deep Learning: Old Technology}
-
-\begin{enumerate}
-\item[1958] Rosenblatt proposed perceptrons 
-\item[1982] Hopfield network, SOM {\scriptsize (Kohonen, 1982)}, Neural PCA {\scriptsize (Oja, 1982)}
-\item[1985] Boltzmann machines {\scriptsize (Ackley et al., 1985)}
-\item[1986] Multilayer perceptrons and backpropagation {\scriptsize (Rumelhart et al., 1986)}
-\item[1988] RBF networks {\scriptsize (Broomhead\&Lowe, 1988)}
-\item[1989] Autoencoders {\scriptsize (Baldi\&Hornik, 1989)}, Convolutional network {\scriptsize (LeCun, 1989)}
-\item[1992] Sigmoid belief network {\scriptsize (Neal, 1992)}
-\end{enumerate}
-
-\end{frame}
-
-\begin{frame}
-
-\centering
-\includegraphics[width=0.80\textwidth]{bet-by-2000.jpg}
-
-\end{frame}
-
-\begin{frame}
-
-\centering
-\includegraphics[width=0.75\textwidth]{mit_breakthrough_deepl.png}
-
-{\small
-\begin{itemize}
-\itemsep 0em
-\item  Object Detection {\scriptsize (Krizhevsky et al., 2012; Ciresan et al., 2012; Goodfellow et al., 2013)} 
-\item Speech Recognition {\scriptsize (Hinton et al., 2012; Dahl et al., 2012; Deng
-        et al., 2013)} 
-\item Natural language processing {\scriptsize (Socher et al., 2011; Mikolov et al., 2010)} 
-\item Transfer learning {\scriptsize (Mesnil et al., 2012)}
-\end{itemize}
-}
-
-\end{frame}
-
-\subsection{Challenges}
-
-\begin{frame}{Challenges in Machine Learning}
-    \centering
-    \includegraphics[width=0.55\textwidth]{machinelearning.pdf}
-
-    \vspace{4mm}
+\begin{frame}{Deep Learning: toward the \emph{Ultimate} Machine Learning?}
     \raggedright
     \begin{enumerate}
-        \item \tred{Learning} is \emph{not} trivial 
-        \item \tred{Learning} and \tblue{inference} are \emph{not} separate
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}{Learning Difficulties}
-
-    \centering
-    \begin{minipage}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\columnwidth]{cost_true.pdf}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\columnwidth]{cost_both.pdf}
-    \end{minipage}
-
-    \vspace{2mm}
-    \begin{itemize}
-    \item True cost $\color{blue}{\CC}$ is \emph{not} available: Only empirical cost $\color{red}\tilde{\CC}$ available
-    \item Often, non-convex optimization with many local/apparent minima
-    \item Impractical to compute either $\color{blue}\CC$ or $\color{red}\tilde{\CC}$, as $\left| D \right|\to\infty$
-    \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Vicious Cycle or Virtuous Cycle?}
-
-    %\begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=0.5\textwidth]{vicious_cycle.pdf}
-    %\end{minipage}
-    %\hfill
-    %\begin{minipage}{0.48\textwidth}
-    %    \tred{\emph{Learning}} which changes $\TT$ requires
-    %    \tblue{\emph{inferences}} based on $\TT$. 
-    %\end{minipage}
-
-    \vfill
-    \raggedright
-    Example: MLE for feedforward neural networks
-    \begin{align*}
-        {\color{red} \min_{\TT} \CC(\TT)} \approx 
-        {\color{red} \min_{\TT} \tilde{\CC}(\TT)} =
-        {\color{red} \min_{\TT} -\frac{1}{N}\sum_{\left(\vx,t\right) \in D}
-        \log {\color{blue}p(y=t \mid \vx, \TT)}}
-    \end{align*}
-
-\end{frame}
-
-\begin{frame}{What gets worse with \emph{deep} learning?}
-    \begin{itemize}
-        \item \tred{Learning}
-            \begin{itemize}
-                \item No access to $\CC$, but only to $\tilde{\CC}$
-                \item Highly entangled inference and learning
-                \item \textbf{High-dimensional}
-                \item \textbf{Non-convex with a lot of local (apparent) minima}
-                \item \textbf{Intractable to compute even $\tilde{\CC}$}, because $\left| D \right| \to \infty$
-            \end{itemize}
-    \end{itemize}
-
-    \begin{itemize}
+        \item Jointly \tred{learn} \emph{everything}
         \item \tblue{Inference}
-            \begin{itemize}
-                \item \textbf{No analytical expression}, often
-                \item \textbf{Intractable to compute}, often
-                \item Difficult to analyze and understand
-            \end{itemize}
-    \end{itemize}
-\end{frame}
+    \end{enumerate}
 
-\section{Deep, Unsupervised Neural Networks}
-
-\begin{frame}{}
+    \vspace{-24mm}
     \begin{center}
-    Deep, Unsupervised Neural Networks \\
-    Boltzmann Machines and Autoencoders
-\end{center}
-
-{\scriptsize
-\begin{enumerate}
-    \item[\textbf{I}] Enhanced
-Gradient for Training Restricted Boltzmann Machines
-
-    \item[\textbf{II}] Enhanced Gradient and Adaptive
-        Learning Rate for Training Restricted Boltzmann
-        Machines
-
-\item[\textbf{III}] 
-Parallel Tempering is Efficient for Learning Restricted Boltzmann Machines
-
-\item[\textbf{VII}] A Two-Stage Pretraining Algorithm for
-Deep Boltzmann Machines
-
-\item[\textbf{VIII}] Simple Sparsification Improves Sparse Denoising Autoencoders
-in Denoising Highly Corrupted Images
-\end{enumerate}
-}
-
-\end{frame}
-
-\subsection{Restricted Boltzmann Machines}
-
-\begin{frame}{Boltzmann Machines}
-
-    \begin{minipage}{0.33\textwidth}
-        \begin{minipage}{\columnwidth}
-            \centering
-            \includegraphics[width=0.99\columnwidth]{boltzmann.pdf}
-        \end{minipage}
-        
-        \vspace{3mm}
-
-        \begin{minipage}{\columnwidth}
-            \small 
-            Popular variants:
-            \begin{itemize}
-                \item If $\mV=\mzero$ and $\mU=\mzero$, restricted Boltzmann
-                    machine (RBM)
-                \item If $\mU=\mzero$ and layered $\vh$, deep Boltzmann
-                    machine (DBM)
-            \end{itemize} 
-        \end{minipage}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.65\textwidth}
-        \small
-        \begin{enumerate}
-            \item Negative energy over $\vx$ and $\vh$:
-                \begin{align*}
-                -E(\vx, \vh &\mid \TT) = \vb^\top \vx +
-                \vc^\top \vh + \\
-                &
-                \vx^\top \mW \vh + \frac{1}{2} \vx^\top \mU \vx +
-                \frac{1}{2} \vh^\top \mV \vh
-            \end{align*}
-            \item Probability over $\vx$ and
-                $\vh$:
-                \begin{align*}
-                p(\vx, \vh \mid \TT) = \frac{1}{Z(\TT)} \exp \left\{
-                -E\left(\vx , \vh \mid \TT\right)
-                \right\}
-            \end{align*}
-            \item Learn $p(\vx)$ by maximizing
-                \begin{align*}
-                    \LL(\TT) =& \E_{\vx \in D} \left[ \log
-                    \frac{1}{Z(\TT)} \sum_{\vh}
-                    e^{-E\left( \vx, \vh \mid \TT\right)}
-    \right]
-            \end{align*}
-            with stochastic gradient descent
-        \end{enumerate}
-    \end{minipage}
-\end{frame}
-
-\begin{frame}{Learning: Observations}
-    \begin{minipage}{0.59\textwidth}
-        \begin{center}
-            \includegraphics[width=\textwidth]{transf.pdf}
-        \end{center}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.4\textwidth}
-        \small 
-        \begin{itemize}
-            \item Invariant to bit-flipping transformation
-            \item $2^{p+q}$ descent directions 
-            \item leading to (potentially all) different solutions
-            \item Which direction?
-            \item How to tractably decide?
-        \end{itemize}
-    \end{minipage}
-\end{frame}
-
-\begin{frame}{Learning: Enhanced Gradient}
-    \begin{minipage}{0.35\textwidth}
-        \begin{minipage}{\columnwidth}
-            \begin{center}
-                \includegraphics[width=0.6\textwidth]{enhgrad.png}
-            \end{center}
-        \end{minipage}
-
-        \vspace{2mm}
-
-        \begin{minipage}{\columnwidth}
-            \scriptsize
-            \begin{center}
-                Covariance of Weight Updates
-            \end{center}
-        \end{minipage}
-        \\
-        \begin{minipage}{0.49\columnwidth}
-            \begin{minipage}{\columnwidth}
-                \begin{center}
-                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{norm_grad_cov.pdf}
-                \end{center}
-            \end{minipage}
-            \begin{minipage}{\columnwidth}
-                \begin{center}
-                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{enh_grad_cov.pdf}
-                \end{center}
-            \end{minipage}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.49\columnwidth}
-            \begin{minipage}{\columnwidth}
-                \begin{center}
-                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{norm_grad_cov_later.pdf}
-                \end{center}
-            \end{minipage}
-            \begin{minipage}{\columnwidth}
-                \begin{center}
-                    \includegraphics[width=\columnwidth,trim=93 35 75 20,clip=true]{enh_grad_cov_later.pdf}
-                \end{center}
-            \end{minipage}
-        \end{minipage}
-        \\
-        \begin{minipage}{0.49\columnwidth}
-            \scriptsize
-            \begin{center}
-                Conventional
-            \end{center}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.49\columnwidth}
-            \scriptsize
-            \begin{center}
-                Enhanced
-            \end{center}
-        \end{minipage}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.64\textwidth}
-        \small 
-        \begin{itemize}
-            \item Importance/weight of each direction $\nabla_{\vf} \LL$
-                \begin{align*}
-                    \prod_{k=1}^{n_v+n_h} \qexp{x_k}_\tdf^{f_k}
-                    \left( 1 - \qexp{x_k}_\tdf
-                    \right)^{1-f_k} 
-                \end{align*}
-
-            \item Weighted sum of all possible updates 
-            \begin{align*}
-                \enhnabla w_{ij} &= \cov_\td\left(x_i, h_j\right)
-                - \cov_\tf\left(x_i, h_j\right)
-                \\
-                \enhnabla b_i &= \left<x_i\right>_\td - \left<x_i\right>_\tf
-                - \sum_j \qexp{ h_j }_\tdf
-                \enhnabla w_{ij}
-                \\
-                \enhnabla c_j &= \left<h_j\right>_\td - \left<h_j\right>_\tf
-                - \sum_i \qexp{ x_i }_\tdf
-                \enhnabla w_{ij}
-            \end{align*}
-        \end{itemize}
-    \end{minipage}
-\end{frame}
-
-\begin{frame}{Learning vs. Inference}
-\begin{itemize}
-    \item Boltzmann machine \tred{learning} requires
-    \tblue{inference}.
-    \begin{align*}
-        {\color{red} \enhnabla w_{ij}} &= {\color{black}\cov_\td\left(x_i,
-        h_j\right)}
-        - {\color{blue}\cov_\tf\left(x_i, h_j\right)}
-    \end{align*}
-    \end{itemize}
-
-    \begin{itemize}
-        \item \emph{What is the covariance between $x_i$ and $h_j$ with the
-    current $\TT$?} 
-    \begin{itemize}
-        \item NP-Hard problem even in the case of RBMs {\small (Long\&Servedio, 2010)}
-        \item Monte Carlo approximation with persistent MCMC
-            \[
-            {\color{blue}\cov_\tf\left(x_i, h_j\right)}
-            \approx
-            \left(\frac{1}{N} \sum_{n=1}^N x_i^{(n)}
-            h_j^{(n)}\right) - 
-            \left( 
-            \frac{1}{N} \sum_{n=1}^N x_i^{(n)} 
-            \right)
-            \left(\frac{1}{N}
-            \sum_{n=1}^N h_j^{(n)}
-            \right)
-            \]
-        \item Gibbs sampling
-    \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Learning vs. Inference: Vicious Cycle}
-
-    \begin{center}
-        \includegraphics[width=0.9\textwidth]{vicious_cycle_bm.pdf}
+    \includegraphics[width=0.8\textwidth]{pipeline3.pdf}
     \end{center}
 
-    \raggedright
-    Failed \tblue{inference} (sampling) breaks
-            \tred{learning} 
-
     \raggedleft
-            $\to$ \emph{Good MCMC sampler is
-            needed!}
+    \emph{The data decides}
+    {\small --Yoshua Bengio}
 
 \end{frame}
 
-\begin{frame}{Inference: Better MCMC Sampler}
-\begin{minipage}{0.49\textwidth}
-\centering
-\scriptsize
-Gibbs sampling
-\end{minipage}
-\hfill
-\begin{minipage}{0.49\textwidth}
-\centering
-\scriptsize
-Parallel Tempering
-\end{minipage}
-\\
-\begin{minipage}{0.49\textwidth}
-\centering
-\includegraphics[width=.9\textwidth]{bad_inference_bm.pdf}
-\end{minipage}
-\hfill
-\begin{minipage}{0.49\textwidth}
-\centering
-\includegraphics[width=.9\textwidth]{parallel_tempering.pdf}
-\end{minipage}
-
-\begin{itemize}
-\item MCMC with a \emph{local} jump cannot easily escape an isolated mode
-\end{itemize}
-
-\begin{minipage}{0.4\textwidth}
-\centering
-\includegraphics[width=0.8\textwidth]{pt.pdf}
-\end{minipage}
-\begin{minipage}{0.58\textwidth}
-{\bf Parallel Tempering}
-\begin{itemize}
-\item Parallel chains between $\color{red}P_0$ and $\color{blue}P_{\infty}$
-\item Jump via tempered chains
-\item Better exploration of the state space
-\end{itemize}
-\end{minipage}
-
-\end{frame}
-
-\begin{frame}{From an RBM to a \emph{deeper} neural
-network..}
-
-\begin{minipage}{0.4\textwidth}
-\centering
-Deep Belief Network
-\\
-{ \small
-    (Pretrained MLP)
-}
-\end{minipage}
-\begin{minipage}{0.59\textwidth}
-\centering
-\includegraphics[width=0.9\columnwidth]{mlp_pretrain.pdf}
-\end{minipage}
-
-\vfill
-\hrulefill
-\vfill
-
-\begin{minipage}{0.4\textwidth}
-\centering
-{\bf
-Deep Boltzmann Machine
-}
-\end{minipage}
-\begin{minipage}{0.59\textwidth}
-\centering
-\includegraphics[width=0.4\columnwidth]{dbm.pdf}
-\end{minipage}
-
- 
+\section{Why deep learning?}
 
 
-\end{frame}
-
-\subsection{Deep Boltzmann Machines}
-
-\begin{frame}{Deep Boltzmann Machines}
-\begin{minipage}{\textwidth}
-\begin{minipage}{0.29\textwidth}
-\centering
-\includegraphics[width=\columnwidth]{dbm.pdf}
-\end{minipage}
-\hfill
-\begin{minipage}{0.7\textwidth}
-\begin{itemize}
-\item \emph{Undirected} Hierarchical Model
-\item Negative Energy
-\end{itemize}
-
-\vspace{-8mm}
-\begin{align*}
-    -E&(\vx, \vh \mid \TT) = \\
-    &\vb^\top \vx +
-    \vc_{\qlay{1}}^\top \vh_{\qlay{1}}
-    + \vx^\top \mW \vh_{\qlay{1}} \\
-    &+\sum_{l=2}^L \left(
-    \vc_{\qlay{l}}^\top
-    \vh_{\qlay{l}} + \vh_{\qlay{l-1}}^\top \mU_{\qlay{l-1}}
-    \vh_{\qlay{l}} \right)
-\end{align*}
-\end{minipage}
-\end{minipage}
-
-\vspace{4mm}
-\begin{minipage}{\textwidth}
-\begin{itemize}
-\item The further away a layer from $\vx$, the more abstract
-concept the layer learns
-\item Hierarchical representation with both bottom-up and
-top-down signals
-\end{itemize}
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Learning: Depressing Observation}
-
-\textbf{Observation}: Lack of Structures in Deeper Hidden Layers
-
-\vspace{4mm}
-Which direction does learning move toward? -- matching
-\tblue{data} and \tred{model} statistics
-\begin{align*}
-    \frac{\partial \LL(\TT)}{\partial u^{\qlay{l}}_{ij}} \propto
-    \textcolor{blue}{\left< h^{\qlay{l}}_i h^{\qlay{l+1}}_j
-    \right>_{p\left(\vh \mid \vv,
-    \TT\right)p_D\left(\vv\right) } }
-    -
-    \textcolor{red}{\left< h^{\qlay{l}}_i h^{\qlay{l+1}}_j
-    \right>_{p\left(\vv, \vh \mid \TT\right)}}
-\end{align*}
-
-\vspace{4mm}
-What happens if \tblue{$p(\vh \mid \vv, \TT)$} does not
-have \textit{any} structure?
-\begin{itemize}
-    \item Learning will \textit{not} utilize deeper layers easily
-    \item Especially severe at the intial stage of
-        learning
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Learning: Hierarchical structure \emph{borrowed} from DBN}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{two_stage.pdf}
-\end{center}
-
-\begin{itemize}
-\item[Stage 1] Recursively train a stack of RBMs to get
-$\color{blue}Q\left(\vh_-\mid\vx\right)$
-\item[Stage 2] Train a large RBM $\iff$ Maximize the variational
-lower-bound of DBM
-        {
-        \small
-        \begin{align*}
-            \E_{D(\vv)} \left[ \log p(\vv^{(n)} \mid \TT) \right]
-            \geq 
-            \textcolor{red}{\E_{D(\vv){\color{blue}Q(\vh_-)}} \left[ \log \sum_{\vh_+} e^{\left\{ -E
-            (\vv^{(n)}, \vh_-, \vh_+)\right\}} \right]}
-            + \HH({\color{blue}Q}) \textcolor{red}{- \log Z(\TT)}
-        \end{align*}
-        }
-\end{itemize}
-\end{frame}
-
-\subsection{Deep Autoencoders}
+\subsection{Why now? And what happens next?}
 
 \begin{frame}
-\centering
-{\bf Q}: Have I worked on anything other than Boltzmann machines?
-\end{frame}
-
-\begin{frame}{Unsupervised Learning: Encoder-Decoder Perspective}
-
-\begin{minipage}{0.67\textwidth}
-\begin{itemize}
-\item Sparse coding:
-\begin{itemize}
-\item[Encoder] $\vh = \argmin_{\vh} \| \vx - \mW^\top \vh \| + \lambda \Omega(\vh)$
-\item[Decoder] $\vx = \mW^\top \vh$
-\end{itemize}
-\item Probabilistic PCA:
-\begin{itemize}
-\item[Encoder] $
-    \E \left[ \vh \right] = (\mW^\top
-    \mW + \sigma^2
-    \mI)^{-1} \mW^\top \vx$
-\item[Decoder] $\E \left[ \vx\right] = \mW^\top \vh$
-\end{itemize}
-\item RBM:
-\begin{itemize}
-\item[Encoder] $\E\left[\vh\right] = \sigma(\mW \vx + \vc)$
-\item[Decoder] $\E\left[\vx\right] = \sigma(\mW^\top \vh + \vb)$
-\end{itemize}
-\item DBM:
-\begin{itemize}
-\item[Encoder] $\vmu^{\qlay{l}} \leftarrow \sigma(\mU_{\qlay{l}}^\top \vmu^{\qlay{l+1}} + 
-        \mU_{\qlay{l-1}} \vmu^{\qlay{l-1}}+ \vc^{\qlay{l}})$, \\
-        $\E\left[\vh^{\qlay{l}}\right] \approx \vmu^{\qlay{l}}$
-\item[Decoder] $\E\left[\vx\right] = \sigma(\mW^\top \vh^{\qlay{1}} + \vb)$
-\end{itemize}
-\end{itemize}
-\end{minipage}
-\begin{minipage}{0.32\textwidth}
-%\centering
-\includegraphics[width=\columnwidth]{encode_decode.pdf}
-\end{minipage}
-\hfill
-
-
-
+    \centering
+Why now? Why not 20 years ago?
 
 \end{frame}
 
-\begin{frame}{Denoising Autoencoder: Explicit Sparsification}
-\begin{minipage}[t!]{0.55\textwidth}
-    Sparse Denoising Autoencoder
-{ \small
+\begin{frame}{What has happened in last 20+ years?}
     \begin{itemize}
-        \item Encoder $\vh = f(\vx): \PP \to \QQ$
-        \item Decoder $\tilde{\vx} = g(\vh): \QQ \to \PP$
+        \item We have connected the dots, e.g.,
+            \begin{itemize}
+                \item PCA $\Leftrightarrow$ Neural PCA
+                    $\Leftrightarrow$
+                    Probabilistic PCA $\Leftrightarrow$ 
+                    Autoencoder
+                \item Autoencoder $\Leftrightarrow$ Belief
+                    network $\Leftrightarrow$ Restricted
+                    Boltzmann machine
+            \end{itemize}
+        \item We understand \tred{learning} better
+            \begin{itemize}
+                \item Learning \emph{is} but \emph{is not} optimization 
+                \item No need to be scared of non-convex
+                    optimization
+            \end{itemize}
+        \item We understand better how \tred{learning} and
+            \tblue{inference} are intermingled
     \end{itemize}
-}
-
-    \centering
-    \includegraphics[width=0.9\columnwidth]{./sdae.pdf}
-
-    \vspace{2mm}
-    \begin{flushleft}
-{
-            \small
-            $
-            \PP = \left\{ \vx \in \RR^p \left| \exists \vx^{(n)}
-            \in D, \| \vx - \vx^{(n)} \|_2^2 \leq \epsilon
-            \right. \right\}
-            $
-
-            $ 
-            \QQ \approx \left\{\vh = f(\vx) \left|
-            \vx \in \PP, \left\| \E_{\vx \in \PP}\left[ h_j \right] - \rho \right\|_2^2 = 0
-             \right.\right\}
-             $
-}
-    \end{flushleft}
-    \vfill
-\end{minipage}
-\hfill
-\begin{minipage}[t!]{0.44\textwidth}
-\vskip 0pt
-    What do we do with $\vx \notin \PP$?
-
-    \centering
-    \includegraphics[width=0.55\columnwidth,angle=330,origin=c]{./sparsification.pdf}
-
-    \begin{enumerate}
-    \itemsep 0em
-    \item Encode: $\vh = f(\vx)$
-    \item \tred{Sparsify}: $\tilde{\vh} = \color{red}R(\vh)$
-    \item Decode: $\tilde{\vx} = g(\tilde{\vh})$
-    \end{enumerate}
-    \vfill
-
-\end{minipage}
-
 \end{frame}
 
 
-\section{Discussion}
+\begin{frame}[fragile,plain]{And Beyond..}
 
-\begin{frame}{And beyond..}
-\begin{itemize}
-\item Theoretical understanding beyond universal approximator properties
-\item Deep learning for long sequences
-\item Deep learning for $p \gg n$ and $n \to 1$
-\item New models that tackles learning and inference directly
-\end{itemize}
+    \hspace*{-10.5mm}
+    \includegraphics[width=\paperwidth]{ian1.png}
+
+    \raggedleft {\scriptsize (Goodfellow, 2013)}
+    
 \end{frame}
 
 
