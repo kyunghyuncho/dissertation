@@ -363,15 +363,15 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     {\bf Top Rankers}
     {\small
     \begin{enumerate}
-        \item {\bf SuperVision: Deep Convolutional Neural Network
-            {\scriptsize (Krizhevsky et al.)}}
-        \item ISI: SIFT, CSIFT, LBP, GIST + FV + Linear
+        \item SuperVision ({\bf 0.153}): Deep Conv. Neural Network
+            {\scriptsize (Krizhevsky et al.)}
+        \item ISI (0.262): Features + FV + Linear
             classifier {\scriptsize (Gunji et al.)}
-        \item OXFORD\_VGG: SIFT + others + FV + SVM
+        \item OXFORD\_VGG (0.270): Features + FV + SVM
             {\scriptsize (Simonyan et al.)}
-        \item XRCE/INRIA: SIFT + others + FV + PQ + SVM
+        \item XRCE/INRIA (0.271): SIFT + FV + PQ + SVM
             {\scriptsize (Perronin et al.)}
-        \item University of Amsterdam: Color desc. + SVM
+        \item University of Amsterdam (0.300): Color desc. + SVM
             {\scriptsize (van de Sande et al.)}
     \end{enumerate}
     }
@@ -385,16 +385,45 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
 
 \begin{frame}{ImageNet: ILSVRC 2013 -- Classification Task}
 
+
+    \vspace{2mm}
+    {\bf Top Rankers}
     {\small
     \begin{enumerate}
-        \item[1] {\bf Clarifi: Deep Convolutional Neural Networks
+        \itemsep 0em
+        \item Clarifi ({\bf 0.117}): {\bf Deep Convolutional Neural Networks
             {\scriptsize (Zeiler)}}
-        \item[\dots] \emph{10+} teams using CNN
-        \item[$\circ$] MIL: Local image descriptors + FV + linear
-            classifier {\small (Hidaka et al.)}
-        \item[\dots] About 3 teams using CNN
-        \item[$\circ$] QuantumLeap: 15 features + RVM {\small
-            (Shu\&Shu)}
+        \item NUS: {\bf Deep Convolutional Neural Networks}
+        \item ZF: {\bf Deep Convolutional Neural Networks}
+        \item Andrew Howard: {\bf Deep Convolutional Neural
+            Networks}
+        \item OverFeat: {\bf Deep Convolutional Neural
+            Networks}
+        \item UvA-Euvision: {\bf Deep Convolutional Neural
+            Networks}
+        \item Adobe: {\bf Deep Convolutional Neural
+            Networks}
+        \item VGG: {\bf Deep Convolutional Neural Networks}
+        \item CognitiveVision: {\bf Deep Convolutional
+            Neural Networks}
+        \item decaf: {\bf Deep Convolutional Neural
+            Networks}
+        \item IBM Multimedia Team: {\bf Deep Convolutional
+            Neural Networks}
+        \item Deep Punx (0.209): {\bf Deep Convolutional Neural
+            Networks}
+        \item {\it MIL (0.244): Local image descriptors + FV + linear
+            classifier {\small (Hidaka et al.)}}
+        \item Minerva-MSRA: {\bf Deep Convolutional Neural
+            Networks}
+        \item Orange: {\bf Deep Convolutional Neural
+            Networks}
+        \item BUPT-Orange: {\bf Deep Convolutional Neural
+            Networks}
+        \item Trimps-Soushen1: {\bf Deep Convolutional
+            Neural Networks}
+        \item {\it QuantumLeap: 15 features + RVM {\small
+            (Shu\&Shu)}}
     \end{enumerate}
     }
 
@@ -405,6 +434,29 @@ Aalto University, School of Science\\kyunghyun.cho@aalto.fi}
     \raggedleft {\scriptsize (Sermanet et al., 2013)}
 
 \end{frame}
+
+%\begin{frame}{ImageNet: ILSVRC 2013 -- Classification Task}
+%
+%    {\small
+%    \begin{enumerate}
+%        \item[1] {\bf Clarifi: Deep Convolutional Neural Networks
+%            {\scriptsize (Zeiler)}}
+%        \item[\dots] \emph{10+} teams using CNN
+%        \item[$\circ$] MIL: Local image descriptors + FV + linear
+%            classifier {\small (Hidaka et al.)}
+%        \item[\dots] About 3 teams using CNN
+%        \item[$\circ$] QuantumLeap: 15 features + RVM {\small
+%            (Shu\&Shu)}
+%    \end{enumerate}
+%    }
+%
+%    \centering
+%    \includegraphics[width=0.75\textwidth]{overfeat.png}
+%
+%    \vspace{-7mm}
+%    \raggedleft {\scriptsize (Sermanet et al., 2013)}
+%
+%\end{frame}
 
 \begin{frame}{You're already using \emph{deep learning}!}
 
@@ -494,7 +546,7 @@ Why now? Why not 20 years ago?
 \begin{frame}{What has happened in last 20+ years?}
     \begin{itemize}
         \item We have connected the dots, e.g.,
-            \textcolor{cyan}{[Summary]}
+            \textcolor{cyan}{\small [Summary]}
             \begin{itemize}
                 \item PCA $\Leftrightarrow$ Neural PCA
                     $\Leftrightarrow$
@@ -503,21 +555,18 @@ Why now? Why not 20 years ago?
                 \item Autoencoder $\Leftrightarrow$ Belief
                     network $\Leftrightarrow$ Restricted
                     Boltzmann machine
-                \item Autoencoder $\Leftrightarrow$ deep
-                    Boltzmann machine
-                    \textcolor{cyan}{[VII]}
             \end{itemize}
         \item We understand \tred{learning} better
             \begin{itemize}
                 \item Model structure matters \emph{a lot}
-                    \textcolor{cyan}{[I,II,V]}
+                    \textcolor{cyan}{\small [I,II,V]}
                 \item Learning \emph{is} but \emph{is not} optimization 
                 \item No need to be scared of non-convex
                     optimization
             \end{itemize}
         \item We understand how \tred{learning} and
-            \tblue{inference} are intermingled
-            \textcolor{cyan}{[III,VIII]}
+            \tblue{inference} interact
+            \textcolor{cyan}{\small [III,VII,VIII]}
         \item \textcolor{gray}{The exponential growth of the amount of data
             and the computational power}
     \end{itemize}
