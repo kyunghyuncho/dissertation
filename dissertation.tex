@@ -586,7 +586,7 @@ of supervised, shallow neural networks in
 Section~\ref{sec:supervised_model}.
 
 Unsupervised neural networks which do not have any output
-unit are considered shallow when either there are no hidden
+units are considered shallow when either there are no hidden
 units or there are only linear hidden units. A
 Hopfield network is one example having no hidden
 units, and a linear autoencoder, or equivalently
@@ -3588,7 +3588,7 @@ while each is equally likely to be either $0$ or $1$. The
 conditional probability of the visible unit $x$ is defined
 by 
 \begin{align*}
-    p(x = 1 \mid h_1, h_2) = \phi(w_1 h_1 + w_2 h_3),
+    p(x = 1 \mid h_1, h_2) = \phi(w_1 h_1 + w_2 h_2),
 \end{align*}
 where $\phi$ is a logistic sigmoid function.
 
@@ -3949,7 +3949,7 @@ $d$ which is smaller than $p$.
 
 %Intuitively, 
 This says that the number of local variations in the above case
-$q$, allowed for a sample to remain on the manifold, is smaller
+$d$, allowed for a sample to remain on the manifold, is smaller
 than the dimensionality $p$ of the original space to which it
 belongs to. Furthermore, any other variation pushes the sample
 outside the manifold, making it invalid, or a noisy sample of the
@@ -5346,7 +5346,7 @@ BM in Eq.~\eqref{eq:bm_energy} into
 \begin{align}
     \label{eq:disbm_energy}
     -E(\vx, \vy, \vh \mid \TT) = \va^\top \vx + \vb^\top \vy
-    + \vc^\top \vh + \vx^\top \mW \vh + \vy^\top \mU +
+    + \vc^\top \vh + \vx^\top \mW \vh + \vy^\top \mU \vh +
     \frac{1}{2} \vh^\top \mV \vh.
 \end{align}
 
@@ -5365,7 +5365,7 @@ p(h_{j_t} = 1 \mid \vx, \vy_{\qt{t-1}}, \vh_{\qt{t-1}}, \TT) = \phi\left(
 \sum_{i} w_{i{j_t}} x_{i} 
 + \sum_{l} u_{l{j_t}} y'_{l} 
 + \sum_{k \neq {j_t}} v_{k{j_t}} h'_k 
-+ b_{j_t} \right),
++ c_{j_t} \right),
 \]
 where $y'_l$ and $h'_k$ are the $l$-th component of
 $\vy_{\qt{t-1}}$ and the $k$-th component of $\vh_{\qt{t-1}}$,
@@ -5378,7 +5378,7 @@ p(y_{l_t} = 1 \mid \vx, \vy_{\qt{t-1}}, \vh_{\qt{t}}, \TT) = \phi\left(
 \sum_{i} w_{i{j_t}} x_{i} 
 + \sum_{k \neq l_t} u_{k{l_t}} y'_{k} 
 + \sum_{j} v_{lj} h'_j 
-+ a_{l_t} \right).
++ b_{l_t} \right).
 \]
 The indices $j_t$ and $l_t$ may be chosen arbitrarily at
 each time $t$. 
@@ -5948,7 +5948,7 @@ rewrite the lower bound $\LL_Q(\TT)$ as
 \begin{align}
     \label{eq:bm_lowerbound}
     \LL_Q(\TT) =& \sum_{i=1}^p b_i x_i + \sum_{j=1}^q c_j
-    \mu_j + \sum_{i=1}^p x_i \mu_j w_{ij} + 
+    \mu_j + \sum_{i=1}^p \sum_{j=1}^q x_i \mu_j w_{ij} + 
     \nonumber \\ 
     & \sum_{i=1}^p \sum_{j=i+1}^p x_i x_j u_{ij} +
     \sum_{i=1}^q \sum_{j=i+1}^q \mu_i \mu_j v_{ij} -\log
@@ -5971,7 +5971,7 @@ iteration:
 \begin{align}
     \label{eq:vari_update}
     \mu_j \leftarrow \phi\left(\sum_{i=1}^p w_{ij} x_i +
-    \sum_{k=1, k\neq j}^q v_{kj} h_k + c_j\right),
+    \sum_{k=1, k\neq j}^q v_{kj} \mu_k + c_j\right),
 \end{align}
 where $\phi$ is a logistic sigmoid function.
 
@@ -8646,7 +8646,7 @@ useful way to incorporate a large amount of unlabeled data
 in addition to a small number of labeled data. This led to a
 success of deep neural networks, for example, in
 unsupervised and transfer learning tasks \citep[see,
-e.g.,]{Guyon2011,Mesnil2012,Raina2007}. Beside the
+e.g.,][]{Guyon2011,Mesnil2012,Raina2007}. Beside the
 layer-wise pretraining as well as unsupervised learning,
 several modifications to multilayer perceptrons, such as
 novel nonlinear hidden units \citep[see,
@@ -8782,11 +8782,12 @@ the states of the observed variables $\vx_o$:
 A deep neural network, however, replaces
 this with a parametric nonlinear function that computes
 \begin{align*}
-   % p(\vx_m \mid \vx_o) \approx  
+    p(\vx_m \mid \vx_o) \approx  
     \sum_{\vh} p(\vx_m \mid
     \vh) Q(\vh \mid \vx_o) 
+    = 
     \E_Q\left[p(\vx_m \mid
-    \vh \right]
+    \vh )\right]
 \end{align*}
 %$\E_{\tilde{p}}\left[ \vx_m \mid \vx_o \right]$ 
 in a single sweep, since this exact marginalization is often
