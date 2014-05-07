@@ -123,13 +123,12 @@
 \newcommand{\citepub}[1]{\alert{#1}}
 
 %\title{Basic Principles of Deep Learning: From Perceptrons to Deep Neural Networks}
-\title{First Step toward Deep Neural Networks: from Perceptrons to Boltzmann
+\title{Basic Principles of Deep Neural Networks \\ -- from Perceptrons to Boltzmann
 Machines and Autoencoders}
 
 \author{
     Kyunghyun Cho \\
     Universit\'e de Montr\'eal \\
-    Aalto University \\
     chokyun@iro.umontreal.ca \\
 }
 
@@ -146,7 +145,24 @@ Machines and Autoencoders}
 \mainmatter
 
 \begin{abstract}
-The abstract goes here.
+Deep neural networks have become increasingly popular under the name of deep
+learning recently due to their success in challenging machine learning tasks.
+Although the popularity is mainly due to recent successes, the history of neural
+networks goes as far back as 1958 when Rosenblatt presented a perceptron
+learning algorithm.  Since then, various kinds of artificial neural networks
+have been proposed. They include Hopfield networks, self-organizing maps, neural
+principal component analysis, Boltzmann machines, multi-layer perceptrons,
+radial-basis function networks, autoencoders, sigmoid belief networks, support
+vector machines and deep belief networks.
+
+This manuscript investigates shallow and deep neural networks in search of
+principles that explain why deep neural networks work so well across a range of
+applications.  The thesis starts from some of the earlier ideas and models in
+the field of artificial neural networks and arrive at autoencoders and Boltzmann
+machines which are the two most widely studied neural networks. The author
+thoroughly discusses how those various neural networks are related to each other
+and how the principles behind those networks form a foundation for autoencoders
+and Boltzmann machines. 
 \end{abstract}
 
 \renewcommand{\nomname}{List of Abbreviations}
@@ -278,9 +294,6 @@ other than the training samples.
 %% The main matter, one can obviously use \input or \include
 \chapter{Introduction}
 
-
-\section{Aim of this Manuscript}
-
 A research field, called \textit{deep learning}, has gained its popularity
 recently as a way of training deep, hierarchical artificial neural
 networks~\citep[see, for example,][]{Bengio2009a}.  Especially, deep neural
@@ -288,12 +301,12 @@ networks such as a deep belief network~\citep{Hinton2006nc}, deep Boltzmann
 machine~\citep{Salakhutdinov2009a}, stacked denoising
 autoencoders~\citep{Vincent2010} and many other variants have been applied to
 various machine learning tasks with impressive improvements over conventional
-approaches.  For instance, \citet{Krizhevsky2012} significantly outperformed
-all other conventional methods in classifying a huge set of large images.
-Speech recognition also benefited significantly by using a deep neural network
+approaches.  For instance, \citet{Krizhevsky2012} significantly outperformed all
+other conventional methods in classifying a huge set of large images.  Speech
+recognition also benefited significantly by using a deep neural network
 recently~\citep[see, e.g.,][]{Hinton2012sp}. Also, many other tasks such as
-traffic sign classification~\citep{Ciresan2012c} have been shown to benefit
-from using a large, deep neural network.
+traffic sign classification~\citep{Ciresan2012c} have been shown to benefit from
+using a large, deep neural network.
 
 Although the recent surge of popularity stems from the introduction of
 layer-wise pretraining proposed in 2006 by
@@ -329,36 +342,31 @@ multilayer perceptrons.
 
 Thus, this manuscript starts from some of the earlier ideas in the artificial
 neural networks and arrives at those two currently popular models. In due
-course, the author will explain how various types of artificial neural networks
-are related to each other, ultimately leading to autoencoders and Boltzmann
-machines. Furthermore, this manuscript will include underlying methods and concepts
-that have led to those two models' popularity, which include, for instance,
-layer-wise pretraining and manifold learning.  Whenever it is possible,
-informal mathematical justification for each model or method is provided
+course, the author explains how various types of artificial neural networks are
+related to each other, ultimately leading to autoencoders and Boltzmann
+machines. Furthermore, this manuscript will include underlying methods and
+concepts that have led to those two models' popularity, which include, for
+instance, layer-wise pretraining and manifold learning.  Whenever it is
+possible, mathematical justification for each model or method is provided
 alongside.
 
-Since the main focus of this manuscript is on introducing \textit{general}
-principles of deep learning via autoencoders and Boltzmann machines, the
-manuscript avoids describing any approach that is specific to a certain task.
-In other words, the explanations as well as the models in this manuscript
-assume no prior knowledge about data, except that each sample is independent
-and identically distributed and that its length is fixed. 
+Since the main focus of this manuscript is on introducing general principles of
+deep learning via autoencoders and Boltzmann machines, the manuscript avoids
+describing any approach that is specific to any certain task.  In other words,
+the explanations as well as the models in this manuscript assume no prior
+knowledge of data, except that each sample is independent and identically
+distributed and that its length is fixed. 
 
 Ultimately, the author hopes that the reader, even without much background on
 deep learning, will understand the basic principles and concepts of deep neural
-networks. 
-
+networks. This work is based on the introductory part of the Ph.D.  dissertation
+of the author~\citep{Cho2014t}
 
 \section{Outline}
 
 This manuscript aims to provide an introduction to deep neural networks.
 Starting from simple neural networks that were introduced as early as 1958, we
 gradually move toward the recent advances in deep neural networks. 
-%
-%For clarity, contributions that have been proposed and presented by
-%the author are emphasized with bold-face. A separate list of
-%the author's contributions is given in
-%Section~\ref{sec:contrib}.
 
 \subsection{Shallow Neural Networks}
 
@@ -564,100 +572,6 @@ recently proposed method of hyper-parameter optimization is briefly described,
 which relies on Bayesian optimization. Second, a standard approach to building
 a deep neural network that explicitly exploits the spatial structure of data is
 presented.
-
-%\section{Author's Contributions}
-%\label{sec:contrib}
-
-%This thesis contains ten publications that are closely
-%related to and based on the basic principles of deep neural
-%networks.  This section lists for each publication the
-%author's contribution.
-
-%In \textbf{\citepub{Cho2013nc}},
-%\textbf{\citepub{Cho2011icml}},
-%\textbf{\citepub{Cho2010ijcnn}} and
-%\textbf{\citepub{Cho2012icann}}, the
-%author extensively studied learning algorithms for
-%restricted Boltzmann machines (RBM\nomenclature{RBM}{Restricted
-%Boltzmann machine}) with binary units. By
-%investigating potential difficulties of training RBMs, the
-%author together with the co-authors of
-%\citepub{Cho2013nc}
-%and \citepub{Cho2011icml} designed a novel update
-%direction called enhanced gradient, that utilizes the
-%transformation invariance of Boltzmann machines (see
-%Section~\ref{sec:enhanced_grad}). Furthermore, to alleviate
-%selecting the right learning rate scheduling, the author
-%proposed an adaptive learning rate algorithm based on
-%maximizing the locally estimated likelihood that can adapt the learning
-%rate on-the-fly (see Section~\ref{sec:eval_bm}), in
-%\citepub{Cho2011icml}. In
-%\citepub{Cho2010ijcnn}, parallel
-%tempering which is an advanced Markov Chain Monte Carlo
-%sampling algorithm, was applied to estimating the statistics
-%of the model distribution of an RBM (see
-%Section~\ref{sec:parallel_tempering}). Additionally, the
-%author proposed and tested empirically novel regularization
-%terms for RBMs that were motivated by the 
-%contractive regularization term recently proposed for autoencoders (see
-%Section~\ref{sec:dae_cae}).
-
-%The author further applied these novel algorithms and
-%approaches, including the enhanced gradient, the adaptive
-%learning rate and parallel tempering to Gaussian-Bernoulli
-%RBMs (GRBM\nomenclature{GRBM}{Gaussian-Bernoulli restricted
-%Boltzmann machine}) which employ Gaussian visible units in place of
-%binary visible units in \textbf{\citepub{Cho2011icann}}. In this
-%work, those approaches as well as a modified form of the
-%energy function (see Section~\ref{sec:grbm}) were
-%empirically found to facilitate estimating the parameters of
-%a GRBM.  These novel approaches were further applied to a
-%more complex model, called a Gaussian-Bernoulli deep
-%Boltzmann machine (GDBM\nomenclature{GDBM}{Gaussian-Bernoulli
-%deep Boltzmann machine}), in \textbf{\citepub{Cho2013ijcnn}}.
-
-%In \textbf{\citepub{Cho2013icann}}, the author proposed a
-%novel two-stage pretraining algorithm for deep Boltzmann
-%machines (DBM) based on the fact that the encoder of a deep
-%autoencoder performs approximate inference of the hidden
-%units (see Section~\ref{sec:dbm_pre}).  A deep autoencoder
-%trained during the first stage is used as an approximate
-%posterior distribution during the second stage to initialize
-%the parameters of a DBM to maximize the variational lower
-%bound of a marginal log-likelihood. 
-
-%Unlike the previous work, the author moved his focus to a
-%denoising autoencoder (see Section~\ref{sec:dae_cae})
-%trained with a sparsity regularization, in
-%\textbf{\citepub{Cho2013icml}}. In this work, mathematical motivation
-%is given for sparsifying the states of hidden units when the
-%autoencoder was trained with a sparsity regularization (see
-%Section~\ref{sec:spaenc}. The
-%author proposes a simple sparsification based on a shrinkage
-%operator that was empirically shown to be effective when an
-%autoencoder is used to denoise a corrupted image patch with
-%high noise.
-
-%%In \textbf{\citepub{Cho2013icassp}}, an application of a
-%%deep neural network on speech recognition was investigated.
-%%In this work, a GRBM with rectified linear hidden units was
-%%used to extract features from speech which were used to
-%%determine each time-frequency unit of speech signal
-%%reliable. The features extracted by a GRBM were empirically
-%%shown to outperform handcrafted features on the task of
-%%reverberant multi-source environment speech recognition.
-
-%In \textbf{\citepub{Cho2013icassp}} and
-%\textbf{\citepub{Cho2013icannA}}, two potential applications
-%of deep neural networks were investigated. An RBM with
-%Gaussian visible units was used to extract features from
-%speech signal for speech recognition in highly noisy
-%environment, in \citepub{Cho2013icassp}. This work showed
-%that an existing system can easily benefit from simply
-%adopting a deep neural network as an additional feature
-%extractor. In \citepub{Cho2013icannA}, the author applied a
-%denoising autoencoder, a GRBM and a GDBM to a blind image
-%denoising task.
 
 
 
